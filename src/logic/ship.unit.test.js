@@ -1,7 +1,12 @@
-const ship = require('./ship')
+import ship from './ship'
 
-test('ship gets created', () =>{
-    expect().toBe({
-    })
-})
+// jest.mock('./ship', () =>(function(){
+//     const mockShip = {isSunk: jest.fn()}
+//     return jest.fn(() => mockShip)
+// }))
 
+// test('create ship' ,() =>{
+//   mockShip().isSunk.mockImplementation(() =>
+    
+//   )
+// })

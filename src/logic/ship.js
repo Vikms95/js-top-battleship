@@ -1,35 +1,37 @@
-export const Ship = function(length,...positions){
-    let _length = length
+export function Ship(...positions){
 
-    let squaresPlaced = [...positions]
+    // The array automatically gets it's length 
+    // thanks to the spread operator 
+    let _squaresPlaced = [...positions]
     
-    const getSquaresPlaces = () =>{
-        return squaresPlaced
+    const getSquaresPlaced = () =>{
+        return _squaresPlaced
     }
 
-    const hit = (hitCoord,squaresPlaced) =>{
+    const removeSquarePlaced = (index) =>{
+        _squaresPlaced.splice(index,1)
+    }
+
+    // Receives coord hit from Gameboard and checks 
+    // which position from squaresPlaced has been hit
+    const hit = (hitCoord) =>{
+
         // Finds where in the squaresPlaced that coord is
-        const indexToDelete = squaresPlaced.findIndex(index =>{
-            index === hitCoord
-        })
+        const index = _squaresPlaced.indexOf(hitCoord)
 
-        // Deletes the index from the aray
-        squaresPlaced.splice(indexToDelete,1)
-        
-        // Calls isSunk function to check if the ship is gone
-
-        return getSquaresPlaces
+        // Deletes the index from the array
+        removeSquarePlaced(index)
     }
 
-    const isSunk = () =>{
-
+    // Receives squaresPlaced length and if 0 returns 
+    // the value to true
+    const isSunk = (_squaresPlaced) =>{
+        return getSquaresPlaced().length === 0 ? true : false
     }
     
     return {
         hit,
-        isSunk
+        isSunk,
+        getSquaresPlaced,
     }
 }
-
-const f = new Ship(2,'A2','A3')
-console.log(f)
