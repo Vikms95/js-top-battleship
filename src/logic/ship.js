@@ -8,30 +8,35 @@ export function Ship(...positions){
         return _squaresPlaced
     }
 
-    const removeSquarePlaced = (index) =>{
-        _squaresPlaced.splice(index,1)
-    }
-
     // Receives coord hit from Gameboard and checks 
     // which position from squaresPlaced has been hit
-    const hit = (hitCoord) =>{
-
-        // Finds where in the squaresPlaced that coord is
-        const index = _squaresPlaced.indexOf(hitCoord)
-
-        // Deletes the index from the array
-        removeSquarePlaced(index)
+    // Pure
+    const findHit = (hitCoord) =>{
+        return _squaresPlaced.indexOf(hitCoord)    
+    }
+    
+    // Removes square hit from _squaresPlaced
+    // Not pure?
+    const removeSquareHit = (index) =>{
+        _squaresPlaced.splice(index,1)
     }
 
     // Receives squaresPlaced length and if 0 returns 
     // the value to true
-    const isSunk = (_squaresPlaced) =>{
-        return getSquaresPlaced().length === 0 ? true : false
+    // Pure
+    const isSunk = () =>{
+        return _squaresPlaced.length === 0 ? true : false
     }
     
     return {
-        hit,
+        findHit,
+        removeSquareHit,
         isSunk,
         getSquaresPlaced,
     }
 }
+
+const f = Ship('A2','A3')
+const coord = f.findHit('A3')
+f.removeSquareHit(coord)
+console.log(f.getSquaresPlaced())
