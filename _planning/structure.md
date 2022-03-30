@@ -38,6 +38,7 @@
 
         - Will tell View module how to render the Gameboard
         - Will tell Gameflow if the game is in state to end 
+        - Will tell Ships which positions they belong to
         - Will tell Ships IF they got hit
         - Will tell Ships WHERE they got hit
         - Will tell itself if there was a missing hit
