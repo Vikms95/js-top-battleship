@@ -75,7 +75,3 @@ export function Gameboard(){
         addShipToPlayerArray,
     }
 }
-
-const f = Gameboard()
-const s = f.createShip('A1','A2')
-console.log(s)

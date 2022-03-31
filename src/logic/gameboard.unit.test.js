@@ -1,13 +1,10 @@
 import { Gameboard } from './gameboard'
-import { Ship } from './ship'
 
 let gameboard
-let mockShip
 
 test('Gameboard factory creates a ship by calling the Ship factory createShip method', () =>{
     gameboard = Gameboard()
-    mockShip = Ship('A1','A2')
-    expect(gameboard.createShip('A1','A2')).toStrictEqual(mockShip)
+    expect(gameboard.createShip('A1','A2')).toHaveProperty('findHit','isSunk','getShipCoord')
 })
 
 // test('sends information to View on how to render the board with sendShipCoord')
