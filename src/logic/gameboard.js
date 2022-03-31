@@ -1,16 +1,28 @@
-function Gameboard(){
+import { Ship } from './ship'
+
+export function Gameboard(){
 
     let isGameOver = false
-    let boardGrid = []
+    let _boardGrid = []
+
+    const getBoardGrid = () =>{
+        return _boardGrid
+    }
 
     // Incoming-query (assert result)
-    const createShip = () =>{
+    const createShip = (...coordinates) =>{
         // Calls the Ship factory and
         // instantiates a ship object
+        const ship = Ship(coordinates)
+        return ship
+    }
+
+    const addShipToPlayerArray = (ship) =>{
+
     }
 
     // Query & Command self x
-    const placeShip = () =>{
+    const addShipToBoardArray = () =>{
         // Gets a Ship object and
         // sets it's position to boardGrid      
     }
@@ -55,4 +67,15 @@ function Gameboard(){
         // returns 0 and send info to Gameflow
 
     }
+    return {
+        getBoardGrid,
+        createShip,
+        sendHitCoord,
+        sendShipCoord,
+        addShipToPlayerArray,
+    }
 }
+
+const f = Gameboard()
+const s = f.createShip('A1','A2')
+console.log(s)

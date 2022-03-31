@@ -27,6 +27,10 @@
     
 #----------------------------------------------------------------#
 
+- Queries: Return a result and do not change the observable state of the system (are free of side effects).
+
+- Commands: Change the state of a system but do not return a value.
+
 - COMMUNICATION
     -Gameflow-
 
@@ -38,9 +42,7 @@
 
         - Will tell View module how to render the Gameboard
         - Will tell Gameflow if the game is in state to end 
-        - Will tell Ships which positions they belong to
-        - Will tell Ships IF they got hit
-        - Will tell Ships WHERE they got hit
+        - Will tell Ships IF & WHERE they got hit
         - Will tell itself if there was a missing hit
         
     -Player-

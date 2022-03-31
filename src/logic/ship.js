@@ -1,8 +1,8 @@
-export function Ship(...positions){
+export function Ship(...coordinates){
 
     // The array automatically gets it's length 
     // thanks to the spread operator 
-    let _shipCoord = [...positions]
+    let _shipCoord = [...coordinates]
     
     // Outgoing query x
     const getShipCoord = () =>{
@@ -31,7 +31,6 @@ export function Ship(...positions){
     
     return {
         findHit,
-        removeSquareHit,
         isSunk,
         getShipCoord,
     }
