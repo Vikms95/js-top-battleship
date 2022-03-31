@@ -6,7 +6,7 @@ export function Gameboard(){
     let _boardGrid = 
     {
         'A1': false, 'A2': false, 'A3': false, 'A4': false, 'A5': false, 'A6': false, 'A7': false, 'A8': false, 
-        'B1': false, 'B2': false, 'B3': false, 'B41': false, 'B5': false, 'B6': false, 'B7': false, 'B8': false, 
+        'B1': false, 'B2': false, 'B3': false, 'B4': false, 'B5': false, 'B6': false, 'B7': false, 'B8': false, 
         'C1': false, 'C2': false, 'C3': false, 'C4': false, 'C5': false, 'C6': false, 'C7': false, 'C8': false, 
         'D1': false, 'D2': false, 'D3': false, 'D4': false, 'D5': false, 'D6': false, 'D7': false, 'D8': false, 
         'E1': false, 'E2': false, 'E3': false, 'E4': false, 'E5': false, 'E6': false, 'E7': false, 'E8': false, 
@@ -33,11 +33,16 @@ export function Gameboard(){
     }
 
     // Query & Command self x
-    const addShipToBoardArray = (...coordinates) =>{
-        // Gets a Ship object and
-        // sets it's position to boardGrid 
-        const ship = createShip(...coordinates)
-        _boardGrid.push(ship)
+    const addShipToBoardGrid = (ship) =>{
+        for (let i = 0; i < ship.getShipCoord().length; i++) {
+            const coordToAdd = ship.getShipCoord()[i]
+            // Sets Ship positions to true on the _boardGrid 
+            for(const [key,value] of Object.entries(_boardGrid)){
+                if(key === coordToAdd){
+                    _boardGrid[key] = true
+                }
+            }       
+        }
     }
 
     // Outgoing-query x
@@ -86,10 +91,11 @@ export function Gameboard(){
         sendHitCoord,
         sendShipCoord,
         addShipToPlayerArray,
-        addShipToBoardArray
+        addShipToBoardGrid
     }
 }
-const board = Gameboard()
-board.addShipToBoardArray('A1','A2')
-board.addShipToBoardArray('A4','A5')
-console.log(board.getBoardGrid())
+
+const gb = Gameboard()
+const ship = gb.createShip('A1','A2')
+gb.addShipToBoardGrid(ship)
+console.log(gb.getBoardGrid())
