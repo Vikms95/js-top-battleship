@@ -35,8 +35,3 @@ export function Ship(...positions){
         getSquaresPlaced,
     }
 }
-
-const f = Ship('A2','A3')
-const coord = f.findHit('A3')
-f.removeSquareHit(coord)
-console.log(f.getSquaresPlaced())
