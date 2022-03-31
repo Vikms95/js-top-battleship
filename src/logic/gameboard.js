@@ -10,8 +10,7 @@ function Gameboard(){
 
     const placeShip = () =>{
         // Gets a Ship object and
-        // sets it's position to boardGrid
-           
+        // sets it's position to boardGrid      
     }
 
     const sendShipCoord = () =>{
@@ -20,7 +19,9 @@ function Gameboard(){
     }
 
     const receiveAttack = ()=>{
-
+        // Receives coord from the DOM,
+        // calls iteratePlayerShips to see
+        // if a Ship was hit
     }
     
     const iteratePlayerShips = () =>{
@@ -35,7 +36,7 @@ function Gameboard(){
     
     const isPlayerDefeated = () =>{
         // Returns true when checkPlayerShips
-        // returns 0 and send info to
-        // Gameflow
+        // returns 0 and send info to Gameflow
+
     }
 }
