@@ -1,10 +1,12 @@
 import { Gameboard } from './gameboard'
 
-let gameboard
 
-test('Gameboard factory creates a ship by calling the Ship factory createShip method', () =>{
-    gameboard = Gameboard()
-    expect(gameboard.createShip('A1','A2')).toHaveProperty('findHit','isSunk','getShipCoord')
+test('createShip should create a ship object', () =>{
+    const gameboard = Gameboard()
+    const ship = gameboard.createShip('A1','A2')
+    expect(ship).toHaveProperty('findHit')
+    expect(ship).toHaveProperty('isSunk')
+    expect(ship).toHaveProperty('getShipCoord')
 })
 
 // test('sends information to View on how to render the board with sendShipCoord')
