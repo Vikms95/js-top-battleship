@@ -50,8 +50,8 @@
         - Will tell Gameboard if all their ships are sunk 
         - Will tell Ship when to be placed
     -Ship-
-        - Will tell Gameboard where to place the Ships
-        - Will tell Player if the Ship is sunk
+        - Will tell Gameboard where to place the Ships (getSquaresPlaced)
+        - Will tell Player if the Ship is sunk (isSunk)
 
 #----------------------------------------------------------------#
 
