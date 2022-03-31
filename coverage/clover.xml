@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1648761878553" clover="3.2.0">
-  <project timestamp="1648761878553" name="All files">
-    <metrics statements="26" coveredstatements="19" conditionals="8" coveredconditionals="3" methods="11" coveredmethods="4" elements="45" coveredelements="26" complexity="0" loc="26" ncloc="26" packages="1" files="1" classes="1"/>
+<coverage generated="1648762622163" clover="3.2.0">
+  <project timestamp="1648762622163" name="All files">
+    <metrics statements="28" coveredstatements="21" conditionals="6" coveredconditionals="1" methods="11" coveredmethods="4" elements="45" coveredelements="26" complexity="0" loc="28" ncloc="28" packages="1" files="1" classes="1"/>
     <file name="gameboard.js" path="C:\Users\vms19\Desktop\Prog.Casa\HTML CSS JS (TOP)\js-top-battleship\src\logic\gameboard.js">
-      <metrics statements="26" coveredstatements="19" conditionals="8" coveredconditionals="3" methods="11" coveredmethods="4"/>
+      <metrics statements="28" coveredstatements="21" conditionals="6" coveredconditionals="1" methods="11" coveredmethods="4"/>
       <line num="5" count="3" type="stmt"/>
       <line num="7" count="3" type="stmt"/>
       <line num="18" count="3" type="stmt"/>
@@ -24,12 +24,14 @@
       <line num="60" count="2" type="stmt"/>
       <line num="68" count="3" type="stmt"/>
       <line num="69" count="2" type="stmt"/>
-      <line num="70" count="128" type="cond" truecount="3" falsecount="1"/>
-      <line num="71" count="0" type="stmt"/>
-      <line num="77" count="3" type="cond" truecount="0" falsecount="1"/>
-      <line num="86" count="3" type="stmt"/>
-      <line num="91" count="3" type="stmt"/>
-      <line num="96" count="3" type="stmt"/>
+      <line num="70" count="2" type="cond" truecount="1" falsecount="1"/>
+      <line num="71" count="2" type="stmt"/>
+      <line num="72" count="2" type="stmt"/>
+      <line num="75" count="0" type="stmt"/>
+      <line num="79" count="3" type="cond" truecount="0" falsecount="1"/>
+      <line num="88" count="3" type="stmt"/>
+      <line num="93" count="3" type="stmt"/>
+      <line num="98" count="3" type="stmt"/>
     </file>
   </project>
 </coverage>

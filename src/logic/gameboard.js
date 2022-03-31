@@ -67,10 +67,12 @@ export function Gameboard(){
     
     const checkIfHit = (coord) =>{
         for(const [key,value] of Object.entries(_boardGrid)){
-            if(key === coord && value === true){
+            if(key === coord){
+                console.log(key,coord,value)
                 return true
             }
         }
+        return false
     }
     
     // Both query and command, refactor?

@@ -9,13 +9,13 @@ beforeEach(() =>{
     gameboard = Gameboard()
   
     ship = gameboard.createShip('A1','A2')
+    // String for now, method when DOM gets created
+    mockSendCoordDOM =  'A1' 
     mockBoardGrid ={
         'A1': false,
         'A2': false,
         'A3': false
     } 
-    // String for now, method when DOM gets created
-    mockSendCoordDOM =  'A1' 
     mockAddShipToBoardGrid = jest.fn((ship) => {
       
     })
@@ -34,6 +34,8 @@ test('the coord received are valid',()=>{
 })
   
 test('a hit is detected if attack is from a Ship coord',() =>{
+    mockAddShipToBoardGrid(ship)
+    console.log
     expect(gameboard.receiveAttackFromDOM(mockSendCoordDOM)).toBeTruthy()
   
 })
