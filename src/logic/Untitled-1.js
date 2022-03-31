@@ -36,7 +36,7 @@ export function Gameboard(){
     const addShipToBoardGrid = (ship) =>{
         for (let i = 0; i < ship.getShipCoord().length; i++) {
             const coordToAdd = ship.getShipCoord()[i]
-            // Iterates _gameboard
+            // Sets Ship positions to true on the _boardGrid 
             for(const [key,value] of Object.entries(_boardGrid)){
                 if(key === coordToAdd){
                     _boardGrid[key] = true
@@ -51,26 +51,11 @@ export function Gameboard(){
         // it's coordinates to View
     }
 
-    // Receives coord from the DOM 
     // Incoming-query (assert result)
-    const receiveAttackFromDOM = (sendCoordDOM = 'A1')=>{
-        // Store 'A1' until DOM methods are created
-        const coord = sendCoordDOM
-        const isShiphit = checkIfHit(coord)
-        return isShiphit
-        // if value from coord is true 
-        /// call iteratePlayerShips
-        // else
-        /// call attackIsMissed 
-
-    }
-    
-    const checkIfHit = (coord) =>{
-        for(const [key,value] of Object.entries(_boardGrid)){
-            if(key === coord && value === true){
-                return true
-            }
-        }
+    const receiveAttack = ()=>{
+        // Receives coord from the DOM,
+        // calls iteratePlayerShips to see
+        // if a Ship was hit
     }
     
     // Both query and command, refactor?
@@ -88,6 +73,13 @@ export function Gameboard(){
         // ship
     }
 
+    // Outgoing query x
+    const isAttackMissed = ()=>{
+        // Returns true when checkPlayerShips
+        // does not return any hit value  
+    }
+    
+
     const isPlayerDefeated = () =>{
         // Returns true when checkPlayerShips
         // returns 0 and send info to Gameflow
@@ -96,11 +88,14 @@ export function Gameboard(){
     return {
         getBoardGrid,
         createShip,
-        receiveAttackFromDOM,
         sendHitCoord,
         sendShipCoord,
         addShipToPlayerArray,
         addShipToBoardGrid
     }
-    
 }
+
+const gb = Gameboard()
+const ship = gb.createShip('A1','A2')
+gb.addShipToBoardGrid(ship)
+console.log(gb.getBoardGrid())

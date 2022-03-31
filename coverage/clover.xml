@@ -1,33 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1648753626511" clover="3.2.0">
-  <project timestamp="1648753626511" name="All files">
-    <metrics statements="24" coveredstatements="24" conditionals="3" coveredconditionals="2" methods="11" coveredmethods="4" elements="38" coveredelements="30" complexity="0" loc="24" ncloc="24" packages="1" files="1" classes="1"/>
+<coverage generated="1648761878553" clover="3.2.0">
+  <project timestamp="1648761878553" name="All files">
+    <metrics statements="26" coveredstatements="19" conditionals="8" coveredconditionals="3" methods="11" coveredmethods="4" elements="45" coveredelements="26" complexity="0" loc="26" ncloc="26" packages="1" files="1" classes="1"/>
     <file name="gameboard.js" path="C:\Users\vms19\Desktop\Prog.Casa\HTML CSS JS (TOP)\js-top-battleship\src\logic\gameboard.js">
-      <metrics statements="24" coveredstatements="24" conditionals="3" coveredconditionals="2" methods="11" coveredmethods="4"/>
-      <line num="5" count="2" type="stmt"/>
-      <line num="7" count="2" type="stmt"/>
-      <line num="18" count="2" type="stmt"/>
-      <line num="19" count="1" type="stmt"/>
-      <line num="23" count="2" type="stmt"/>
-      <line num="26" count="2" type="stmt"/>
-      <line num="31" count="2" type="stmt"/>
-      <line num="36" count="2" type="stmt"/>
-      <line num="37" count="1" type="stmt"/>
-      <line num="38" count="2" type="stmt"/>
-      <line num="40" count="2" type="stmt"/>
-      <line num="41" count="128" type="cond" truecount="2" falsecount="0"/>
-      <line num="42" count="2" type="stmt"/>
-      <line num="49" count="2" type="stmt"/>
-      <line num="55" count="2" type="stmt"/>
-      <line num="62" count="2" type="cond" truecount="0" falsecount="1"/>
-      <line num="71" count="2" type="stmt"/>
-      <line num="77" count="2" type="stmt"/>
-      <line num="83" count="2" type="stmt"/>
-      <line num="88" count="2" type="stmt"/>
-      <line num="98" count="1" type="stmt"/>
-      <line num="99" count="1" type="stmt"/>
-      <line num="100" count="1" type="stmt"/>
-      <line num="101" count="1" type="stmt"/>
+      <metrics statements="26" coveredstatements="19" conditionals="8" coveredconditionals="3" methods="11" coveredmethods="4"/>
+      <line num="5" count="3" type="stmt"/>
+      <line num="7" count="3" type="stmt"/>
+      <line num="18" count="3" type="stmt"/>
+      <line num="19" count="0" type="stmt"/>
+      <line num="23" count="3" type="stmt"/>
+      <line num="26" count="3" type="stmt"/>
+      <line num="31" count="3" type="stmt"/>
+      <line num="36" count="3" type="stmt"/>
+      <line num="37" count="0" type="stmt"/>
+      <line num="38" count="0" type="stmt"/>
+      <line num="40" count="0" type="stmt"/>
+      <line num="41" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="42" count="0" type="stmt"/>
+      <line num="49" count="3" type="stmt"/>
+      <line num="56" count="3" type="cond" truecount="0" falsecount="1"/>
+      <line num="58" count="2" type="stmt"/>
+      <line num="59" count="2" type="stmt"/>
+      <line num="60" count="2" type="stmt"/>
+      <line num="68" count="3" type="stmt"/>
+      <line num="69" count="2" type="stmt"/>
+      <line num="70" count="128" type="cond" truecount="3" falsecount="1"/>
+      <line num="71" count="0" type="stmt"/>
+      <line num="77" count="3" type="cond" truecount="0" falsecount="1"/>
+      <line num="86" count="3" type="stmt"/>
+      <line num="91" count="3" type="stmt"/>
+      <line num="96" count="3" type="stmt"/>
     </file>
   </project>
 </coverage>
