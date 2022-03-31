@@ -1,6 +1,6 @@
 import { Ship } from './ship'
 
-// Mock object created for test
+// Mock object declared for test
 let ship 
 
 beforeEach(() =>{
@@ -13,7 +13,7 @@ test('finds hit index',() =>{
 
 test('removes hit index from findHit',() =>{
     ship.removeSquareHit(0)
-    expect(ship.getSquaresPlaced()).toEqual(['A3'])
+    expect(ship.getShipCoord()).toEqual(['A3'])
 })
 
 test('isSunk triggers when _positions is 0',() =>{
