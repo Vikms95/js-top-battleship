@@ -37,7 +37,7 @@ export function Gameboard(){
         for (let i = 0; i < ship.getShipCoord().length; i++) {
             const coordToAdd = ship.getShipCoord()[i]
             // Iterates _gameboard
-            for(const [key,value] of Object.entries(_boardGrid)){
+            for(const [key] of Object.entries(_boardGrid)){
                 if(key === coordToAdd){
                     _boardGrid[key] = true
                 }
@@ -66,9 +66,8 @@ export function Gameboard(){
     }
     
     const checkIfHit = (coord) =>{
-        for(const [key,value] of Object.entries(_boardGrid)){
-            if(key === coord){
-                console.log(key,coord,value)
+        for(const [key] of Object.entries(_boardGrid)){
+            if(key === coord && _boardGrid[key]){
                 return true
             }
         }
