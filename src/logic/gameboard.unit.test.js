@@ -2,24 +2,29 @@ import { Gameboard } from './gameboard'
 
 let mockGameboard
 let mockShip
+let mockGameboardShips
 let mockSendHittingCoordDOM
 let mockSendMissingCoordDOM
+let mockAddShipToBoardGrid
 
 beforeEach(() =>{
     mockGameboard = Gameboard()
     mockShip = mockGameboard.createShip('A1','A2')
+    mockGameboardShips = []
+    mockGameboardShips.push(mockShip)
+      
     // String for now, method when DOM gets created
     mockSendHittingCoordDOM =  'A1' 
     mockSendMissingCoordDOM =  'A3' 
 })
 
-test('createShip should create a ship object', () =>{
+test('createShip() - should create a ship object', () =>{
     expect(mockShip).toHaveProperty('getShipCoord')
     expect(mockShip).toHaveProperty('findHit')
     expect(mockShip).toHaveProperty('isSunk')
 })
 
-describe('hits are detected and looked after on _boardGrid',() =>{
+describe('receiveAttackFromDOM() - hits are detected and looked after on _boardGrid',() =>{
     test('the coords received are valid',()=>{
         const spyReceiveAttackFromDOM = jest.spyOn(mockGameboard, 'receiveAttackFromDOM')
         mockGameboard.receiveAttackFromDOM(mockSendHittingCoordDOM)
@@ -29,9 +34,9 @@ describe('hits are detected and looked after on _boardGrid',() =>{
     beforeEach(()=>{
         mockGameboard.addShipToBoardGrid(mockShip)
     })
-    
+    // TODO set up mockGameBoardShips
     test('a hit is detected truthy if the coords received belong to a ship',() =>{
-        expect(mockGameboard.receiveAttackFromDOM(mockSendHittingCoordDOM)).toBe(true)
+        expect(mockGameboard.receiveAttackFromDOM(mockSendHittingCoordDOM)).toBeTruthy()
     })
 
     test('a hit is detected falsy if the coords received do not belong to a ship',() =>{

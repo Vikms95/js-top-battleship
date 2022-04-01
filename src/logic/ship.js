@@ -2,13 +2,21 @@ export function Ship(...coordinates){
 
     // The array automatically gets it's length 
     // thanks to the spread operator 
-    let _shipCoord = [...coordinates]
-    
+    const _shipCoord = [...coordinates]
+    // TODO set up name according to its length and how many of it's same kind there are
+    const _shipName = ''
     // Outgoing query x
     const getShipCoord = () =>{
         return _shipCoord
     }
 
+    const getShipName = () =>{
+
+    }
+
+    const setShipName = () =>{
+
+    }
     // Receives coord hit from Gameboard and checks 
     // which position from squaresPlaced has been hit
     // Incoming query (assert result)

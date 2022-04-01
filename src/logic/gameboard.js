@@ -14,6 +14,12 @@ export function Gameboard(){
         'G1': false, 'G2': false, 'G3': false, 'G4': false, 'G5': false, 'G6': false, 'G7': false, 'G8': false, 
         'H1': false, 'H2': false, 'H3': false, 'H4': false, 'H5': false, 'H6': false, 'H7': false, 'H8': false 
     }
+    let _gameBoardShips = [
+        {
+            name: 'ship1',
+            coords: ['A1','A2']
+        }
+    ]
 
     const getBoardGrid = () =>{
         return _boardGrid
@@ -23,13 +29,14 @@ export function Gameboard(){
     const createShip = (...coordinates) =>{
         // Calls the Ship factory and
         // instantiates a ship object
-        return Ship(...coordinates)
+        const ship = Ship(...coordinates) 
+        return ship
  
     }
 
     // Outgoing-command (expect to send)
-    const addShipToPlayerArray = () =>{
-
+    const addShipToBoardShipsArray = (ship) =>{
+        _gameBoardShips.push(ship)
     }
 
     // Query & Command self x
@@ -45,43 +52,54 @@ export function Gameboard(){
         }
     }
 
-    // Outgoing-query x
-    const sendShipCoord = () =>{
-        // Gets a Ship object and sends
-        // it's coordinates to View
-    }
-
     // Receives coord from the DOM 
     // Incoming-query (assert result)
-    const receiveAttackFromDOM = (sendCoordDOM = 'A1')=>{
+    const receiveAttackFromDOM = (sendCoordsDOM = 'A1')=>{
         // Store 'A1' until DOM methods are created
-        const coord = sendCoordDOM
-        const isShiphit = checkIfHit(coord)
-        return isShiphit
-        // if value from coord is true 
-        /// call iteratePlayerShips
+        const coords = sendCoordsDOM
+        const isShiphit = checkIfHit(coords)
+
+        if(isShiphit){
+            // call iteratePlayerShips
+            return getHitShipName(coords,_gameBoardShips)
+        } 
         // else
-        /// call attackIsMissed 
+        /// 
+        return false
 
     }
     
-    const checkIfHit = (coord) =>{
+    const checkIfHit = (coords) =>{
         for(const [key] of Object.entries(_boardGrid)){
-            if(key === coord && _boardGrid[key]){
+            if(key === coords && _boardGrid[key]){
                 return true
             }
         }
         return false
     }
     
-    // Both query and command, refactor?
-    const iteratePlayerShips = (coord = null) =>{
-        // 1. check if a ship was hit and send it ( true = sendHitCoord, false = isAttackMissed)
+    // TODO double check that the name is being retrieved
+    const getHitShipName = (coords = null, gameboardShips) =>{
+        // Iterates one player ship array (for now I just pass
+        // 
+        // if you get here, IT IS BECAUSE A SHIP WAS HIT
+        // check the ships from the array to retrieve the name of the ship hit
+        return gameboardShips.find(ship =>{
+            if(ship.coords === coords){
+                return ship.name
+            }
+        })
         // 2. check if a player has any remaining ships (false = isPlayerDefeated)
-        // Iterates the player ship array
         // 
         // 
     }   
+
+    
+    // Outgoing-query x
+    const sendShipCoord = () =>{
+        // Gets a Ship object and sends
+        // it's coordinates to View
+    }
 
     // Outgoing query x
     const sendHitCoord = () =>{
@@ -100,8 +118,6 @@ export function Gameboard(){
         receiveAttackFromDOM,
         sendHitCoord,
         sendShipCoord,
-        addShipToPlayerArray,
         addShipToBoardGrid
     }
-    
 }
