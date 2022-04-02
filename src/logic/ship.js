@@ -41,5 +41,6 @@ export function Ship(...coordinates){
         findHit,
         isSunk,
         getShipCoord,
+        removeSquareHit
     }
 }

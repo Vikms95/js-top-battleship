@@ -35,8 +35,8 @@ describe('receiveAttackFromDOM() - hits are detected and looked after on _boardG
         mockGameboard.addShipToBoardGrid(mockShip)
     })
     // TODO set up mockGameBoardShips
-    test('a hit is detected truthy if the coords received belong to a ship',() =>{
-        expect(mockGameboard.receiveAttackFromDOM(mockSendHittingCoordDOM)).toBeTruthy()
+    test('if a ',() =>{
+        expect(mockGameboard.receiveAttackFromDOM(mockSendHittingCoordDOM)).toHaveBeenCalled()
     })
 
     test('a hit is detected falsy if the coords received do not belong to a ship',() =>{

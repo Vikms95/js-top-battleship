@@ -14,13 +14,9 @@ export function Gameboard(){
         'G1': false, 'G2': false, 'G3': false, 'G4': false, 'G5': false, 'G6': false, 'G7': false, 'G8': false, 
         'H1': false, 'H2': false, 'H3': false, 'H4': false, 'H5': false, 'H6': false, 'H7': false, 'H8': false 
     }
-    let _gameBoardShips = [
-        {
-            name: 'ship1',
-            coords: ['A1','A2']
-        }
-    ]
 
+    let _gameBoardShips = []
+    
     const getBoardGrid = () =>{
         return _boardGrid
     }
@@ -31,8 +27,11 @@ export function Gameboard(){
         // instantiates a ship object
         const ship = Ship(...coordinates) 
         return ship
- 
+        
+   
     }
+    let f = createShip('A1','A2')
+    _gameBoardShips.push(f)
 
     // Outgoing-command (expect to send)
     const addShipToBoardShipsArray = (ship) =>{
@@ -51,17 +50,15 @@ export function Gameboard(){
             }       
         }
     }
-
     // Receives coord from the DOM 
     // Incoming-query (assert result)
     const receiveAttackFromDOM = (sendCoordsDOM = 'A1')=>{
         // Store 'A1' until DOM methods are created
-        const coords = sendCoordsDOM
+        const coords = sendCoordsDOM // Will be a method later
         const isShiphit = checkIfHit(coords)
 
         if(isShiphit){
-            // call iteratePlayerShips
-            return getHitShipName(coords,_gameBoardShips)
+            findShipAndRemoveCoord(coords,_gameBoardShips)
         } 
         // else
         /// 
@@ -79,22 +76,18 @@ export function Gameboard(){
     }
     
     // TODO double check that the name is being retrieved
-    const getHitShipName = (coords = null, gameboardShips) =>{
-        // Iterates one player ship array (for now I just pass
-        // 
-        // if you get here, IT IS BECAUSE A SHIP WAS HIT
+    const findShipAndRemoveCoord = (hitCoords, gameboardShips) =>{
+        // for now we pass an array with already inserted values
         // check the ships from the array to retrieve the name of the ship hit
-        return gameboardShips.find(ship =>{
-            if(ship.coords === coords){
-                return ship.name
+        // Just delete the ship coord here?
+        gameboardShips.forEach(ship =>{
+            if(ship.getShipCoord().includes(hitCoords)){
+                ship.removeSquareHit(hitCoords)
+                return 'Ship Name'
             }
         })
-        // 2. check if a player has any remaining ships (false = isPlayerDefeated)
-        // 
-        // 
-    }   
+    }
 
-    
     // Outgoing-query x
     const sendShipCoord = () =>{
         // Gets a Ship object and sends

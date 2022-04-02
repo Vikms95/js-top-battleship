@@ -32,6 +32,9 @@
 - Commands: Change the state of a system but do not return a value.
 
 - COMMUNICATION
+
+- ( ( ( (ships) gameboard) player1)  ( ( (ships) gameboard) player2) game)
+
     -Gameflow-
 
         - Will create Players and Gameboard
