@@ -12,6 +12,7 @@ beforeEach(() =>{
     mockShip = mockGameboard.createShip('A1','A2')
     mockGameboardShips = []
     mockGameboardShips.push(mockShip)
+    console.log(mockGameboardShips)
       
     // String for now, method when DOM gets created
     mockSendHittingCoordDOM =  'A1' 
@@ -34,15 +35,28 @@ describe('receiveAttackFromDOM() - hits are detected and looked after on _boardG
     beforeEach(()=>{
         mockGameboard.addShipToBoardGrid(mockShip)
     })
-    // TODO set up mockGameBoardShips
-    test('if a ',() =>{
-        expect(mockGameboard.receiveAttackFromDOM(mockSendHittingCoordDOM)).toHaveBeenCalled()
-    })
 
+    test('undefined is returned if the coords received belong to the ship ',() =>{
+        expect(mockGameboard.receiveAttackFromDOM(mockSendHittingCoordDOM)).toBeUndefined()
+    })
+    
     test('a hit is detected falsy if the coords received do not belong to a ship',() =>{
         expect(mockGameboard.receiveAttackFromDOM(mockSendMissingCoordDOM)).toBe(false)
+      
     })
-  
+
+    test('the hit makes findShipAndRemoveCoord remove the coords', () =>{
+        const mockFindShipAndRemoveCoord = jest.fn((mockSendHittingCoordDOM, mockGameboardShips) =>{
+            for (let i = 0; i < mockGameboardShips.length; i++) {
+                if(mockGameboardShips[i].getShipCoord().includes(mockSendHittingCoordDOM)){
+                    const index = mockGameboardShips[i].findHit(mockSendHittingCoordDOM)
+                    mockGameboardShips[i].removeSquareHit(index)
+                }
+            }
+        })
+        mockFindShipAndRemoveCoord(mockSendHittingCoordDOM,mockGameboardShips)
+        expect(mockGameboardShips[0].getShipCoord()).toEqual(['A2'])
+    })
 })
 
 // test('atack is missed if coord received is not from Ship')

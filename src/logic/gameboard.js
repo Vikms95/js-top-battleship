@@ -23,15 +23,9 @@ export function Gameboard(){
 
     // Incoming-query (assert result) X
     const createShip = (...coordinates) =>{
-        // Calls the Ship factory and
-        // instantiates a ship object
-        const ship = Ship(...coordinates) 
-        return ship
-        
-   
+        return Ship(...coordinates) 
+
     }
-    let f = createShip('A1','A2')
-    _gameBoardShips.push(f)
 
     // Outgoing-command (expect to send)
     const addShipToBoardShipsArray = (ship) =>{
@@ -42,7 +36,6 @@ export function Gameboard(){
     const addShipToBoardGrid = (ship) =>{
         for (let i = 0; i < ship.getShipCoord().length; i++) {
             const coordToAdd = ship.getShipCoord()[i]
-            // Iterates _gameboard
             for(const [key] of Object.entries(_boardGrid)){
                 if(key === coordToAdd){
                     _boardGrid[key] = true
@@ -55,18 +48,17 @@ export function Gameboard(){
     const receiveAttackFromDOM = (sendCoordsDOM = 'A1')=>{
         // Store 'A1' until DOM methods are created
         const coords = sendCoordsDOM // Will be a method later
-        const isShiphit = checkIfHit(coords)
+        const isShiphit = _checkIfHit(coords)
 
         if(isShiphit){
-            findShipAndRemoveCoord(coords,_gameBoardShips)
+            findShipAndRemoveCoord(coords,_gameBoardShips) 
+            return
         } 
-        // else
-        /// 
         return false
 
     }
     
-    const checkIfHit = (coords) =>{
+    const _checkIfHit = (coords) =>{
         for(const [key] of Object.entries(_boardGrid)){
             if(key === coords && _boardGrid[key]){
                 return true
@@ -75,7 +67,6 @@ export function Gameboard(){
         return false
     }
     
-    // TODO double check that the name is being retrieved
     const findShipAndRemoveCoord = (hitCoords, gameboardShips) =>{
         // for now we pass an array with already inserted values
         // check the ships from the array to retrieve the name of the ship hit
@@ -83,7 +74,6 @@ export function Gameboard(){
         gameboardShips.forEach(ship =>{
             if(ship.getShipCoord().includes(hitCoords)){
                 ship.removeSquareHit(hitCoords)
-                return 'Ship Name'
             }
         })
     }
