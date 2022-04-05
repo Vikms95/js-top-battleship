@@ -35,12 +35,14 @@ export function Gameboard(){
     const receiveAttackFromDOM = (sendCoordsDOM = 'A1')=>{
         // Store 'A1' until DOM methods are created
         const coords = sendCoordsDOM // Will be a method later
-        const isShiphit = checkIfHit(coords)
 
-        if(isShiphit){
+        if(isShipHit(coords)){
+          
             const ship = findShip(coords,_gameBoardShips)
             ship.removeSquareHit(coords)
+            removeShipFromBoardGridObject(coords)
             // Mark the sunk ship on _boardGrid 
+
         }else{ 
             return false
         }
@@ -54,16 +56,24 @@ export function Gameboard(){
     // Query & Command self x
     const addShipToBoardGridObject = (ship) =>{
         for (let i = 0; i < ship.getShipCoord().length; i++) {
-            const coordToAdd = ship.getShipCoord()[i]
+            const coords = ship.getShipCoord()[i]
             for(const [key] of Object.entries(_boardGrid)){
-                if(key === coordToAdd){
+                if(key === coords){
                     _boardGrid[key] = true
                 }
             }       
         }
     }
 
-    const checkIfHit = (coords) =>{
+    const removeShipFromBoardGridObject = (coords) =>{
+        for(const[key] of Object.entries(_boardGrid)){
+            if(key === coords){
+                _boardGrid[key] = false
+            }
+        }
+    }
+
+    const isShipHit = (coords) =>{
         for(const [key] of Object.entries(_boardGrid)){
             if(key === coords && _boardGrid[key]){
                 // Change value inside _boardgrid here?
@@ -108,6 +118,5 @@ export function Gameboard(){
         receiveAttackFromDOM,
         sendHitCoord,
         sendShipCoord,
-        addShipToBoardGridObject
     }
 }

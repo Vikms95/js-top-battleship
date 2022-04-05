@@ -33,10 +33,6 @@ describe('receiveAttackFromDOM() - hits are detected and looked after on _boardG
         expect(spyReceiveAttackFromDOM).toHaveBeenCalledWith('A1')
     })
   
-    beforeEach(()=>{
-
-    })
-
     test('undefined is returned if the coords received belong to the ship ',() =>{
         expect(mockGameboard.receiveAttackFromDOM(mockSendHittingCoordDOM)).toBeUndefined()
     })
