@@ -38,11 +38,11 @@ export function Gameboard(){
 
         if(isShipHit(coords)){
             const ship = findShipByCoords(coords)
-            removeSquareFromBoardGridObject(coords)
             ship.removeSquareHit(coords)
+            removeSquareFromBoardGridObject(coords)
             // Send info tot he DOM to mark that square as hit visually
             if(ship.isSunk()){
-                removeShipFromShipsArray(ship)
+                _boardShips = removeShipFromShipsArray(ship)
             }
         }else{
             return false
@@ -67,7 +67,8 @@ export function Gameboard(){
     
     const removeShipFromShipsArray = (ship) =>{
         const index = findShipIndexByName(ship)
-        console.log(index)
+        return _boardShips.filter(value =>{
+            return _boardShips.indexOf(value) !== index })
     }
 
     const removeSquareFromBoardGridObject = (coords) =>{
@@ -97,7 +98,9 @@ export function Gameboard(){
     }
 
     const findShipIndexByName = (ship) =>{
-        return _boardShips.indexOf(ship.name)    
+        return _boardShips.findIndex(currentShip =>{
+            return currentShip.getShipName() === ship.getShipName()
+        })
     }
 
     // Outgoing-query x
@@ -121,6 +124,7 @@ export function Gameboard(){
         createShip,
         receiveAttackFromDOM,
         sendHitCoord,
-        sendShipCoord
+        sendShipCoord,
+        removeShipFromShipsArray,
     }
 }

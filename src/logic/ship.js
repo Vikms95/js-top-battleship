@@ -14,9 +14,6 @@ export function Ship(...coordinates){
         return _shipName
     }
 
-    const setShipName = () =>{
-
-    }
     // Receives coord hit from Gameboard and checks 
     // which position from _shipCoords has been hit
     // Incoming query (assert result)

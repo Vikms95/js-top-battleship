@@ -13,6 +13,7 @@ beforeEach(() =>{
     mockShip = mockGameboard.createShip('A1','A2')
     mockGameboardShips = []
     mockGameboardShips.push(mockShip)
+    mockGameboard.removeShipFromShipsArray(mockShip)
     mockGameboardGrid = [{'A1': false,'A2': false,'A3': false,'A4': false}]
       
     // String for now, method when DOM gets created
