@@ -43,6 +43,7 @@ export function Gameboard(){
             // Send info tot he DOM to mark that square as hit visually
             if(ship.isSunk()){
                 _boardShips = removeShipFromShipsArray(ship)
+                // Send info to Player with isPlayerDefeated?
             }
         }else{
             return false
