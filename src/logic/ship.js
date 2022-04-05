@@ -18,20 +18,21 @@ export function Ship(...coordinates){
 
     }
     // Receives coord hit from Gameboard and checks 
-    // which position from squaresPlaced has been hit
+    // which position from _shipCoords has been hit
     // Incoming query (assert result)
     const findHit = (coords) =>{
         return _shipCoord.indexOf(coords)    
     }
     
-    // Removes square hit from _squaresPlaced
+    // Removes square hit from _shipCoords
     // Self command x
     const removeSquareHit = (coords) =>{
+        // Use filter and return a new array?
         const index = findHit(coords)
         _shipCoord.splice(index,1)
     }
 
-    // Receives squaresPlaced length and if 0 returns 
+    // Receives _shipCoords length and if 0 returns 
     // the value to true
     // Pure / Outgoing query x
     const isSunk = () =>{
@@ -40,9 +41,9 @@ export function Ship(...coordinates){
     
     return {
         getShipName,
-        getShipCoord,
-        removeSquareHit,
         findHit,
-        isSunk
+        isSunk,
+        getShipCoord,
+        removeSquareHit
     }
 }

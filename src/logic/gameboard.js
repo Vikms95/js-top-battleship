@@ -25,8 +25,8 @@ export function Gameboard(){
     // Incoming-query (assert result) X
     const createShip = (...coordinates) =>{
         const ship = Ship(...coordinates) 
-        addShipToBoardShipsArray(ship,_boardShips)
-        addShipToBoardGridObject(ship,_boardGrid)
+        _boardShips = addShipToBoardShipsArray(ship)
+        addShipToBoardGridObject(ship)
         return ship
 
     }
@@ -37,7 +37,6 @@ export function Gameboard(){
         const coords = sendCoordsDOM // Will be a method later
 
         if(isShipHit(coords)){
-          
             const ship = findShipByCoords(coords)
             removeSquareFromBoardGridObject(coords)
             ship.removeSquareHit(coords)
@@ -45,23 +44,11 @@ export function Gameboard(){
             if(ship.isSunk()){
                 removeShipFromShipsArray(ship)
             }
-
-
-        }else{ 
+        }else{
             return false
         }
     }
-    // Array of ship objects
-    // Outgoing-command (expect to send)
-    const addShipToBoardShipsArray = (ship) =>{
-        _boardShips.push(ship)
-    }
-      
-    const removeShipFromShipsArray = (ship) =>{
-        const index = findShipIndexByName(ship)
-        console.log(index)
-    }
-      
+ 
     // Query & Command self x
     const addShipToBoardGridObject = (ship) =>{
         for (let i = 0; i < ship.getShipCoord().length; i++) {
@@ -72,6 +59,15 @@ export function Gameboard(){
                 }
             }       
         }
+    }
+
+    const addShipToBoardShipsArray = (ship) =>{
+        return [..._boardShips,ship]
+    }
+    
+    const removeShipFromShipsArray = (ship) =>{
+        const index = findShipIndexByName(ship)
+        console.log(index)
     }
 
     const removeSquareFromBoardGridObject = (coords) =>{
@@ -116,11 +112,8 @@ export function Gameboard(){
         // ship
     }
   
-
     const isPlayerDefeated = () =>{
-        // Returns true when checkPlayerShips
-        // returns 0 and send info to Gameflow
-
+        return _boardShips.every(ship => ship.isSunk())
     }
 
     return {
@@ -128,6 +121,6 @@ export function Gameboard(){
         createShip,
         receiveAttackFromDOM,
         sendHitCoord,
-        sendShipCoord,
+        sendShipCoord
     }
 }
