@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1648988269069" clover="3.2.0">
-  <project timestamp="1648988269069" name="All files">
-    <metrics statements="48" coveredstatements="43" conditionals="13" coveredconditionals="8" methods="19" coveredmethods="10" elements="80" coveredelements="61" complexity="0" loc="48" ncloc="48" packages="1" files="2" classes="2"/>
+<coverage generated="1649139834716" clover="3.2.0">
+  <project timestamp="1649139834716" name="All files">
+    <metrics statements="34" coveredstatements="30" conditionals="11" coveredconditionals="8" methods="12" coveredmethods="6" elements="57" coveredelements="44" complexity="0" loc="34" ncloc="34" packages="1" files="1" classes="1"/>
     <file name="gameboard.js" path="C:\Users\vms19\Desktop\Prog.Casa\HTML CSS JS (TOP)\js-top-battleship\src\logic\gameboard.js">
-      <metrics statements="35" coveredstatements="31" conditionals="11" coveredconditionals="8" methods="12" coveredmethods="6"/>
+      <metrics statements="34" coveredstatements="30" conditionals="11" coveredconditionals="8" methods="12" coveredmethods="6"/>
       <line num="5" count="5" type="stmt"/>
       <line num="7" count="5" type="stmt"/>
       <line num="18" count="5" type="stmt"/>
@@ -24,37 +24,20 @@
       <line num="51" count="3" type="stmt"/>
       <line num="53" count="3" type="cond" truecount="2" falsecount="0"/>
       <line num="54" count="2" type="stmt"/>
-      <line num="55" count="2" type="stmt"/>
-      <line num="57" count="1" type="stmt"/>
-      <line num="61" count="5" type="stmt"/>
-      <line num="62" count="3" type="stmt"/>
-      <line num="63" count="66" type="cond" truecount="4" falsecount="0"/>
-      <line num="64" count="2" type="stmt"/>
-      <line num="67" count="1" type="stmt"/>
-      <line num="70" count="5" type="stmt"/>
-      <line num="74" count="2" type="stmt"/>
-      <line num="75" count="0" type="cond" truecount="0" falsecount="2"/>
-      <line num="76" count="0" type="stmt"/>
-      <line num="82" count="5" type="stmt"/>
-      <line num="88" count="5" type="stmt"/>
-      <line num="93" count="5" type="stmt"/>
-      <line num="98" count="5" type="stmt"/>
-    </file>
-    <file name="ship.js" path="C:\Users\vms19\Desktop\Prog.Casa\HTML CSS JS (TOP)\js-top-battleship\src\logic\ship.js">
-      <metrics statements="13" coveredstatements="12" conditionals="2" coveredconditionals="0" methods="7" coveredmethods="4"/>
-      <line num="5" count="6" type="stmt"/>
-      <line num="7" count="6" type="stmt"/>
-      <line num="9" count="6" type="stmt"/>
-      <line num="10" count="22" type="stmt"/>
-      <line num="13" count="6" type="stmt"/>
-      <line num="17" count="6" type="stmt"/>
-      <line num="23" count="6" type="stmt"/>
-      <line num="24" count="2" type="stmt"/>
-      <line num="29" count="6" type="stmt"/>
-      <line num="30" count="1" type="stmt"/>
-      <line num="36" count="6" type="stmt"/>
-      <line num="37" count="0" type="cond" truecount="0" falsecount="2"/>
-      <line num="40" count="6" type="stmt"/>
+      <line num="56" count="1" type="stmt"/>
+      <line num="60" count="5" type="stmt"/>
+      <line num="61" count="3" type="stmt"/>
+      <line num="62" count="66" type="cond" truecount="4" falsecount="0"/>
+      <line num="63" count="2" type="stmt"/>
+      <line num="66" count="1" type="stmt"/>
+      <line num="69" count="5" type="stmt"/>
+      <line num="73" count="2" type="stmt"/>
+      <line num="74" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="75" count="0" type="stmt"/>
+      <line num="81" count="5" type="stmt"/>
+      <line num="87" count="5" type="stmt"/>
+      <line num="92" count="5" type="stmt"/>
+      <line num="97" count="5" type="stmt"/>
     </file>
   </project>
 </coverage>

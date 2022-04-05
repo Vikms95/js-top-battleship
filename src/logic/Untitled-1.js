@@ -98,4 +98,3 @@ export function Gameboard(){
 const gb = Gameboard()
 const ship = gb.createShip('A1','A2')
 gb.addShipToBoardGrid(ship)
-console.log(gb.getBoardGrid())

@@ -3,6 +3,7 @@ import { Gameboard } from './gameboard'
 let mockGameboard
 let mockShip
 let mockGameboardShips
+let mockGameboardGrid
 let mockSendHittingCoordDOM
 let mockSendMissingCoordDOM
 let mockAddShipToBoardGrid
@@ -11,8 +12,8 @@ beforeEach(() =>{
     mockGameboard = Gameboard()
     mockShip = mockGameboard.createShip('A1','A2')
     mockGameboardShips = []
+    mockGameboardGrid = [{'A1': false,'A2': false,'A3': false,'A4': false}]
     mockGameboardShips.push(mockShip)
-    console.log(mockGameboardShips)
       
     // String for now, method when DOM gets created
     mockSendHittingCoordDOM =  'A1' 

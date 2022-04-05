@@ -20,13 +20,14 @@ export function Ship(...coordinates){
     // Receives coord hit from Gameboard and checks 
     // which position from squaresPlaced has been hit
     // Incoming query (assert result)
-    const findHit = (hitCoord) =>{
-        return _shipCoord.indexOf(hitCoord)    
+    const findHit = (coords) =>{
+        return _shipCoord.indexOf(coords)    
     }
     
     // Removes square hit from _squaresPlaced
     // Self command x
-    const removeSquareHit = (index) =>{
+    const removeSquareHit = (coords) =>{
+        const index = findHit(coords)
         _shipCoord.splice(index,1)
     }
 

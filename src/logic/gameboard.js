@@ -3,6 +3,7 @@ import { Ship } from './ship'
 export function Gameboard(){
 
     let isGameOver = false
+    
     let _boardGrid = 
     {
         'A1': false, 'A2': false, 'A3': false, 'A4': false, 'A5': false, 'A6': false, 'A7': false, 'A8': false, 
@@ -23,10 +24,28 @@ export function Gameboard(){
 
     // Incoming-query (assert result) X
     const createShip = (...coordinates) =>{
-        return Ship(...coordinates) 
+        const ship = Ship(...coordinates) 
+        addShipToBoardShipsArray(ship)
+        addShipToBoardGrid(ship)
+        return ship
 
     }
+    
+    // Incoming-query (assert result)
+    const receiveAttackFromDOM = (sendCoordsDOM = 'A1')=>{
+        // Store 'A1' until DOM methods are created
+        const coords = sendCoordsDOM // Will be a method later
+        const isShiphit = checkIfHit(coords)
 
+        if(isShiphit){
+            const ship = findShip(coords,_gameBoardShips)
+            ship.removeSquareHit(coords)
+            // Mark the sunk ship on _boardGrid 
+        }else{ 
+            return false
+        }
+    }
+    // Array of ship objects
     // Outgoing-command (expect to send)
     const addShipToBoardShipsArray = (ship) =>{
         _gameBoardShips.push(ship)
@@ -43,39 +62,27 @@ export function Gameboard(){
             }       
         }
     }
-    // Receives coord from the DOM 
-    // Incoming-query (assert result)
-    const receiveAttackFromDOM = (sendCoordsDOM = 'A1')=>{
-        // Store 'A1' until DOM methods are created
-        const coords = sendCoordsDOM // Will be a method later
-        const isShiphit = _checkIfHit(coords)
 
-        if(isShiphit){
-            findShipAndRemoveCoord(coords,_gameBoardShips) 
-            return
-        } 
-        return false
-
-    }
-    
-    const _checkIfHit = (coords) =>{
+    const checkIfHit = (coords) =>{
         for(const [key] of Object.entries(_boardGrid)){
             if(key === coords && _boardGrid[key]){
+                // Change value inside _boardgrid here?
                 return true
             }
         }
         return false
     }
     
-    const findShipAndRemoveCoord = (hitCoords, gameboardShips) =>{
+    const findShip = (coords, gameboardShips) =>{
         // for now we pass an array with already inserted values
         // check the ships from the array to retrieve the name of the ship hit
-        // Just delete the ship coord here?
-        gameboardShips.forEach(ship =>{
-            if(ship.getShipCoord().includes(hitCoords)){
-                ship.removeSquareHit(hitCoords)
-            }
+        return gameboardShips.find(ship =>{
+            return ship.getShipCoord().includes(coords)    
         })
+    }
+
+    const checkIfSunkShips = () =>{
+
     }
 
     // Outgoing-query x
