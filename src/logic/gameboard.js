@@ -16,7 +16,7 @@ export function Gameboard(){
         'H1': false, 'H2': false, 'H3': false, 'H4': false, 'H5': false, 'H6': false, 'H7': false, 'H8': false 
     }
 
-    let _gameBoardShips = []
+    let _boardShips = []
     
     const getBoardGrid = () =>{
         return _boardGrid
@@ -25,8 +25,8 @@ export function Gameboard(){
     // Incoming-query (assert result) X
     const createShip = (...coordinates) =>{
         const ship = Ship(...coordinates) 
-        addShipToBoardShipsArray(ship)
-        addShipToBoardGridObject(ship)
+        addShipToBoardShipsArray(ship,_boardShips)
+        addShipToBoardGridObject(ship,_boardGrid)
         return ship
 
     }
@@ -38,10 +38,14 @@ export function Gameboard(){
 
         if(isShipHit(coords)){
           
-            const ship = findShip(coords,_gameBoardShips)
+            const ship = findShipByCoords(coords)
+            removeSquareFromBoardGridObject(coords)
             ship.removeSquareHit(coords)
-            removeShipFromBoardGridObject(coords)
-            // Mark the sunk ship on _boardGrid 
+            // Send info tot he DOM to mark that square as hit visually
+            if(ship.isSunk()){
+                removeShipFromShipsArray(ship)
+            }
+
 
         }else{ 
             return false
@@ -50,9 +54,14 @@ export function Gameboard(){
     // Array of ship objects
     // Outgoing-command (expect to send)
     const addShipToBoardShipsArray = (ship) =>{
-        _gameBoardShips.push(ship)
+        _boardShips.push(ship)
     }
-
+      
+    const removeShipFromShipsArray = (ship) =>{
+        const index = findShipIndexByName(ship)
+        console.log(index)
+    }
+      
     // Query & Command self x
     const addShipToBoardGridObject = (ship) =>{
         for (let i = 0; i < ship.getShipCoord().length; i++) {
@@ -65,10 +74,10 @@ export function Gameboard(){
         }
     }
 
-    const removeShipFromBoardGridObject = (coords) =>{
+    const removeSquareFromBoardGridObject = (coords) =>{
         for(const[key] of Object.entries(_boardGrid)){
             if(key === coords){
-                _boardGrid[key] = false
+                _boardGrid[key] = 'Hit'
             }
         }
     }
@@ -83,35 +92,37 @@ export function Gameboard(){
         return false
     }
     
-    const findShip = (coords, gameboardShips) =>{
+    const findShipByCoords = (coords) =>{
         // for now we pass an array with already inserted values
         // check the ships from the array to retrieve the name of the ship hit
-        return gameboardShips.find(ship =>{
+        return _boardShips.find(ship =>{
             return ship.getShipCoord().includes(coords)    
         })
     }
 
-    const checkIfSunkShips = () =>{
-
+    const findShipIndexByName = (ship) =>{
+        return _boardShips.indexOf(ship.name)    
     }
 
     // Outgoing-query x
-    const sendShipCoord = () =>{
+    const sendShipCoord = () =>{ 
         // Gets a Ship object and sends
         // it's coordinates to View
     }
-
+    
     // Outgoing query x
     const sendHitCoord = () =>{
         // Send hit coordinates to the hit
         // ship
     }
+  
 
     const isPlayerDefeated = () =>{
         // Returns true when checkPlayerShips
         // returns 0 and send info to Gameflow
 
     }
+
     return {
         getBoardGrid,
         createShip,

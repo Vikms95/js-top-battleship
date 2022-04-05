@@ -11,7 +11,7 @@ export function Ship(...coordinates){
     }
 
     const getShipName = () =>{
-
+        return _shipName
     }
 
     const setShipName = () =>{
@@ -39,9 +39,10 @@ export function Ship(...coordinates){
     }
     
     return {
-        findHit,
-        isSunk,
+        getShipName,
         getShipCoord,
-        removeSquareHit
+        removeSquareHit,
+        findHit,
+        isSunk
     }
 }
