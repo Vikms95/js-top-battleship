@@ -26,7 +26,7 @@ export function Gameboard(){
     const createShip = (...coordinates) =>{
         const ship = Ship(...coordinates) 
         addShipToBoardShipsArray(ship)
-        addShipToBoardGrid(ship)
+        addShipToBoardGridObject(ship)
         return ship
 
     }
@@ -52,7 +52,7 @@ export function Gameboard(){
     }
 
     // Query & Command self x
-    const addShipToBoardGrid = (ship) =>{
+    const addShipToBoardGridObject = (ship) =>{
         for (let i = 0; i < ship.getShipCoord().length; i++) {
             const coordToAdd = ship.getShipCoord()[i]
             for(const [key] of Object.entries(_boardGrid)){
@@ -108,6 +108,6 @@ export function Gameboard(){
         receiveAttackFromDOM,
         sendHitCoord,
         sendShipCoord,
-        addShipToBoardGrid
+        addShipToBoardGridObject
     }
 }
