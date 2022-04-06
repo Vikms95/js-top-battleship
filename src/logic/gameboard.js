@@ -52,8 +52,9 @@ export function Gameboard(){
  
     // Query & Command self x
     const addShipToBoardGridObject = (ship) =>{
-        for (let i = 0; i < ship.getShipCoord().length; i++) {
-            const coords = ship.getShipCoord()[i]
+        const coordsArray = ship.getShipCoord()
+        for (let i = 0; i < coordsArray.length; i++) {
+            const coords = coordsArray[i]
             for(const [key] of Object.entries(_boardGrid)){
                 if(key === coords){
                     _boardGrid[key] = true
@@ -67,9 +68,10 @@ export function Gameboard(){
     }
     
     const removeShipFromShipsArray = (ship) =>{
-        const index = findShipIndexByName(ship)
-        return _boardShips.filter(value =>{
-            return _boardShips.indexOf(value) !== index })
+        const shipIndex = findShipIndexByName(ship)
+        return _boardShips.filter(arrayShip =>{
+            return _boardShips.indexOf(arrayShip) !== shipIndex 
+        })
     }
 
     const removeSquareFromBoardGridObject = (coords) =>{
@@ -83,7 +85,6 @@ export function Gameboard(){
     const isShipHit = (coords) =>{
         for(const [key] of Object.entries(_boardGrid)){
             if(key === coords && _boardGrid[key]){
-                // Change value inside _boardgrid here?
                 return true
             }
         }
@@ -92,7 +93,6 @@ export function Gameboard(){
     
     const findShipByCoords = (coords) =>{
         // for now we pass an array with already inserted values
-        // check the ships from the array to retrieve the name of the ship hit
         return _boardShips.find(ship =>{
             return ship.getShipCoord().includes(coords)    
         })

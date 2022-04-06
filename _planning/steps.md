@@ -7,4 +7,4 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
  <!-- - Debug findSHipIndexByName (returning -1) -->
  <!-- - Implement removeShipFromShipsArray -->
  <!-- - Test isPlayerDefeated -->
- - Make array modifiers to return a new array
+ - Make array modifiers to return a new array(removeSquareFromBoardGridObject,addShipToBoardGridObject)
