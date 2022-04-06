@@ -85,10 +85,9 @@ export function Gameboard(){
         //     }
         // }
         
-        const squareIndex = Object.entries(_boardGrid)
-            .findIndex(ship => ship.coords === coords)
-        // Not working v
-        return Object.assign({..._boardShips})
+        // Test working?
+        return Object.assign({..._boardGrid}, {[`${coords}`]: 'Hit'})
+        
     }
 
     const removeShipFromShipsArray = (ship) =>{
