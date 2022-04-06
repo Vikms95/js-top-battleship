@@ -48,13 +48,9 @@ export function Gameboard(){
 
         if(isShipHit(coords)){
             const ship = findShipByCoords(coords)
-            destroyShipSquare(coords,ship)
-            //x Send info to the DOM to mark that square as hit 
-            if(ship.isSunk()){
-                _boardShips = removeShipFromShipsArray(ship)
-                //x Send info to the DOM to mark ship as sunk
-            }
-            return
+            return ship.isSunkNextHit() 
+                ? _boardShips = removeShipFromShipsArray(ship) 
+                : destroyShipSquare(coords,ship)
         }
         // Return coords 
         return sendCoordsDOM

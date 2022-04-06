@@ -27,7 +27,7 @@ beforeEach(() =>{
 test('createShip() - should create a ship object', () =>{
     expect(mockShip).toHaveProperty('getShipName')
     expect(mockShip).toHaveProperty('getShipCoord')
-    expect(mockShip).toHaveProperty('isSunk')
+    expect(mockShip).toHaveProperty('isSunkNextHit')
     expect(mockShip).toHaveProperty('removeSquareHit')
 })
 

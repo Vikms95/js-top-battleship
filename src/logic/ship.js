@@ -36,14 +36,14 @@ export function Ship(...coordinates){
     }
 
     // Pure / Outgoing query x
-    const isSunk = () =>{
-        return _shipCoord.length === 0 ? true : false
+    const isSunkNextHit = () =>{
+        return _shipCoord.length === 1 ? true : false
     }
     
     return {
         getShipName,
         getShipCoord,
-        isSunk,
+        isSunkNextHit,
         removeSquareHit
     }
 }

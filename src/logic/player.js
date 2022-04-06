@@ -1,4 +1,5 @@
 import { Gameboard } from './gameboard'
+
 export function Player(name){
     const _playerName = name
 
@@ -15,7 +16,8 @@ export function Player(name){
 
     const attackGameboard = (coords = 'A1') =>{
         // Receives coords from an event listener
-        // Call the enemy Gameboard.receiveAttackFromPlayer with the coords
+        // Check the current player and call 
+        // the enemy Gameboard.receiveAttackFromPlayer
         
     }
 
