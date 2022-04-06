@@ -52,6 +52,7 @@ export function Gameboard(){
                 ? _boardShips = removeShipFromShipsArray(ship) 
                 : destroyShipSquare(coords,ship)
         }
+        // Send render info to the DOM
         // Return coords 
         return sendCoordsDOM
     }
