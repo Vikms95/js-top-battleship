@@ -15,6 +15,10 @@ function Player(name){
 
     }
 
+    const isTurnOver = () =>{
+        
+    }
+
     return{
         getName,
         attackGameboard
