@@ -10,6 +10,10 @@ let mockSendMissingCoordDOM
 let mockAddShipToBoardGrid
 
 beforeEach(() =>{
+    // String for now, method when DOM gets created
+    mockSendHittingCoordDOM =  'A1' 
+    mockSendMissingCoordDOM =  'H8' 
+
     mockGameboard = Gameboard()
     mockShip = mockGameboard.createShip('A1','A2')
     mockShip2 = mockGameboard.createShip('A3','A4')
@@ -19,9 +23,6 @@ beforeEach(() =>{
     mockGameboard.removeShipFromShipsArray(mockShip)
     mockGameboardGrid = [{'A1': false,'A2': false,'A3': false,'A4': false,'H8':false}]
       
-    // String for now, method when DOM gets created
-    mockSendHittingCoordDOM =  'A1' 
-    mockSendMissingCoordDOM =  'H8' 
 })
 
 test('createShip() - should create a ship object', () =>{

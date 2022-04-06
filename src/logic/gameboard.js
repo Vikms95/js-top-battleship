@@ -1,9 +1,7 @@
 import { Ship } from './ship'
 
 export function Gameboard(){
-
-    let isGameOver = false
-    
+   
     let _boardGrid = 
     {
         'A1': false, 'A2': false, 'A3': false, 'A4': false, 'A5': false, 'A6': false, 'A7': false, 'A8': false, 
@@ -33,10 +31,11 @@ export function Gameboard(){
             index++
         }
     }
+
     // Incoming-query (assert result) X
     const createShip = (...coordinates) =>{
         const ship = Ship(...coordinates) 
-        _boardShips = addShipToBoardShipsArray(ship)
+        _boardShips = addShipToShipsArray(ship)
         addShipToBoardGridObject(ship)
         return ship
     }
@@ -53,8 +52,7 @@ export function Gameboard(){
                 : destroyShipSquare(coords,ship)
         }
         // Send render info to the DOM
-        // Return coords 
-        return sendCoordsDOM
+        return coords
     }
 
     const destroyShipSquare = (coords,ship) =>{
@@ -75,23 +73,29 @@ export function Gameboard(){
         }
     }
 
-    const addShipToBoardShipsArray = (ship) =>{
+    const addShipToShipsArray = (ship) =>{
         return [..._boardShips,ship]
     }
-    
+
+    const removeSquareFromBoardGridObject = (coords) =>{
+        // for(const[key] of Object.keys(_boardGrid)){
+        //     if(key === coords){
+        //         _boardGrid[key] = 'Hit'
+        //         console.log(_boardGrid)
+        //     }
+        // }
+        
+        const squareIndex = Object.entries(_boardGrid)
+            .findIndex(ship => ship.coords === coords)
+        // Not working v
+        return Object.assign({..._boardShips})
+    }
+
     const removeShipFromShipsArray = (ship) =>{
         const shipIndex = findShipIndexByName(ship)
         return _boardShips.filter(arrayShip =>{
             return _boardShips.indexOf(arrayShip) !== shipIndex 
         })
-    }
-
-    const removeSquareFromBoardGridObject = (coords) =>{
-        for(const[key] of Object.entries(_boardGrid)){
-            if(key === coords){
-                _boardGrid[key] = 'Hit'
-            }
-        }
     }
 
     const isShipHit = (coords) =>{
@@ -116,21 +120,21 @@ export function Gameboard(){
         })
     }
 
-    // Outgoing-query x
-    const sendShipCoord = () =>{ 
-        // Gets a Ship object and sends
-        // it's coordinates to View
-    }
+    // // Outgoing-query x
+    // const sendShipCoord = () =>{ 
+    //     // Gets a Ship object and sends
+    //     // it's coordinates to View
+    // }
     
-    // Outgoing query x
-    const sendHitCoord = () =>{
-        // Send hit coordinates to the hit
-        // ship
-    }
+    // // Outgoing query x
+    // const sendHitCoord = () =>{
+    //     // Send hit coordinates to the hit
+    //     // ship
+    // }
   
-    const isPlayerDefeated = () =>{
-        return _boardShips.every(ship => ship.isSunk())
-    }
+    // const isPlayerDefeated = () =>{
+    //     return _boardShips.every(ship => ship.isSunk())
+    // }
 
     return {
         getBoardGrid,
@@ -138,8 +142,6 @@ export function Gameboard(){
         createShip,
         populateGameboard,
         receiveAttackFromPlayer,
-        sendHitCoord,
-        sendShipCoord,
         removeShipFromShipsArray,
     }
 }

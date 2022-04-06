@@ -13,7 +13,6 @@ export function Player(name){
         return gameboard
     }
 
-
     const attackGameboard = (coords = 'A1') =>{
         // Receives coords from an event listener
         // Check the current player and call 
