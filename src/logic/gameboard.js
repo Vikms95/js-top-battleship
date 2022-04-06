@@ -28,7 +28,6 @@ export function Gameboard(){
         _boardShips = addShipToBoardShipsArray(ship)
         addShipToBoardGridObject(ship)
         return ship
-
     }
     
     // Incoming-query (assert result)

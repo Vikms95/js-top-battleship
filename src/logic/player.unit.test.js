@@ -11,7 +11,7 @@ let mockAddShipToBoardGrid
 beforeEach(() =>{
     mockGameboard = Gameboard()
     mockShip = mockGameboard.createShip('A1','A2')
-    mockShip2 = mockGameboard.createShip('A3','A4')
+    mockShip2 = mockGameboard.createShip('A3','A4','A5','A6')
     mockGameboardShips = []
     mockGameboardShips.push(mockShip)
     mockGameboardShips.push(mockShip2)

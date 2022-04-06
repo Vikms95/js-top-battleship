@@ -1,4 +1,4 @@
-function Player(name){
+export function Player(name){
     const _playerName = name
 
     const getName = () =>{
@@ -16,7 +16,7 @@ function Player(name){
     }
 
     const isTurnOver = () =>{
-        
+
     }
 
     return{
