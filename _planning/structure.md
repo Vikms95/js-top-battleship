@@ -17,9 +17,9 @@
             registerHit
             sendHitDataShipArray
             isGameOver
-        - Player
             placeShip
             sendHitDataGameboard
+        - Player
             isTurnOver
             isAllShipsSunk
         - Ship
@@ -33,7 +33,7 @@
 
 - COMMUNICATION
 
-- ( ( ( (ships) gameboard) player1)  ( ( (ships) gameboard) player2) game)
+- ( ( ( (Ships) Gameboard1) Player1)  ( ( (Ships) Gameboard2) Player2) Game)
 
     -Gameflow-
 

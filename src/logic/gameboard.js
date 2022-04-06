@@ -32,7 +32,7 @@ export function Gameboard(){
     }
     
     // Incoming-query (assert result)
-    const receiveAttackFromDOM = (sendCoordsDOM = 'A1')=>{
+    const receiveAttackFromPlayer = (sendCoordsDOM = 'A1')=>{
         // Store 'A1' until DOM methods are created
         const coords = sendCoordsDOM // Will be a method later
 
@@ -123,7 +123,7 @@ export function Gameboard(){
     return {
         getBoardGrid,
         createShip,
-        receiveAttackFromDOM,
+        receiveAttackFromDOM: receiveAttackFromPlayer,
         sendHitCoord,
         sendShipCoord,
         removeShipFromShipsArray,

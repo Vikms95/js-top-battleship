@@ -31,18 +31,18 @@ test('createShip() - should create a ship object', () =>{
     expect(mockShip).toHaveProperty('removeSquareHit')
 })
 
-describe('receiveAttackFromDOM() - hits are detected and looked after on _boardGrid',() =>{
-    test('the coords received are valid',()=>{
+describe('receiveAttackFromDOM',() =>{
+    test('handles coords received are validation',()=>{
         const spyReceiveAttackFromDOM = jest.spyOn(mockGameboard, 'receiveAttackFromDOM')
         mockGameboard.receiveAttackFromDOM(mockSendHittingCoordDOM)
         expect(spyReceiveAttackFromDOM).toHaveBeenCalledWith('A1')
     })
   
-    test('undefined is returned if the coords received belong to the ship ',() =>{
+    test('handles hitting coords',() =>{
         expect(mockGameboard.receiveAttackFromDOM(mockSendHittingCoordDOM)).toBeUndefined()
     })
     
-    test('a hit is detected falsy if the coords received do not belong to a ship',() =>{
+    test('handles missing coords',() =>{
         expect(mockGameboard.receiveAttackFromDOM(mockSendMissingCoordDOM)).toBe(false)
       
     })

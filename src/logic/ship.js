@@ -4,6 +4,15 @@ export function Ship(...coordinates){
     // thanks to the spread operator 
     let _shipCoord = [...coordinates]
     // TODO set up name according to its length and how many of it's same kind there are
+
+    const _shipNames = {
+        1 : 'Spy',
+        2 : 'Destroyer',
+        3 : 'Cruiser',
+        4 : 'Battleship',
+        5 : 'Carrier'
+    }
+
     const _shipName = 'Ship'
 
     // Outgoing query x
