@@ -8,7 +8,7 @@ export function Player(name){
 
     const createGameBoard = (...coordinates) =>{
         const gameboard = Gameboard()
-        gameboard.populateGameboard(...coordinates)
+        gameboard.populateGameboard(coordinates)
         return gameboard
     }
 

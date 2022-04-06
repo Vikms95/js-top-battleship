@@ -34,10 +34,10 @@ export function Gameboard(){
         return ship
     }
     
-    const populateGameboard = (...coordinates) =>{
+    const populateGameboard = (coordinates) =>{
         let index = 0
         while( index < coordinates.length ){
-            createShip(coordinates[index])
+            createShip(...coordinates[index])
             index++
         }
     }
@@ -57,6 +57,7 @@ export function Gameboard(){
                 // Send info to Player with isPlayerDefeated?
             }
         }else{
+            // Return coords as suggested by TOP?
             return false
         }
     }

@@ -1,6 +1,6 @@
-export function Ship(coordinates){
+export function Ship(...coordinates){
 
-    let _shipCoord = [...coordinates]
+    let _shipCoord = coordinates
 
     const _SHIP_NAMES = {
         1 : 'Spy',

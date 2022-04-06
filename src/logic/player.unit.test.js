@@ -34,6 +34,11 @@ describe('createGameBoard', () =>{
             ['D1','D2','D3','D4'],
             ['E1','E2','E3','E4','E5']
         )
+        console.log(mockGameboard.getBoardShips())
+        mockGameboard.getBoardShips().forEach(ship =>{
+            console.log(ship.getShipName())
+            console.log(ship.getShipCoord())
+        })
     })
     // test('handles enemy ships check when coords are missing ')
 })
