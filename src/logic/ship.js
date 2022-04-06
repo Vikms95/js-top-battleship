@@ -1,4 +1,4 @@
-export function Ship(...coordinates){
+export function Ship(coordinates){
 
     let _shipCoord = [...coordinates]
 

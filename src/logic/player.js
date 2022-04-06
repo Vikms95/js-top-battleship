@@ -1,3 +1,4 @@
+import { Gameboard } from './gameboard'
 export function Player(name){
     const _playerName = name
 
@@ -5,10 +6,17 @@ export function Player(name){
         return _playerName
     }
 
+    const createGameBoard = (...coordinates) =>{
+        const gameboard = Gameboard()
+        gameboard.populateGameboard(...coordinates)
+        return gameboard
+    }
 
-    const attackGameboard = () =>{
+
+    const attackGameboard = (coords = 'A1') =>{
         // Receives coords from an event listener
         // Call the enemy Gameboard.receiveAttackFromPlayer with the coords
+        
     }
 
     const receiveAttackFromPlayer = () =>{
@@ -21,6 +29,7 @@ export function Player(name){
 
     return{
         getName,
+        createGameBoard,
         attackGameboard
     }
 }
