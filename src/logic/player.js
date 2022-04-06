@@ -19,10 +19,6 @@ export function Player(name){
         
     }
 
-    const receiveAttackFromPlayer = () =>{
-
-    }
-
     const isTurnOver = () =>{
 
     }

@@ -43,7 +43,7 @@ describe('receiveAttackFromPlayer',() =>{
     })
     
     test('handles missing coords',() =>{
-        expect(mockGameboard.receiveAttackFromPlayer(mockSendMissingCoordDOM)).toBe(false)
+        expect(mockGameboard.receiveAttackFromPlayer(mockSendMissingCoordDOM)).toBe(mockSendMissingCoordDOM)
       
     })
 })
