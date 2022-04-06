@@ -25,14 +25,6 @@ export function Gameboard(){
     const getBoardShips = () =>{
         return _boardShips
     }
-
-    // Incoming-query (assert result) X
-    const createShip = (...coordinates) =>{
-        const ship = Ship(...coordinates) 
-        _boardShips = addShipToBoardShipsArray(ship)
-        addShipToBoardGridObject(ship)
-        return ship
-    }
     
     const populateGameboard = (coordinates) =>{
         let index = 0
@@ -41,7 +33,14 @@ export function Gameboard(){
             index++
         }
     }
-
+    // Incoming-query (assert result) X
+    const createShip = (...coordinates) =>{
+        const ship = Ship(...coordinates) 
+        _boardShips = addShipToBoardShipsArray(ship)
+        addShipToBoardGridObject(ship)
+        return ship
+    }
+    
     // Incoming-query (assert result)
     const receiveAttackFromPlayer = (sendCoordsDOM = 'A1')=>{
         // Store 'A1' until DOM methods are created
