@@ -77,5 +77,15 @@
 
 - Game
     - Ask for player's name
-    - Ask for ship positions
-    - 
+    - Create two players
+    - Ask each player for ship positions
+    - Players create one gameboard each
+    - Start while loop
+        - Player 1 clicks on DOM
+        - Player 1 receives DOM event
+        - Player 1 sends coords to player 2 receiveAttackFromPlayer
+        - Attack is received by player 2
+        - Update state (enemy boardgrid and boardships)
+        - Send values from boardgrid to DOM
+        - Check if enemy lost (isPlayerDefeated)
+    
