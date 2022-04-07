@@ -7,7 +7,8 @@
     "w": "webpack --watch",
     "wt": "jest --watch .*.test.js",
     "test": "jest --coverage",
-    "build": "webpack"
+    "build": "webpack",
+    "dev":"webpack --mode development"
   },
   "repository": {
     "type": "git",

@@ -41,15 +41,18 @@ export function Gameboard(){
     }
     
     // Incoming-query (assert result)
-    const receiveAttackFromPlayer = (sendCoordsDOM = 'A1')=>{
+    const receiveAttackFromPlayer = (sendCoordsDOM)=>{
         const coords = sendCoordsDOM // Will be a method later
-        
         if(isShipHit(coords)){
             const ship = findShipByCoords(coords)
-            ship.isSunkNextHit() 
-                ? _boardShips = removeShipFromShipsArray(ship) 
-                : _boardGrid  = removeShipSquare(coords,ship)
-            return
+            if(ship.isSunkNextHit()){
+                _boardGrid  = removeShipSquare(coords,ship)
+                _boardShips = removeShipFromShipsArray(ship)
+                return
+            }else{
+                _boardGrid  = removeShipSquare(coords,ship)
+                return
+            }
         }
         // Send render info to the DOM or use another function?
         return coords

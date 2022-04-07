@@ -1,4 +1,4 @@
-import { Game } from '../game'
+import { Game } from './logic/game'
 
 const game = Game()
-game.setupGame()
+game.gameLoop()

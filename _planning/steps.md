@@ -8,6 +8,8 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
  <!-- - Implement removeShipFromShipsArray -->
  <!-- - Test isPlayerDefeated -->
  <!-- - Test removeSquare... refactor works -->
-- Create AI_Player factory function as descendant of Player
-
  - Make array modifiers to return a new array(addShipToBoardGridObject)
+
+
+ -BUG-
+- _boardGrid not being marked correctly
