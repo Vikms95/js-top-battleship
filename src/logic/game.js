@@ -23,15 +23,20 @@ export function Game (){
             ['E1','E2','E3','E4','E5']
         )
             
-        let playerInTurn = player1
-        let enemyGameboard = gameboard2
+        let playerInTurn = player2
+        let enemyGameboard = gameboard1
         let index = 0
         let coords
         let attack
 
         while(!player1.isPlayerDefeated(gameboard1)||!player2.isPlayerDefeated(gameboard2))
         {   
+            
             coords = Object.keys(enemyGameboard.getBoardGrid())[index]
+            // Test guard clause to avoid error
+            if(coords === undefined){
+                break
+            }
             attack = playerInTurn.sendAttackCoordsToGame(coords)
             enemyGameboard.receiveAttackFromPlayer(attack)
             if(enemyGameboard.isAllShipsSunk()){

@@ -12,4 +12,5 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
 
 
  -BUG-
+ <!-- - switchBoards not switching boards -->
 - _boardGrid not being marked correctly

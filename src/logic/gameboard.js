@@ -46,10 +46,13 @@ export function Gameboard(){
         if(isShipHit(coords)){
             const ship = findShipByCoords(coords)
             if(ship.isSunkNextHit()){
+                // If ship is about to sink, remove hit and
+                // remove ship from array
                 _boardGrid  = removeShipSquare(coords,ship)
                 _boardShips = removeShipFromShipsArray(ship)
                 return
             }else{
+                // 
                 _boardGrid  = removeShipSquare(coords,ship)
                 return
             }
