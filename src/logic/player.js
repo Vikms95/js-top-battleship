@@ -22,12 +22,12 @@ export function Player(name){
     const sendRandomAttackCoordsToGameboard = (gameboard) =>{
         // Select a random square from _boardGrid
         // and send it to the enemy gameboard.receiveAttackFromPlayer
-        const index = getRandomNumber(0,64)
+        const BOARD_GRID_LENGTH  = Object.keys(gameboard.getBoardGrid()).length
+        const index = generateRandomNumber(0,BOARD_GRID_LENGTH)
         return Object.keys(gameboard.getBoardGrid())[index]
-  
     }
 
-    const getRandomNumber = (max,min) =>{
+    const generateRandomNumber = (max,min) =>{
         return Math.floor(Math.random() * (max - min)) + min
     }
 
@@ -43,7 +43,6 @@ export function Player(name){
     }
 }
 
-const p1 = Player()
-const gb = p1.createGameBoard(['A1','A2','E6'])
-console.log(gb)
-console.log(p1.sendRandomAttackCoordsToGameboard(gb))
+// const p1 = Player()
+// const gb = p1.createGameBoard(['A1','A2'])
+// console.log(p1.sendRandomAttackCoordsToGameboard(gb))

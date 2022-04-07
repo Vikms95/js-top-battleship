@@ -42,22 +42,22 @@ export function Gameboard(){
     
     // Incoming-query (assert result)
     const receiveAttackFromPlayer = (sendCoordsDOM = 'A1')=>{
-        // Store 'A1' until DOM methods are created
         const coords = sendCoordsDOM // Will be a method later
-
+        
         if(isShipHit(coords)){
             const ship = findShipByCoords(coords)
-            return ship.isSunkNextHit() 
+            ship.isSunkNextHit() 
                 ? _boardShips = removeShipFromShipsArray(ship) 
-                : destroyShipSquare(coords,ship)
+                : _boardGrid  = removeShipSquare(coords,ship)
+            return
         }
-        // Send render info to the DOM
+        // Send render info to the DOM or use another function?
         return coords
     }
 
-    const destroyShipSquare = (coords,ship) =>{
+    const removeShipSquare = (coords,ship) =>{
         ship.removeSquareHit(coords)
-        _boardGrid = markSquareFromBoardGridObject(coords)
+        return removeSquareFromBoardGridObject(coords)
     }
  
     // Query & Command self x
@@ -76,7 +76,7 @@ export function Gameboard(){
         return [..._boardShips,ship]
     }
 
-    const markSquareFromBoardGridObject = (coords) =>{
+    const removeSquareFromBoardGridObject = (coords) =>{
         return Object.assign({..._boardGrid}, {[`${coords}`]: 'Hit'})
     }
 
@@ -86,16 +86,7 @@ export function Gameboard(){
             return _boardShips.indexOf(arrayShip) !== shipIndex 
         })
     }
-
-    const isShipHit = (coords) =>{
-        for(const [key] of Object.entries(_boardGrid)){
-            if(key === coords && _boardGrid[key]){
-                return true
-            }
-        }
-        return false
-    }
-    
+ 
     const findShipByCoords = (coords) =>{
         // for now we pass an array with already inserted values
         return _boardShips.find(ship =>{
@@ -120,11 +111,20 @@ export function Gameboard(){
     //     // Send hit coordinates to the hit
     //     // ship
     // }
-  
-    // const isPlayerDefeated = () =>{
-    //     return _boardShips.every(ship => ship.isSunk())
-    // }
 
+    const isShipHit = (coords) =>{
+        for(const [key] of Object.entries(_boardGrid)){
+            if(key === coords && _boardGrid[key]){
+                return true
+            }
+        }
+        return false
+    }
+
+    const isAllShipsSunk = () =>{
+        return _boardShips.length === 0 ? true : false
+    }
+  
     return {
         getBoardGrid,
         getBoardShips,
@@ -132,6 +132,7 @@ export function Gameboard(){
         populateGameboard,
         receiveAttackFromPlayer,
         removeShipFromShipsArray,
+        isAllShipsSunk,
     }
 }
 

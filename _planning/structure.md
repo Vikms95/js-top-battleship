@@ -1,29 +1,34 @@
 - FILE MANAGEMENT(vague)
     -View-
-
         - renderGameboard
         - renderShips
-
     -Logic-
-
         - Game
-            createGameBoards
             createPlayers
             switchPlayers
             startGame
             finishGame
-        - Gameboard
-            sendDataToView
-            registerHit
-            sendHitDataShipArray
-            isGameOver
-            placeShip
-            sendHitDataGameboard
         - Player
+            createGameBoards
             isTurnOver
             isAllShipsSunk
+        - Gameboard
+            populateGameboard           > player
+            createShip                  > player
+            receiveAttack               > player
+            destroyShipSquare           <
+            removeShipFromShipsArray    <
+            addShipToBoardGridObject    <
+            addShipToShipsArray         <
+            markSquareFromBoardGridObj  <
+            removeShipFromShipsArray    <
+            isShipHit                   <
+            findShipByCoords            <
+            findShipIndexByName         <
         - Ship
-            isSunk
+            isSunkNextHit   > gameboard
+            removeSquareHit > gameboard
+            findHitIndex <
     
 #----------------------------------------------------------------#
 
