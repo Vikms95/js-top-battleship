@@ -47,4 +47,4 @@ export function Player(name){
 
 // const p1 = Player()
 // const gb = p1.createGameBoard(['A1','A2'])
-// (p1.sendRandomAttackCoordsToGameboard(gb))
+// console.log(p1.sendRandomAttackCoordsToGameboard(gb))
