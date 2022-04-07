@@ -13,16 +13,17 @@ export function Player(name){
         return gameboard
     }
 
-    const sendAttackCoordsToGameboard = (coords = 'A1') =>{
+    const sendAttackCoordsToGame = (coords = 'A1') =>{
         // Receives coords from an event listener
-        // and send it to the enemy gameboard.receiveAttackFromPlayer
+        // and send it to game 
         return coords
     }
 
-    const sendRandomAttackCoordsToGameboard = (gameboard) =>{
+    const sendRandomAttackCoordsToGame = (gameboard) =>{
         // Select a random square from _boardGrid
         // and send it to the enemy gameboard.receiveAttackFromPlayer
-        const BOARD_GRID_LENGTH  = Object.keys(gameboard.getBoardGrid()).length
+        const BOARD_GRID_LENGTH  = 
+            Object.keys(gameboard.getBoardGrid()).length
         const index = generateRandomNumber(0,BOARD_GRID_LENGTH)
         return Object.keys(gameboard.getBoardGrid())[index]
     }
@@ -35,11 +36,15 @@ export function Player(name){
 
     }
 
+    const isPlayerDefeated = () =>{
+
+    }
+
     return{
         getName,
         createGameBoard,
-        sendAttackCoordsToGameboard,
-        sendRandomAttackCoordsToGameboard
+        sendAttackCoordsToGame,
+        sendRandomAttackCoordsToGame
     }
 }
 

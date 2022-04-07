@@ -10,8 +10,9 @@
             finishGame
         - Player
             createGameBoard                   > game
-            sendAttackCoordsToGameboard       > game
-            sendRandomAttackCoordsToGameboard > game
+            sendAttackCoordsToGame            > game
+            sendRandomAttackCoordsToGame      > game
+            isTurnOver                        > game
             generateRandomNumber <
        
         - Gameboard
@@ -83,8 +84,9 @@
     - Start while loop
         - Player 1 clicks on DOM
         - Player 1 receives DOM event
-        - Player 1 sends coords to player 2 receiveAttackFromPlayer
-        - Attack is received by player 2
+        - Player 1 sends coords to Game
+        - Game sends coords to Player 2
+        - Attack is received by player 2 receiveAttackFromPlayer
         - Update state (enemy boardgrid and boardships)
         - Send values from boardgrid to DOM
         - Check if enemy lost (isPlayerDefeated)
