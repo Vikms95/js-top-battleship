@@ -127,7 +127,6 @@ export function Gameboard(){
 
     return {
         getBoardGrid,
-        _boardGrid,
         getBoardShips,
         createShip,
         populateGameboard,
