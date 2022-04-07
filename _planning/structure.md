@@ -9,13 +9,16 @@
             startGame
             finishGame
         - Player
-            createGameBoards
-            isTurnOver
-            isAllShipsSunk
+            createGameBoard                   > game
+            sendAttackCoordsToGameboard       > game
+            sendRandomAttackCoordsToGameboard > game
+            generateRandomNumber <
+       
         - Gameboard
             populateGameboard           > player
             createShip                  > player
             receiveAttack               > player
+            isAllShipsSunk              > player
             destroyShipSquare           <
             removeShipFromShipsArray    <
             addShipToBoardGridObject    <
@@ -40,28 +43,29 @@
 
 - ( ( ( (Ships) Gameboard1) Player1)  ( ( (Ships) Gameboard2) Player2) Game)
 
-    -Gameflow-
+    -Game-
+    -Will tell Player
+        - When it's its turn 
 
-        - Will create Players and Gameboard
-        - Will tell Gameboard when to start and when to finish a game
-        - Will tell Player when it's his turn
+    -Player-
+    Will tell Game
+        - To create a Gameboard (createGameBoard)
+        - If they are done with the turn (isTurnOver)
+        - If they lost the game (isPlayerDefeated)
 
     -Gameboard-
+    Will tell Player
+        - To create a Ship (createShip)
+        - To populate the Gameboard (populateGameboard)
+        - To receive an attack from the enemy (receiveAttackFromPlayer)
 
-        - Will tell View module how to render the Gameboard
-        - Will tell Gameflow if the game is in state to end 
-        - Will tell Ships IF & WHERE they got hit
-        - Will tell itself if there was a missing hit
-        
-    -Player-
-
-        - Will tell Gameflow if they are done with the turn
-        - Will tell Gameboard where to hit within the grid
-        - Will tell Gameboard if all their ships are sunk 
-        - Will tell Ship when to be placed
+    Will tell DOM
+        - To update display based on _boardGrid state (getBoardGrid)
+    
     -Ship-
-        - Will tell Gameboard where to place the Ships (getSquaresPlaced)
-        - Will tell Player if the Ship is sunk (isSunk)
+    Will tell Gameboard
+        - To remove the square that got hit (removeSquareHit)
+        - If it's sunk on the next hit (isSunkNextHit)
 
 #----------------------------------------------------------------#
 
@@ -71,3 +75,7 @@
     - Lower part showing a form to enter usernames, and a
       score when the game has started
 
+- Game
+    - Ask for player's name
+    - Ask for ship positions
+    - 
