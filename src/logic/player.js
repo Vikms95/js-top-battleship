@@ -13,11 +13,20 @@ export function Player(name){
         return gameboard
     }
 
-    const attackGameboard = (coords = 'A1') =>{
+    const sendAttackCoordsToGameboard = (coords = 'A1') =>{
         // Receives coords from an event listener
-        // Check the current player and call 
-        // the enemy Gameboard.receiveAttackFromPlayer
-        
+        return coords
+    }
+
+    const sendRandomAttackCoordsToGameboard = (gameboard) =>{
+        // Select a random square from _boardGrid
+        const index = getRandomNumber(0,64)
+        return gameboard.getBoardGrid()[1]
+  
+    }
+
+    const getRandomNumber = (max,min) =>{
+        return Math.floor(Math.random() * (max - min)) + min
     }
 
     const isTurnOver = () =>{
@@ -27,6 +36,11 @@ export function Player(name){
     return{
         getName,
         createGameBoard,
-        attackGameboard
+        sendAttackCoordsToGameboard,
+        sendRandomAttackCoordsToGameboard
     }
 }
+
+const p1 = Player()
+const gb = p1.createGameBoard()
+console.log(p1.sendRandomAttackCoordsToGameboard(gb))

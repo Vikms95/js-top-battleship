@@ -34,7 +34,7 @@ export function Gameboard(){
 
     // Incoming-query (assert result) X
     const createShip = (...coordinates) =>{
-        const ship = Ship(...coordinates) 
+        const ship  = Ship(...coordinates) 
         _boardShips = addShipToShipsArray(ship)
         addShipToBoardGridObject(ship)
         return ship
@@ -57,37 +57,27 @@ export function Gameboard(){
 
     const destroyShipSquare = (coords,ship) =>{
         ship.removeSquareHit(coords)
-        removeSquareFromBoardGridObject(coords)
+        _boardGrid = markSquareFromBoardGridObject(coords)
     }
  
     // Query & Command self x
     const addShipToBoardGridObject = (ship) =>{
         const coordsArray = ship.getShipCoord()
-        for (let i = 0; i < coordsArray.length; i++) {
-            const coords = coordsArray[i]
-            for(const [key] of Object.entries(_boardGrid)){
-                if(key === coords){
-                    _boardGrid[key] = true
-                }
-            }       
-        }
+        let indexArray    = 0
+        for(const [key] of Object.entries(_boardGrid)){
+            if(key === coordsArray[indexArray]){
+                _boardGrid[key] = true
+                indexArray++
+            }
+        }       
     }
 
     const addShipToShipsArray = (ship) =>{
         return [..._boardShips,ship]
     }
 
-    const removeSquareFromBoardGridObject = (coords) =>{
-        // for(const[key] of Object.keys(_boardGrid)){
-        //     if(key === coords){
-        //         _boardGrid[key] = 'Hit'
-        //         console.log(_boardGrid)
-        //     }
-        // }
-        
-        // Test working?
+    const markSquareFromBoardGridObject = (coords) =>{
         return Object.assign({..._boardGrid}, {[`${coords}`]: 'Hit'})
-        
     }
 
     const removeShipFromShipsArray = (ship) =>{
@@ -137,6 +127,7 @@ export function Gameboard(){
 
     return {
         getBoardGrid,
+        _boardGrid,
         getBoardShips,
         createShip,
         populateGameboard,
@@ -144,3 +135,4 @@ export function Gameboard(){
         removeShipFromShipsArray,
     }
 }
+
