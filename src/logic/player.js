@@ -32,19 +32,16 @@ export function Player(name){
         return Math.floor(Math.random() * (max - min)) + min
     }
 
-    const isTurnOver = () =>{
-
-    }
-
-    const isPlayerDefeated = () =>{
-
+    const isPlayerDefeated = (gameboard) =>{
+        return gameboard.isAllShipsSunk()
     }
 
     return{
         getName,
         createGameBoard,
         sendAttackCoordsToGame,
-        sendRandomAttackCoordsToGame
+        sendRandomAttackCoordsToGame,
+        isPlayerDefeated
     }
 }
 

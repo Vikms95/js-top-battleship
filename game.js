@@ -2,9 +2,7 @@ import { Player } from './src/logic/player'
 export function Game (){
 
     const setupGame = () =>{
-        let playerInTurn = player1
-        let enemyGameboard = gameboard2
-    
+        
         const player1 = Player('Victor')
         const player2 = Player('Olga')
 
@@ -23,27 +21,28 @@ export function Game (){
             ['D1','D2','D3','D4'],
             ['E1','E2','E3','E4','E5']
         )
+            
+        let playerInTurn = player1
+        let enemyGameboard = gameboard2
 
-        while(
-            !player1.isPlayerDefeated()
-            ||
-            !player2.isPlayerDefeated()
-        ){
+        while(!player1.isPlayerDefeated(gameboard1)||!player2.isPlayerDefeated(gameboard2))
+        {
             const attack = playerInTurn.sendAttackCoordsToGame('A1')
             enemyGameboard.receiveAttackFromPlayer(attack)
             enemyGameboard.isAllShipsSunk()
-            enemyGameboard.sendStateToDOM()
             playerInTurn = switchPlayers(player1,player2)
+            console.log(playerInTurn)
             enemyGameboard = switchGameboards(gameboard1,gameboard2)
+            console.log(enemyGameboard)
         }
     }
 
-    const switchPlayers = (player1,player2) =>{
+    const switchPlayers = (player1,player2,playerInTurn) =>{
         return playerInTurn === player2 ? player1 : player2
     }
 
-    const switchGameboards = (player2,gameboard1,gameboard2) =>{
-        return playerInTurn === player2 ? gameboard1 : gameboard2
+    const switchGameboards = (gameboard1,gameboard2,enemyGameboard) =>{
+        return enemyGameboard === gameboard2 ? gameboard1 : gameboard2
     }   
 
     return{setupGame}
