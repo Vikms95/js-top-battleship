@@ -93,3 +93,12 @@ body{
   background-color: var(--grid-color);
   position: relative;
 }
+.top-coordinates{
+  position: absolute;
+  bottom: 4rem;
+}
+
+.left-coordinates{
+  position:absolute;
+  right: 5rem;
+}
