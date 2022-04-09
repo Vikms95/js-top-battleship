@@ -35,16 +35,30 @@ body{
   padding:2rem;
 }
 
+.player1-name,
+.player2-name{
+  color: var(--ships-color);
+  display: flex;
+  font-weight: 500;
+  font-size: 2rem;
+  padding: 1rem;
+}
+
+
+.player2-name{
+  justify-content: flex-end;
+}
+
 .pool-container{
   background-color: var(--grid-color);
   display: grid;
   gap: .2rem;
   justify-content: center;
-  align-items: stretch;
   grid-template-columns: repeat(3,1fr);
   padding: 1rem;
   border: solid 1px black;
   height: 100%;
+  box-shadow:0px 5px 10px 0px;
 }
 
 .pool-column{
@@ -56,4 +70,26 @@ body{
 .pool-row{
   background-color: var(--ships-color);
   gap: .2rem;
+}
+
+.gameboard-column{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.gameboard-grid{
+  background-color: var(--background-color);
+  display: grid;
+  gap: .2rem;
+  grid-template-columns: repeat(8, minmax(3.5rem, 1fr));
+  grid-template-rows: repeat(8, minmax(3.5rem, 1fr));
+  border: 1px solid black;
+  box-shadow:0px 5px 10px 0px;
+}
+
+.grid-square{
+  background-color: var(--grid-color);
+  position: relative;
 }
