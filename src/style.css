@@ -96,9 +96,23 @@ body{
 .top-coordinates{
   position: absolute;
   bottom: 4rem;
+  right: 1.5rem;
+}
+
+.top-coordinates-player2{
+  position: absolute;
+  bottom: 4rem;
+  left: 1.4rem;
 }
 
 .left-coordinates{
   position:absolute;
   right: 5rem;
+  top: 1rem;
+}
+
+.right-coordinates{
+  position: absolute;
+  left:5rem;
+  top: 1rem;
 }
