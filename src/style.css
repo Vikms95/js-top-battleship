@@ -8,22 +8,23 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+html,
 body{
-  height: 100vh;
+  background-color: var(--background-color);
+  height: 100%;
+  width: 100%;
   margin: 0;
   padding: 0;
 }
 
 .container{ 
-  background-color: var(--background-color);
-  height: 100%;
+  height: 90%;
   display: grid;
   grid-template-columns: 1fr 2fr 2fr 1fr;
 }
 
 .column{
   border:solid 1px black;
-  height: 100%;
 }
 
 .column.gameboard,
@@ -49,11 +50,11 @@ body{
 }
 
 .pool-container{
+  height: 100%;
   background-color: var(--grid-color);
   display: grid;
   gap: 1rem;
   justify-content: center;
-  align-content: center;
   grid-template-columns: repeat(3,1fr);
   grid-template-rows: 1.6fr 1fr 1fr;
   padding: 1rem;
@@ -72,9 +73,10 @@ body{
 }
 
 .gameboard-column{
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-around;
   padding: 1rem;
 }
 
