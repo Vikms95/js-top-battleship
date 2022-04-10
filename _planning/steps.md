@@ -8,7 +8,12 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
  <!-- - Implement removeShipFromShipsArray -->
  <!-- - Test isPlayerDefeated -->
  <!-- - Test removeSquare... refactor works -->
+ - List of ilegal moves:
+  -Placing ships
+  -Attacking
  - Make array modifiers to return a new array(addShipToBoardGridObject)
+
+
 
 
  -BUG-
