@@ -9,17 +9,19 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
  <!-- - Test isPlayerDefeated -->
  <!-- - Test removeSquare... refactor works -->
  - List of ilegal moves:
-  -Placing ships
+  -Placing ships(tests at createShip)
     :some ship squares are outside of grid boundaries(check grid boundaries)
     :outside of grid
     :an already filled square(check if square has class ship)
-  -Attacking
+  -Attacking(test at receiveAttack)
     :outside the grid
     :an already attacked square(check hit in boardgrid)
     :its own grid
 
 
-- Attach gameboard to each player(make function createPlayer? and putting createGameboard inside?)
+
+
+<!-- - Attach gameboard to each player(make function createPlayer? and putting createGameboard inside?) -->
  - Make array modifiers to return a new array(addShipToBoardGridObject)
 
  -BUG-

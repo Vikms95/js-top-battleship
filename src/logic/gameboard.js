@@ -35,6 +35,7 @@ export function Gameboard(){
     // Incoming-query (assert result) X
     const createShip = (...coordinates) =>{
         const ship  = Ship(...coordinates) 
+        // Add legal move check
         _boardShips = addShipToShipsArray(ship)
         addShipToBoardGridObject(ship)
         return ship
@@ -42,7 +43,8 @@ export function Gameboard(){
     
     // Incoming-query (assert result)
     const receiveAttackFromPlayer = (coords)=>{
-        if(isShipHit(coords)){
+        c(isAttackValid(coords))
+        if(isShipHit(coords) && isAttackValid(coords)){
             const ship = findShipByCoords(coords)
             if(ship.isSunkNextHit()){
                 // If ship is about to sink, remove hit and
@@ -105,18 +107,6 @@ export function Gameboard(){
         })
     }
 
-    // // Outgoing-query x
-    // const sendShipCoord = () =>{ 
-    //     // Gets a Ship object and sends
-    //     // it's coordinates to View
-    // }
-    
-    // // Outgoing query x
-    // const sendHitCoord = () =>{
-    //     // Send hit coordinates to the hit
-    //     // ship
-    // }
-
     const isShipHit = (coords) =>{
         for(const [key] of Object.entries(_boardGrid)){
             if(key === coords && _boardGrid[key]){
@@ -129,7 +119,24 @@ export function Gameboard(){
     const isAllShipsSunk = () =>{
         return _boardShips.length === 0 ? true : false
     }
-  
+
+    const isSquareAvailable = (coords) =>{
+        for(const [key] of Object.entries(_boardGrid)){
+            if(key === coords){
+                console.log(_boardGrid[key])
+                return _boardGrid[key] ? false : true
+            }
+        } 
+    }
+    
+    const isAttackValid = (coords) =>{
+        for(const [key] of Object.entries(_boardGrid)){
+            if(key === coords){
+                return _boardGrid[key] === 'Hit'? false : true
+            }
+        } 
+    }
+
     return {
         getBoardGrid,
         getBoardShips,

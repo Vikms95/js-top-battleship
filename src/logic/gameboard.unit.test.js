@@ -81,6 +81,18 @@ describe('receiveAttackFromPlayer()',() =>{
     })
 })
 
+describe('isAttackValid()',() =>{
+    test('returns true when coordinate is not hit',()=>{        
+        expect(mockGameboard.receiveAttackFromPlayer(mockSendHittingCoordDOM)).toBeUndefined()
+    })
+    test('returns false when coordinate is hit',()=>{        
+        mockGameboard.receiveAttackFromPlayer('A1')
+        expect(mockGameboard.receiveAttackFromPlayer('A1')).toBe('A1')
+    })
+})
+
+
+
 // test('sends information to View on how to render the board with sendShipCoord')
 // test('sends information to Gameflow on when to end game with checkPlayerShips')
 // test('sends information to Ships array of the last hit registered')
