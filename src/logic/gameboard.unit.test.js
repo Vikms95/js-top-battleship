@@ -1,29 +1,39 @@
+const c = console.log.bind(console)
 import { Gameboard } from './gameboard'
+
 let mockGameboard
 let mockShip
 let mockShip2
-let mockGameboardShips
-let mockGameboardGrid
 let mockSendHittingCoordDOM
 let mockSendMissingCoordDOM
-let mockAddShipToBoardGrid
-const c = console.log.bind(console)
+
 beforeEach(() =>{
-    // String for now, method when DOM gets created
+    mockGameboard = Gameboard()
     mockSendHittingCoordDOM =  'A1' 
     mockSendMissingCoordDOM =  'H8' 
-
-    mockGameboard = Gameboard()
     mockShip = mockGameboard.createShip('A1','A2')
-    mockShip2 = mockGameboard.createShip('A3','A4')
-    // mockGameboardShips = []
-    // mockGameboardShips.push(mockShip)
-    // mockGameboardShips.push(mockShip2)
-    // mockGameboardGrid = [{'A1': false,'A2': false,'A3': false,'A4': false,'H8':false}]
-      
+    mockShip2 = mockGameboard.createShip('A3','A4')      
 })
+  
+describe('populateGameboard()', () =>{
+    let mockGameboard = Gameboard()   
+
+    mockGameboard.populateGameboard([
+        ['C1','C2','C3'],
+        ['D1','D2','D3','D4'],
+        ['E1','E2','E3','E4','E5']
+    ])
+        
+    test('coordinates are add properly to the ship array',() =>{
+        expect(mockGameboard.getBoardShips()[0].getShipCoord()).toEqual(['C1','C2','C3'])
+    })
+    test('the right amount of ships are added within the array', ()=>{
+        expect(mockGameboard.getBoardShips().length).toBe(3)
+    })
+})
+
 describe('createShip()', () =>{
-    test('createShip() - should create a ship object', () =>{
+    test('should create a ship object', () =>{
         expect(mockShip).toHaveProperty('getShipName')
         expect(mockShip).toHaveProperty('getShipCoord')
         expect(mockShip).toHaveProperty('isSunkNextHit')

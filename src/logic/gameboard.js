@@ -136,7 +136,6 @@ export function Gameboard(){
         createShip,
         populateGameboard,
         receiveAttackFromPlayer,
-        removeShipFromShipsArray,
         isAllShipsSunk,
     }
 }
