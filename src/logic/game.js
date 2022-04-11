@@ -41,7 +41,6 @@ export function Game (){
             }
             attack = playerInTurn.sendAttackCoordsToGame(coords)
             enemyGameboard.receiveAttackFromPlayer(attack)
-            console.log(enemyGameboard.getBoardGrid())
             playerInTurn = switchPlayers()
             enemyGameboard = switchGameboards()
             // Testing incremental index to auto attack

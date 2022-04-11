@@ -10,12 +10,12 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
  <!-- - Test removeSquare... refactor works -->
  - List of ilegal moves:
   -Placing ships(tests at createShip)
+    :an already filled square(check if square has class ship)
     :some ship squares are outside of grid boundaries(check grid boundaries)
     :outside of grid
-    :an already filled square(check if square has class ship)
   -Attacking(test at receiveAttack)
+    <!-- :an already attacked square(check hit in boardgrid) -->
     :outside the grid
-    :an already attacked square(check hit in boardgrid)
     :its own grid
 
 

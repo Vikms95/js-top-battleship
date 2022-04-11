@@ -34,29 +34,25 @@ export function Gameboard(){
 
     // Incoming-query (assert result) X
     const createShip = (...coordinates) =>{
-        const ship  = Ship(...coordinates) 
-        // Add legal move check
-        _boardShips = addShipToShipsArray(ship)
-        addShipToBoardGridObject(ship)
-        return ship
+        if(isCoordsAvailable(coordinates)){
+            const ship  = Ship(...coordinates) 
+            _boardShips = addShipToShipsArray(ship)
+            addShipToBoardGridObject(ship)
+            return ship
+        }
     }
     
     // Incoming-query (assert result)
     const receiveAttackFromPlayer = (coords)=>{
-        c(isAttackValid(coords))
         if(isShipHit(coords) && isAttackValid(coords)){
             const ship = findShipByCoords(coords)
             if(ship.isSunkNextHit()){
-                // If ship is about to sink, remove hit and
-                // remove ship from array
                 _boardGrid  = removeShipSquare(coords,ship)
                 _boardShips = removeShipFromShipsArray(ship)
                 return
-            }else{
-                // 
-                _boardGrid  = removeShipSquare(coords,ship)
-                return
             }
+            _boardGrid  = removeShipSquare(coords,ship)
+            return
         }
         // Send render info to the DOM or use another function?
         return coords
@@ -120,10 +116,10 @@ export function Gameboard(){
         return _boardShips.length === 0 ? true : false
     }
 
-    const isSquareAvailable = (coords) =>{
+    const isCoordsAvailable = (coords) =>{
+        let indexArray = 0
         for(const [key] of Object.entries(_boardGrid)){
-            if(key === coords){
-                console.log(_boardGrid[key])
+            if(key === coords[indexArray]){
                 return _boardGrid[key] ? false : true
             }
         } 
