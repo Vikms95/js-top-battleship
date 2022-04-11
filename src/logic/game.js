@@ -1,5 +1,5 @@
 import { Player } from './player'
-import { Ship } from './ship'
+
 export function Game (){
 
     const gameLoop = () =>{

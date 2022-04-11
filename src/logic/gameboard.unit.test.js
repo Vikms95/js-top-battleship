@@ -1,4 +1,3 @@
-const c = console.log.bind(console)
 import { Gameboard } from './gameboard'
 
 let mockGameboard
@@ -16,8 +15,7 @@ beforeEach(() =>{
 })
   
 describe('populateGameboard()', () =>{
-    let mockGameboard = Gameboard()   
-
+    let mockGameboard = Gameboard()  
     mockGameboard.populateGameboard([
         ['C1','C2','C3'],
         ['D1','D2','D3','D4'],

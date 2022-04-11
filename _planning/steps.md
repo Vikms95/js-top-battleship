@@ -18,6 +18,8 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
     :an already attacked square(check hit in boardgrid)
     :its own grid
 
+
+- Attach gameboard to each player(make function createPlayer? and putting createGameboard inside?)
  - Make array modifiers to return a new array(addShipToBoardGridObject)
 
  -BUG-

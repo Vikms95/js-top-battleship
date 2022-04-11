@@ -15,7 +15,7 @@ export function Player(name){
 
     const sendAttackCoordsToGame = (coords = 'A1') =>{
         // Receives coords from an event listener
-        // and send it to game 
+        // and send them to game 
         return coords
     }
 
