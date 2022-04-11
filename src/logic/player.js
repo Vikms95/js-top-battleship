@@ -4,7 +4,7 @@ export function Player(name,...coordinates){
     const _playerName = name
 
     let _gameboard
-
+    
     const getName = () =>{
         return _playerName
     }
@@ -13,14 +13,13 @@ export function Player(name,...coordinates){
         return _gameboard
     }
 
-    const createPlayer = (name,...coordinates) =>{
+    const createPlayer = (name) =>{
         _playerName = name
     }
 
     const createGameBoard = (...coordinates) =>{
-        const gameboard = Gameboard()
-        gameboard.populateGameboard(coordinates)
-        _gameboard = gameboard
+        _gameboard = Gameboard()
+        _gameboard.populateGameboard(coordinates)
     }
 
     const sendAttackCoordsToGame = (coords = 'A1') =>{
@@ -43,7 +42,7 @@ export function Player(name,...coordinates){
     }
 
     const isPlayerDefeated = () =>{
-        return _gameboard.isAllShipsSunk()
+        return _gameboard.getBoardShips().length === 0 ? true : false
     }
 
     return{
