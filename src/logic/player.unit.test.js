@@ -1,31 +1,30 @@
 import { Player } from './player'
 
-let mockGameboard
-let player
+let mockPlayer
 
 beforeEach(() =>{
-    player = Player()
-    mockGameboard = player.createGameBoard(['A1','A2'])
+    mockPlayer = Player()
+    mockPlayer.createGameBoard(['A1','A2'])
 })
 
 test('createGameboard() - creates a gameboard object ', () =>{
-    expect(mockGameboard).toHaveProperty('getBoardGrid')
-    expect(mockGameboard).toHaveProperty('getBoardShips')
-    expect(mockGameboard).toHaveProperty('createShip')
-    expect(mockGameboard).toHaveProperty('populateGameboard')
-    expect(mockGameboard).toHaveProperty('receiveAttackFromPlayer')
-    expect(mockGameboard).toHaveProperty('isAllShipsSunk')
-    expect(mockGameboard).not.toHaveProperty('removeShipSquare')
+    expect(mockPlayer.getGameboard()).toHaveProperty('getBoardGrid')
+    expect(mockPlayer.getGameboard()).toHaveProperty('getBoardShips')
+    expect(mockPlayer.getGameboard()).toHaveProperty('createShip')
+    expect(mockPlayer.getGameboard()).toHaveProperty('populateGameboard')
+    expect(mockPlayer.getGameboard()).toHaveProperty('receiveAttackFromPlayer')
+    expect(mockPlayer.getGameboard()).toHaveProperty('isAllShipsSunk')
+    expect(mockPlayer.getGameboard()).not.toHaveProperty('removeShipSquare')
         
 })
 
 test('isPlayerDefeated() - returns false when at least one ship exists in the array', () =>{
-    expect(player.isPlayerDefeated(mockGameboard)).toBe(false)
+    expect(mockPlayer.isPlayerDefeated()).toBe(false)
 })
 test('isPlayerDefeated() - returns true when the array is empty',() =>{
-    mockGameboard.receiveAttackFromPlayer('A1')
-    mockGameboard.receiveAttackFromPlayer('A2')
-    expect(player.isPlayerDefeated(mockGameboard)).toBe(true)
+    mockPlayer.getGameboard().receiveAttackFromPlayer('A1')
+    mockPlayer.getGameboard().receiveAttackFromPlayer('A2')
+    expect(mockPlayer.isPlayerDefeated()).toBe(true)
 })
 
 

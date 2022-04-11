@@ -4,32 +4,27 @@ export function Game (){
 
     const gameLoop = () =>{
         
-        const player1 = Player('Victor')
-        const player2 = Player('Olga')
-
-        const gameboard1 = player1.createGameBoard(
+        const player1 = Player('Victor',
             ['A1'],
             ['B1','B2'],
             ['C1','C2','C3'],
             ['D1','D2','D3','D4'],
             ['E1','E2','E3','E4','E5']
         )
-
-        const gameboard2 = player2.createGameBoard(          
+        const player2 = Player('Olga',
             ['G8'],
             ['B1','B2'],
             ['C1','C2','C3'],
             ['D1','D2','D3','D4'],
-            ['E1','E2','E3','E4','E5']
-        )
-            
+            ['E1','E2','E3','E4','E5'])
+          
         let playerInTurn = player2
-        let enemyGameboard = gameboard1
         let index = 0
         let coords
         let attack
 
-        while(!player1.isPlayerDefeated(gameboard1)||!player2.isPlayerDefeated(gameboard2))
+        // TODO  USE A 'DO WHILE LOOP'
+        while(!player1.isPlayerDefeated()||!player2.isPlayerDefeated())
         {   
             
             coords = Object.keys(enemyGameboard.getBoardGrid())[index]

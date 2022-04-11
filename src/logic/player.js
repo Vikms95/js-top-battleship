@@ -1,16 +1,26 @@
 import { Gameboard } from './gameboard'
 
-export function Player(name){
+export function Player(name,...coordinates){
     const _playerName = name
+
+    let _gameboard
 
     const getName = () =>{
         return _playerName
     }
 
+    const getGameboard = () =>{
+        return _gameboard
+    }
+
+    const createPlayer = (name,...coordinates) =>{
+        _playerName = name
+    }
+
     const createGameBoard = (...coordinates) =>{
         const gameboard = Gameboard()
         gameboard.populateGameboard(coordinates)
-        return gameboard
+        _gameboard = gameboard
     }
 
     const sendAttackCoordsToGame = (coords = 'A1') =>{
@@ -32,12 +42,14 @@ export function Player(name){
         return Math.floor(Math.random() * (max - min)) + min
     }
 
-    const isPlayerDefeated = (gameboard) =>{
-        return gameboard.isAllShipsSunk()
+    const isPlayerDefeated = () =>{
+        return _gameboard.isAllShipsSunk()
     }
 
     return{
         getName,
+        getGameboard,
+        createPlayer,
         createGameBoard,
         sendAttackCoordsToGame,
         sendRandomAttackCoordsToGame,
