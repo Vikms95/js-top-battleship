@@ -8,18 +8,21 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
  <!-- - Implement removeShipFromShipsArray -->
  <!-- - Test isPlayerDefeated -->
  <!-- - Test removeSquare... refactor works -->
- - List of ilegal moves:
+<!-- TODO Add event listener check -->
+
+- LAST: Created event listeners with console.log to know when a click is recorded as valid or not
+<!-- - How to change event listener gameboard everytime a player is swapped(check tic tac toe) -->
+- Work on event listeners from grid
+
+ - List of ilegal moves(done, continue when event listeners):
   -Placing ships(tests at createShip)
-    :an already filled square(check if square has class ship)
+    <!-- :an already filled square(check if square has class ship) -->
     :some ship squares are outside of grid boundaries(check grid boundaries)
     :outside of grid
   -Attacking(test at receiveAttack)
     <!-- :an already attacked square(check hit in boardgrid) -->
     :outside the grid
     :its own grid
-
-
-
 
 <!-- - Attach gameboard to each player(make function createPlayer? and putting createGameboard inside?) -->
  - Make array modifiers to return a new array(addShipToBoardGridObject)
