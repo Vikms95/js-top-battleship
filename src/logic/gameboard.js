@@ -1,5 +1,5 @@
 import { Ship } from './ship'
-
+const c = console.log.bind(console)
 export function Gameboard(){
    
     let _boardGrid = 
@@ -41,8 +41,7 @@ export function Gameboard(){
     }
     
     // Incoming-query (assert result)
-    const receiveAttackFromPlayer = (sendCoordsDOM)=>{
-        const coords = sendCoordsDOM // Will be a method later
+    const receiveAttackFromPlayer = (coords)=>{
         if(isShipHit(coords)){
             const ship = findShipByCoords(coords)
             if(ship.isSunkNextHit()){

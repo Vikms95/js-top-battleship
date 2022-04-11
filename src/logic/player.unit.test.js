@@ -17,7 +17,6 @@ beforeEach(() =>{
     mockGameboardShips = []
     mockGameboardShips.push(mockShip)
     mockGameboardShips.push(mockShip2)
-    mockGameboard.removeShipFromShipsArray(mockShip)
       
     // String for now, method when DOM gets created
     mockSendHittingCoordDOM =  'A1' 

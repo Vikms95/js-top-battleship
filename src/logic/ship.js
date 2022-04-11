@@ -21,14 +21,14 @@ export function Ship(...coordinates){
         return _shipCoord
     }
 
-    // Incoming query (assert result)
+
+    // Incoming query (assert result > tested with removeSquareHit)
     const findHitIndex = (coords) =>{
         return _shipCoord.indexOf(coords)    
     }
     
     // Self command x
     const removeSquareHit = (coords) =>{
-        // Use filter and return a new array?
         const indexCoord = findHitIndex(coords)
         _shipCoord = _shipCoord.filter(coord =>{
             return _shipCoord.indexOf(coord) !== indexCoord 
