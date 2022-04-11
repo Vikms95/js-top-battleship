@@ -1,5 +1,4 @@
 import { Ship } from './ship'
-const c = console.log.bind(console)
 export function Gameboard(){
    
     let _boardGrid = 
@@ -40,6 +39,7 @@ export function Gameboard(){
             addShipToBoardGridObject(ship)
             return ship
         }
+        console.log('SQUARE ALREADY OCUPPIED')
     }
     
     // Incoming-query (assert result)
@@ -55,6 +55,7 @@ export function Gameboard(){
             return
         }
         // Send render info to the DOM or use another function?
+        console.log('NOT HIT OR NOT VALID')
         return coords
     }
 

@@ -1,10 +1,12 @@
 // Add event listeners to
+import { Game } from './game'
+
 //  - grid squares
-export function addEventListeners (){
+export function addEventListeners (game){
     const gridSquaresNodeList = document.getElementsByClassName('grid-square')
     Array.from(gridSquaresNodeList).forEach(square=>{
         square.addEventListener('click',(event) =>{
-            console.log(event.target.id)
+            game.gameTurn(event.target.id)
         })
     })
 }

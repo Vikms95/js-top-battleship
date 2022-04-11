@@ -22,12 +22,6 @@ export function Player(name,...coordinates){
         _gameboard.populateGameboard(coordinates)
     }
 
-    const sendAttackCoordsToGame = (coords = 'A1') =>{
-        // Receives coords from an event listener
-        // and send them to game 
-        return coords
-    }
-
     const sendRandomAttackCoordsToGame = (gameboard) =>{
         // Select a random square from _boardGrid
         // and send it to the enemy gameboard.receiveAttackFromPlayer
@@ -50,7 +44,6 @@ export function Player(name,...coordinates){
         getGameboard,
         createPlayer,
         createGameBoard,
-        sendAttackCoordsToGame,
         sendRandomAttackCoordsToGame,
         isPlayerDefeated
     }
