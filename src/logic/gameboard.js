@@ -51,7 +51,7 @@ export function Gameboard(){
                 _boardShips = removeShipFromShipsArray(ship)
                 return
             }
-            _boardGrid  = removeShipSquare(coords,ship)
+            _boardGrid = removeShipSquare(coords,ship)
             return
         }
         // Send render info to the DOM or use another function?

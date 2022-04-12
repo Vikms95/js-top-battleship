@@ -99,14 +99,21 @@ body{
   box-shadow: 0px 5px 10px 0px;
 }
 
+
+
+.grid-square.ship,
+.pool-row.ship{
+  background-color:var(--ships-color);
+}
+
 .grid-square{
   background-color: var(--grid-color);
   position: relative;
 }
 
-.grid-square.ship,
-.pool-row.ship{
-  background-color:var(--ships-color);
+.grid-square:hover{
+  cursor: pointer;
+  background-color: blue;
 }
 .top-coordinates{
   position: absolute;
@@ -134,4 +141,12 @@ body{
 
 .medium{
   display: grid;
+}
+
+.hit{
+  background-color: red;
+}
+
+.miss{
+  background-color: rgb(32, 31, 31);
 }

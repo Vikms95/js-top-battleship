@@ -1,6 +1,6 @@
 import { Gameboard } from './gameboard'
 
-export function Player(name,...coordinates){
+export function Player(name){
     const _playerName = name
 
     let _gameboard
