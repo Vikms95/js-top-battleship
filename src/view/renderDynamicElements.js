@@ -1,5 +1,5 @@
-export function renderDynamicElements (attackIsSuccess, element){
-    attackIsSuccess ? renderSquareOnHit(element) : renderSquareOnMiss(element) 
+export function renderDynamicElements (attackIsMissed, element){
+    attackIsMissed ? renderSquareOnMiss(element) :  renderSquareOnHit(element)
 }
 
 const renderSquareOnHit = (element) =>{

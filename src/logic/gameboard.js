@@ -54,8 +54,11 @@ export function Gameboard(){
             _boardGrid = removeShipSquare(coords,ship)
             return
         }
+        console.log('hi')
         // Send render info to the DOM or use another function?
-        console.log('NOT HIT OR NOT VALID')
+        // console.log('is ship hit? ' + isShipHit(coords))
+        // console.log('is attack valid? ' + isAttackValid(coords))
+        _boardGrid = removeSquareFromBoardGridObject(coords)
         return coords
     }
 

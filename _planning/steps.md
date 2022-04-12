@@ -13,6 +13,7 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
 - LAST: Created event listeners with console.log to know when a click is recorded as valid or not
 <!-- - How to change event listener gameboard everytime a player is swapped(check tic tac toe) -->
 - Work on event listeners from grid
+- Even if hit ship is false, mark is as hit
 
  - List of ilegal moves(done, continue when event listeners):
   -Placing ships(tests at createShip)

@@ -26,11 +26,11 @@ export function Game (){
     let enemyGameboard = gameboard1
 
     const gameTurn = (coords) =>{
-        const attackIsSuccess = enemyGameboard.receiveAttackFromPlayer(coords)
+        const attackIsMiss = enemyGameboard.receiveAttackFromPlayer(coords)
         console.log(enemyGameboard.getBoardGrid())
         playerInTurn   = switchPlayers()
         enemyGameboard = switchGameboards()
-        return attackIsSuccess
+        return attackIsMiss
     }
 
     const switchPlayers = () =>{
