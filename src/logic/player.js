@@ -29,13 +29,12 @@ export function Player(name){
 
     const createGameBoard = (...coordinates) =>{
         _gameboard = Gameboard()
+        console.log(coordinates)
         _gameboard.populateGameboard(coordinates)
     }
     
     const sendAttackCoordsToGame = (coords) =>{
-        if(getAttackedSquares().includes(coords)){
-            return null
-        }
+        if(getAttackedSquares().includes(coords)) return null
         setAttackedSquares(coords)
         return coords
     

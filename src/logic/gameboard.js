@@ -65,13 +65,13 @@ export function Gameboard(){
     // Query & Command self x
     const addShipToBoardGridObject = (ship) =>{
         const coordsArray = ship.getShipCoord()
-        let indexArray    = 0
-        for(const [key] of Object.entries(_boardGrid)){
-            if(key === coordsArray[indexArray]){
-                _boardGrid[key] = true
-                indexArray++
-            }
-        }       
+        for (let i = 0; i < coordsArray.length; i++) {
+            for(const [key] of Object.entries(_boardGrid)){
+                if(key === coordsArray[i]){
+                    _boardGrid[key] = true
+                }
+            }       
+        }
     }
 
     const addShipToShipsArray = (ship) =>{

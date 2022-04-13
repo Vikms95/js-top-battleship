@@ -9,7 +9,7 @@ export function Game (){
         ['B5','B6'],
         ['E8','D8','C8'],
         ['D1','D2','D3','D4'],
-        ['E1','E2','E3','E4','E5']
+        ['E1','E2','E3','E4','A5']
     )
     const player2 = Player('Computer')
     player2.createGameBoard(
@@ -25,13 +25,15 @@ export function Game (){
     let playerInTurn   = player2
     let enemyGameboard = gameboard1
 
+    console.log(gameboard1.getBoardGrid())
+    console.log(gameboard2.getBoardGrid())
+
     renderStaticElements(gameboard1,'player1')
 
     const gameTurn = (coords) =>{
         const playerCoords = playerInTurn.sendAttackCoordsToGame(coords)
-        if(playerCoords === null){
-            return null
-        }
+        if(playerCoords === null) return null
+  
         const isPlayerAttackMiss   = enemyGameboard.receiveAttackFromPlayer(playerCoords)
         playerInTurn               = switchPlayers()
         enemyGameboard             = switchGameboards()
@@ -39,8 +41,8 @@ export function Game (){
         const computerCoords       = playerInTurn.sendRandomAttackCoordsToGame(enemyGameboard)
         let isComputerAttackMiss  = enemyGameboard.receiveAttackFromPlayer(computerCoords)
 
-        playerInTurn               = switchPlayers()
-        enemyGameboard             = switchGameboards()
+        // playerInTurn               = switchPlayers()
+        // enemyGameboard             = switchGameboards()
 
         if(player1.isPlayerDefeated() || player2.isPlayerDefeated()){
             console.log('Done!')

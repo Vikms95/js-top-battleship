@@ -7,9 +7,7 @@ export function addEventListeners (game){
         square.addEventListener('click',(event) =>{
             const playerCoords = event.target.id
             const turnData = game.gameTurn(playerCoords)
-            if(turnData === null){
-                return
-            }
+            if(turnData === null) return null
             renderDynamicElements(turnData.isPlayerAttackMiss, event.target)
             const attackedElement = findHitElement(turnData.computerCoords)
             renderDynamicElements(turnData.isComputerAttackMiss,attackedElement)
