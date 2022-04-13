@@ -1,10 +1,9 @@
 export function renderDynamicElements (attackIsMissed, element){
-    if(attackIsMissed && element.classList.contains('hit')){
+    console.log(attackIsMissed.playerAttackIsMissed)
+    if(attackIsMissed.playerAttackIsMissed && element.classList.contains('hit')){
         return
-    }else if(attackIsMissed){
+    }else if(attackIsMissed.playerAttackIsMissed){
         renderSquareOnMiss(element)
-    }else if(attackIsMissed === null){
-        return
     }
     renderSquareOnHit(element)
 

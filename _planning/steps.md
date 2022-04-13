@@ -13,12 +13,13 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
 <!-- - Attach gameboard to each player(make function createPlayer? and putting createGameboard inside?) -->
  <!-- - switchBoards not switching boards -->
 <!-- - _boardGrid not being marked correctly -->
-
-- Work on event listeners from grid
 <!-- - Player 2 rendering needs to be backwards
   :divide in 8 arrays and reverse the arrays to later join them? -->
 <!-- - Even if hit ship is false, mark is as hit -->
-- Do not let players hit its own board
+
+- Setup game with computer
+  :handle object that send report of the attacks on gameLoop
+
 
  - List of ilegal moves(done, continue when event listeners):
   -Placing ships(tests at createShip)
@@ -27,7 +28,5 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
     :outside of grid
   -Attacking(test at receiveAttack)
     <!-- :an already attacked square(check hit in boardgrid) -->
-    :outside the grid
-    :its own grid
 
  - Make array modifiers to return a new array(addShipToBoardGridObject)
