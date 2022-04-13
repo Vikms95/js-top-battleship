@@ -1,11 +1,11 @@
-import { renderDynamicElements } from '../view/renderDynamicElements'
+import { renderStaticElements } from '../view/renderStaticElements'
 import { Player } from './player'
 
 export function Game (){
 
     const player1 = Player('Victor')
     player1.createGameBoard(
-        ['A1'],
+        ['F1'],
         ['B1','B2'],
         ['C1','C2','C3'],
         ['D1','D2','D3','D4'],
@@ -24,6 +24,9 @@ export function Game (){
     let gameboard2     = player2.getGameboard()
     let playerInTurn   = player2
     let enemyGameboard = gameboard1
+
+    renderStaticElements(gameboard1,'player1')
+    renderStaticElements(gameboard2,'player2')
 
     const gameTurn = (coords) =>{
         const attackIsMiss = enemyGameboard.receiveAttackFromPlayer(coords)

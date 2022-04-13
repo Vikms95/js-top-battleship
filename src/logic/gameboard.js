@@ -1,5 +1,5 @@
 import { Ship } from './ship'
-export function Gameboard(){
+export function Gameboard(){    
    
     let _boardGrid = 
     {
@@ -44,7 +44,7 @@ export function Gameboard(){
     
     // Incoming-query (assert result)
     const receiveAttackFromPlayer = (coords)=>{
-        if(isShipHit(coords) && isAttackValid(coords)){
+        if(isAttackValid(coords) && isShipHit(coords)){
             const ship = findShipByCoords(coords)
             if(ship.isSunkNextHit()){
                 _boardGrid  = removeShipSquare(coords,ship)
@@ -54,12 +54,9 @@ export function Gameboard(){
             _boardGrid = removeShipSquare(coords,ship)
             return
         }
-        console.log('hi')
-        // Send render info to the DOM or use another function?
-        // console.log('is ship hit? ' + isShipHit(coords))
-        // console.log('is attack valid? ' + isAttackValid(coords))
         _boardGrid = removeSquareFromBoardGridObject(coords)
-        return coords
+
+        return {coords,isAttackValid}
     }
 
     const removeShipSquare = (coords,ship) =>{
