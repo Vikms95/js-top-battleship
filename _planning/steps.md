@@ -16,17 +16,12 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
 <!-- - Player 2 rendering needs to be backwards
   :divide in 8 arrays and reverse the arrays to later join them? -->
 <!-- - Even if hit ship is false, mark is as hit -->
+  <!-- -Attacking(test at receiveAttack) -->
+  <!-- -an already attacked square(check hit in boardgrid -->
 
+- All squares are being rendered red?
 - Setup game with computer
-  :handle object that send report of the attacks on gameLoop
-
-
- - List of ilegal moves(done, continue when event listeners):
-  -Placing ships(tests at createShip)
-    <!-- :an already filled square(check if square has class ship) -->
-    :some ship squares are outside of grid boundaries(check grid boundaries)
-    :outside of grid
-  -Attacking(test at receiveAttack)
-    <!-- :an already attacked square(check hit in boardgrid) -->
+  <!-- :handle object that send report of the attacks on gameLoop -->
+  - Find within boardGrid the square with the coords send
 
  - Make array modifiers to return a new array(addShipToBoardGridObject)
