@@ -1,22 +1,19 @@
-export function renderStaticElements(gameboard,player){
-    renderShips(gameboard,player)
+export function renderStaticElements(gameboard){
+    renderShips(gameboard)
 }
 
-const renderShips = (gameboard,player) =>{
+const renderShips = (gameboard) =>{
     let index = 0
-    let gridNodeList = Array.from(document.querySelectorAll(`.${player} > .grid-square`))
-    for(const [key] of Object.entries(gameboard.getBoardGrid())){
-        if(gameboard.getBoardGrid()[key]){
+    let boardGrid = gameboard.getBoardGrid()
+    let gridNodeList = Array.from(document.querySelectorAll('.player1 > .grid-square'))
+    for(const [key] of Object.entries(boardGrid)){
+        if(boardGrid[key]){
             gridNodeList[index].classList.add('ship')
         }
         index++
     }
 }
 
-// Slices the array in 8 different arrays,
-// reverse them and then joins them on one array
-
 const renderPlayerNames = (player) =>{
     
 }
-

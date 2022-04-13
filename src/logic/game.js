@@ -6,9 +6,9 @@ export function Game (){
     const player1 = Player('Victor')
     player1.createGameBoard(
         ['H8'],
-        ['B5','B6'],
-        ['E8','D8','C8'],
-        ['D1','D2','D3','D4'],
+        ['C5','H6'],
+        ['B7','D1','H1'],
+        ['C6','A5','D8','D2'],
         ['E1','E2','E3','E4','A5']
     )
     const player2 = Player('Computer')
@@ -25,10 +25,7 @@ export function Game (){
     let playerInTurn   = player1
     let enemyGameboard = gameboard2
 
-    console.log(gameboard1.getBoardGrid())
-    console.log(gameboard2.getBoardGrid())
-
-    renderStaticElements(gameboard1,'player1')
+    renderStaticElements(gameboard1)
 
     const gameTurn = (coords) =>{
         const playerCoords = playerInTurn.sendAttackCoordsToGame(coords)
