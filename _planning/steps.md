@@ -22,6 +22,9 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
 - All squares are being rendered red?
 - Setup game with computer
   <!-- :handle object that send report of the attacks on gameLoop -->
-  - Find within boardGrid the square with the coords send
+  <!-- - Find within boardGrid the square with the coords send -->
+  - Make computer not attack the same coords twice
+    :store number selected and exclude it from future generations
+  - If player click is on hit square, return the whole process so the computer does not get a free chance to attack
 
  - Make array modifiers to return a new array(addShipToBoardGridObject)

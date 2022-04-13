@@ -4,6 +4,8 @@ export function Player(name){
     const _playerName = name
 
     let _gameboard
+
+    let _attackedSquares = []
     
     const getName = () =>{
         return _playerName
@@ -11,6 +13,14 @@ export function Player(name){
 
     const getGameboard = () =>{
         return _gameboard
+    }
+
+    const getAttackedSquares = () =>{
+        return _attackedSquares
+    }
+
+    const setAttackedSquares = (coords) =>{
+        _attackedSquares.push(coords)
     }
 
     const createPlayer = (name) =>{
@@ -25,10 +35,15 @@ export function Player(name){
     const sendRandomAttackCoordsToGame = (gameboard) =>{
         // Select a random square from _boardGrid
         // and send it to the enemy gameboard.receiveAttackFromPlayer
-        const BOARD_GRID_LENGTH  = 
-            Object.keys(gameboard.getBoardGrid()).length
-        const index = generateRandomNumber(0,BOARD_GRID_LENGTH)
-        return Object.keys(gameboard.getBoardGrid())[index]
+        let boardGrid = Object.keys(gameboard.getBoardGrid())
+        const BOARD_GRID_LENGTH = boardGrid.length
+        let index = generateRandomNumber(0,BOARD_GRID_LENGTH)
+        while(getAttackedSquares().includes(boardGrid[index])){
+            index = generateRandomNumber(0,BOARD_GRID_LENGTH)
+        }
+        setAttackedSquares(boardGrid[index])
+        return boardGrid[index]
+
     }
 
     const generateRandomNumber = (max,min) =>{
@@ -42,6 +57,7 @@ export function Player(name){
     return{
         getName,
         getGameboard,
+        setAttackedSquares,
         createPlayer,
         createGameBoard,
         sendRandomAttackCoordsToGame,

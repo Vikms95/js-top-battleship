@@ -28,18 +28,22 @@ export function Game (){
     renderStaticElements(gameboard1,'player1')
 
     const gameTurn = (coords) =>{
-        const playerAttackIsMiss   = enemyGameboard.receiveAttackFromPlayer(coords)
+        const isPlayerAttackMiss   = enemyGameboard.receiveAttackFromPlayer(coords)
 
         playerInTurn               = switchPlayers()
         enemyGameboard             = switchGameboards()
 
         const computerCoords       = playerInTurn.sendRandomAttackCoordsToGame(enemyGameboard)
-        let computerAttackIsMiss = enemyGameboard.receiveAttackFromPlayer(computerCoords)
+        let isComputerAttackMisss = enemyGameboard.receiveAttackFromPlayer(computerCoords)
+
+        playerInTurn               = switchPlayers()
+        enemyGameboard             = switchGameboards()
 
         if(player1.isPlayerDefeated() || player2.isPlayerDefeated()){
             console.log('Done!')
         }
-        return {playerAttackIsMiss,computerAttackIsMiss,computerCoords}
+        console.log(computerCoords)
+        return {isPlayerAttackMiss,isComputerAttackMisss,computerCoords}
     }
 
     const switchPlayers = () =>{
