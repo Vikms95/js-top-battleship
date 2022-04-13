@@ -5,9 +5,9 @@ export function Game (){
 
     const player1 = Player('Victor')
     player1.createGameBoard(
-        ['F1'],
-        ['B1','B2'],
-        ['C1','C2','C3'],
+        ['H8'],
+        ['B5','B6'],
+        ['E8','D8','C8'],
         ['D1','D2','D3','D4'],
         ['E1','E2','E3','E4','E5']
     )
