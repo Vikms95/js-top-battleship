@@ -3,6 +3,8 @@ export function renderDynamicElements (attackIsMissed, element){
         return
     }else if(attackIsMissed){
         renderSquareOnMiss(element)
+    }else if(attackIsMissed === null){
+        return
     }
     renderSquareOnHit(element)
 

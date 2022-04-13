@@ -28,16 +28,21 @@ export function Game (){
     renderStaticElements(gameboard1,'player1')
     renderStaticElements(gameboard2,'player2')
 
-    const gameTurn = (coords) =>{
-        const attackIsMiss = enemyGameboard.receiveAttackFromPlayer(coords)
-        console.log(enemyGameboard.getBoardGrid())
-        playerInTurn   = switchPlayers()
-        enemyGameboard = switchGameboards()
-        if(player1.isPlayerDefeated() || player2.isPlayerDefeated()){
-            console.log('Done!')
-            // Congratulate player
+    const gameTurn = (coords,attackedGameboard) =>{
+        if((attackedGameboard.classList.contains('player1') && playerInTurn === player2) || (attackedGameboard.classList.contains('player2') && playerInTurn === player1)){
+            const attackIsMiss = enemyGameboard.receiveAttackFromPlayer(coords)
+            // console.log(enemyGameboard.getBoardGrid())
+            playerInTurn   = switchPlayers()
+            enemyGameboard = switchGameboards()
+            if(player1.isPlayerDefeated() || player2.isPlayerDefeated()){
+                console.log('Done!')
+                // Congratulate player
+            }
+            return attackIsMiss
+        }else{
+            console.log('not enemy gameboard!')
+            return null
         }
-        return attackIsMiss
     }
 
     const switchPlayers = () =>{

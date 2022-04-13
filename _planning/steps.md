@@ -14,12 +14,11 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
  <!-- - switchBoards not switching boards -->
 <!-- - _boardGrid not being marked correctly -->
 
-- Player 2 rendering needs to be backwards
-  :divide in 8 arrays and reverse the arrays to later join them?
-
-
 - Work on event listeners from grid
-- Even if hit ship is false, mark is as hit
+<!-- - Player 2 rendering needs to be backwards
+  :divide in 8 arrays and reverse the arrays to later join them? -->
+<!-- - Even if hit ship is false, mark is as hit -->
+- Do not let players hit its own board
 
  - List of ilegal moves(done, continue when event listeners):
   -Placing ships(tests at createShip)

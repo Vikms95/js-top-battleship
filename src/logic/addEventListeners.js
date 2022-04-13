@@ -6,7 +6,8 @@ export function addEventListeners (game){
     Array.from(gridSquaresNodeList).forEach(square=>{
         square.addEventListener('click',(event) =>{
             const coords = event.target.id
-            const attackState = game.gameTurn(coords)
+            const clickedGameboard = event.target.parentNode
+            const attackState = game.gameTurn(coords,clickedGameboard)
             renderDynamicElements(attackState, event.target)
         })
     })

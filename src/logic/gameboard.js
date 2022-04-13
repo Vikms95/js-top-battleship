@@ -56,7 +56,7 @@ export function Gameboard(){
         }
         _boardGrid = removeSquareFromBoardGridObject(coords)
 
-        return {coords,isAttackValid}
+        return coords
     }
 
     const removeShipSquare = (coords,ship) =>{
@@ -126,12 +126,17 @@ export function Gameboard(){
         } 
     }
     
-    const isAttackValid = (coords) =>{
+    const isAttackValid = (coords,player) =>{
+        return isSquareUnattacked(coords)
+    }
+      
+    const isSquareUnattacked = (coords) =>{
         for(const [key] of Object.entries(_boardGrid)){
             if(key === coords){
                 return _boardGrid[key] === 'Hit'? false : true
             }
         } 
+        
     }
 
     return {
