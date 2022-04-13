@@ -26,10 +26,12 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
     :store number selected and exclude it from future generations -->
   <!-- - If player click is on hit square, return the whole process so the computer does not get a free chance to attack -->
 
-- Check square ship rendering and ship coordinates placing(seems to not be consistent)
+<!-- - Check square ship rendering and ship coordinates placing(seems to not be consistent)
   :player > gameboard ship placement and gameboard ship rendering should be the same
   :computer > only place ships, no rendering
     :addShipToBoardGridObject! not printing after iterating boardGrid object
-      :when a coord is found, does not look the following coord from the beggining of the boardGrid
+      :when a coord is found, does not look the following coord from the beggining of the boardGrid -->
+
+<!-- - Computer ships not being placed correctly -->
 
  - Make array modifiers to return a new array(addShipToBoardGridObject)
