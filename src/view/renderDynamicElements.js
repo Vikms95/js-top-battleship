@@ -1,7 +1,8 @@
-export function renderDynamicElements (attackIsMissed, element){
-    if(attackIsMissed){
+export function renderDynamicElements (turnData, element){
+    console.log(turnData)
+    // console.log(element)
+    if(turnData){
         if(element && element.classList.contains('hit')){
-            // Need to make sure to not execute the whole script
             return 
         }else{
             renderSquareOnMiss(element)

@@ -34,7 +34,7 @@ export function Game (){
         enemyGameboard             = switchGameboards()
 
         const computerCoords       = playerInTurn.sendRandomAttackCoordsToGame(enemyGameboard)
-        let isComputerAttackMisss = enemyGameboard.receiveAttackFromPlayer(computerCoords)
+        let isComputerAttackMiss  = enemyGameboard.receiveAttackFromPlayer(computerCoords)
 
         playerInTurn               = switchPlayers()
         enemyGameboard             = switchGameboards()
@@ -42,8 +42,7 @@ export function Game (){
         if(player1.isPlayerDefeated() || player2.isPlayerDefeated()){
             console.log('Done!')
         }
-        console.log(computerCoords)
-        return {isPlayerAttackMiss,isComputerAttackMisss,computerCoords}
+        return {isPlayerAttackMiss,isComputerAttackMiss,computerCoords}
     }
 
     const switchPlayers = () =>{
