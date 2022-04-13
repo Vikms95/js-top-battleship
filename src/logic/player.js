@@ -31,6 +31,15 @@ export function Player(name){
         _gameboard = Gameboard()
         _gameboard.populateGameboard(coordinates)
     }
+    
+    const sendAttackCoordsToGame = (coords) =>{
+        if(getAttackedSquares().includes(coords)){
+            return null
+        }
+        setAttackedSquares(coords)
+        return coords
+    
+    }
 
     const sendRandomAttackCoordsToGame = (gameboard) =>{
         // Select a random square from _boardGrid
@@ -61,10 +70,7 @@ export function Player(name){
         createPlayer,
         createGameBoard,
         sendRandomAttackCoordsToGame,
+        sendAttackCoordsToGame,
         isPlayerDefeated
     }
 }
-
-// const p1 = Player()
-// const gb = p1.createGameBoard(['A1','A2'])
-// console.log(p1.sendRandomAttackCoordsToGameboard(gb))

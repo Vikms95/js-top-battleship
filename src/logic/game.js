@@ -28,8 +28,11 @@ export function Game (){
     renderStaticElements(gameboard1,'player1')
 
     const gameTurn = (coords) =>{
-        const isPlayerAttackMiss   = enemyGameboard.receiveAttackFromPlayer(coords)
-
+        const playerCoords = playerInTurn.sendAttackCoordsToGame(coords)
+        if(playerCoords === null){
+            return null
+        }
+        const isPlayerAttackMiss   = enemyGameboard.receiveAttackFromPlayer(playerCoords)
         playerInTurn               = switchPlayers()
         enemyGameboard             = switchGameboards()
 

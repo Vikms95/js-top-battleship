@@ -1,6 +1,4 @@
 export function renderDynamicElements (turnData, element){
-    console.log(turnData)
-    // console.log(element)
     if(turnData){
         if(element && element.classList.contains('hit')){
             return 

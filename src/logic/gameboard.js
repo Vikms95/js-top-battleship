@@ -39,7 +39,6 @@ export function Gameboard(){
             addShipToBoardGridObject(ship)
             return ship
         }
-        console.log('SQUARE ALREADY OCUPPIED')
     }
     
     // Incoming-query (assert result)
