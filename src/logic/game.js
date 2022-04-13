@@ -33,6 +33,10 @@ export function Game (){
         console.log(enemyGameboard.getBoardGrid())
         playerInTurn   = switchPlayers()
         enemyGameboard = switchGameboards()
+        if(player1.isPlayerDefeated() || player2.isPlayerDefeated()){
+            console.log('Done!')
+            // Congratulate player
+        }
         return attackIsMiss
     }
 
