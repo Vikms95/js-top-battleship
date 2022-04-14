@@ -41,9 +41,7 @@ export function Player(name){
     }
 
     const sendRandomAttackCoordsToGame = (gameboard) =>{
-        // Select a random square from _boardGrid
-        // and send it to the enemy gameboard.receiveAttackFromPlayer
-        let boardGrid = Object.keys(gameboard.getBoardGrid())
+        const boardGrid = Object.keys(gameboard.getBoardGrid())
         const BOARD_GRID_LENGTH = boardGrid.length
         let index = generateRandomNumber(0,BOARD_GRID_LENGTH)
         while(getAttackedSquares().includes(boardGrid[index])){
