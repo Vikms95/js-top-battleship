@@ -1,4 +1,4 @@
-import {renderTurn} from '../view/renderDynamicElements'
+import { renderTurn } from '../view/renderDynamicElements'
 
 
 export function addEventListeners (game){

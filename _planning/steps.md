@@ -34,6 +34,6 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
 
 <!-- - Computer ships not being placed correctly -->
 
-- Clean code to make it more functional styled
+<!-- - Clean code to make it more functional styled -->
 
  - Make array modifiers to return a new array(addShipToBoardGridObject)

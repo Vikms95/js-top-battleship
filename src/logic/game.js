@@ -25,7 +25,7 @@ export function Game (){
     let playerInTurn   = player1
     let enemyGameboard = gameboard2
 
-    renderStaticElements(gameboard1)
+    renderStaticElements(gameboard1, player1, player2)
 
     const gameTurn = (coords) =>{
         const playerCoords = playerInTurn.sendAttackCoordsToGame(coords)
