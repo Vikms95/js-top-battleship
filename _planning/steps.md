@@ -36,4 +36,4 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
 
 <!-- - Clean code to make it more functional styled -->
 
- - Make array modifiers to return a new array(addShipToBoardGridObject)
+- Make letter appear one by one on match-info

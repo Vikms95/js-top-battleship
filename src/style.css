@@ -20,9 +20,25 @@ body{
 }
 
 .container{ 
+  position: relative;
   height: 80%;
   display: grid;
   grid-template-columns: 1fr 2fr 2fr 1fr;
+}
+
+.match-info{
+  font-family: 'Press Start 2P', cursive;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  min-width: 5rem;
+  max-width: 15rem;
+  line-height: 2rem;
+  padding: 30px;
+  box-shadow: 0px 1px 5px 0px;
+  background-color: rgba(255, 255, 255, 0.1);
+  top:2rem;
+  left: 38rem;
 }
 
 .column{
