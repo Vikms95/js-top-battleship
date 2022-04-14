@@ -31,20 +31,17 @@ export function Game (){
         const playerCoords = playerInTurn.sendAttackCoordsToGame(coords)
         if(playerCoords === null) return null
   
-        const isPlayerAttackMiss   = enemyGameboard.receiveAttackFromPlayer(playerCoords)
-        
+        const isPlayerAttackMiss   = enemyGameboard.receiveAttackFromPlayer(playerCoords) 
         playerInTurn               = switchPlayers()
         enemyGameboard             = switchGameboards()
         
         const computerCoords       = playerInTurn.sendRandomAttackCoordsToGame(enemyGameboard)
         const isComputerAttackMiss = enemyGameboard.receiveAttackFromPlayer(computerCoords)
-
         playerInTurn               = switchPlayers()
         enemyGameboard             = switchGameboards()
 
-        if(player1.isPlayerDefeated() || player2.isPlayerDefeated()){
-            console.log('Done!')
-        }
+        if(isAnyPlayerDefeated) console.log('hi')
+        
         return {
             isPlayerAttackMiss,
             isComputerAttackMiss,
@@ -59,6 +56,10 @@ export function Game (){
     const switchGameboards = () =>{
         return playerInTurn === player2 ? gameboard1 : gameboard2
     }   
+
+    const isAnyPlayerDefeated = () =>{
+        return player1.isPlayerDefeated() || player2.isPlayerDefeated()
+    } 
 
     return{gameTurn}
 }

@@ -2,9 +2,9 @@ export function renderTurn (game,event){
     const turnData = game.gameTurn(event.target.id)
     if(turnData === null) return
 
-    const {playerData,computerData, attackedElement} = 
+    const { playerData,computerData, attackedElement } = 
         retrieveTurnData(turnData)
-        
+
     renderBoardSquares(playerData, event.target)
     renderBoardSquares(computerData, attackedElement)
 }
@@ -23,12 +23,12 @@ const findHitElement = (coords) =>{
 }
 
 const renderBoardSquares = (turnData, element) =>{
-    if(turnData && isHitElement(element)) return
+    if(isHitElement(element)) return  
     turnData ? renderSquareOnMiss(element) : renderSquareOnHit(element)
 }
 
 const isHitElement = (element) =>{
-    return element && element.classList.contains('hit') 
+    return element.classList.contains('hit') 
 }
 
 const renderSquareOnHit = (element) =>{
