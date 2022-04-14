@@ -46,9 +46,7 @@ export function Gameboard(){
         if(isAttackValid(coords) && isShipHit(coords)){
             const ship = findShipByCoords(coords)
             if(ship.isSunkNextHit()){
-                _boardGrid  = removeShipSquare(coords,ship)
                 _boardShips = removeShipFromShipsArray(ship)
-                return
             }
             _boardGrid = removeShipSquare(coords,ship)
             return
@@ -65,6 +63,7 @@ export function Gameboard(){
     // Query & Command self x
     const addShipToBoardGridObject = (ship) =>{
         const coordsArray = ship.getShipCoord()
+
         for (let i = 0; i < coordsArray.length; i++) {
             for(const [key] of Object.entries(_boardGrid)){
                 if(key === coordsArray[i]){
