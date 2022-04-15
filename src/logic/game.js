@@ -1,7 +1,7 @@
-import {renderStaticElements } from '../view/renderStaticElements'
+import { renderStaticElements } from '../view/renderStaticElements'
 import { renderMatchResult } from '../view/renderDynamicElements'
 import { Player } from './player'
-import {executeGame} from '/src/index'
+import { executeGame } from '/src/index'
 
 export function Game (){
 

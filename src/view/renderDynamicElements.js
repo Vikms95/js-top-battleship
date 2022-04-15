@@ -1,3 +1,5 @@
+import interact from 'interactjs'
+
 export function renderTurn (turnData,event){
     const { playerData,computerData, attackedElement } = 
         retrieveTurnData(turnData)
@@ -39,12 +41,11 @@ const renderSquareOnMiss  = (element) =>{
     element.classList.add('miss')
 }
 
-
 export const renderMatchResult = (playerData) =>{
     const winner = playerData.player1.isPlayerDefeated() 
         ? 'Computer'
         : playerData.player1.getName()   
-        
+
     const matchInfoEl = document.querySelector('.turn-info')
     matchInfoEl.textContent = `${winner}` + ' is the winner!' 
 }
@@ -56,6 +57,10 @@ const renderTurnInfo = (turnData,player1) =>{
   
 }
 
+
+const dragShips = () =>{
+
+}
 
 const renderWarningsInfo = () =>{
 }

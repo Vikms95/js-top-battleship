@@ -36,9 +36,12 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
 
 <!-- - Clean code to make it more functional styled -->
 
-- Create unique function to iterate and separate functions to do the action after iterating
+<!-- - Create function to end match -->
 
-- Create function to end match
+- Ideas on applying drag and drop for ship placement
+  :drag div to grid, change property within the object on grid
+  :lookup interact.js sourcecode
+  :https://www.javascripttutorial.net/web-apis/javascript-drag-and-drop/#:~:text=Introduction%20to%20JavaScript%20Drag%20and%20Drop%20API&text=By%20default%2C%20only%20image%20and,you%20would%20drag%20an%20image.
 
 - Absolute positioned elements take hit
 
