@@ -43,6 +43,7 @@ export function Game (){
         if(isAnyPlayerDefeated) console.log('hi')
         
         return {
+            player1,
             isPlayerAttackMiss,
             isComputerAttackMiss,
             computerCoords
