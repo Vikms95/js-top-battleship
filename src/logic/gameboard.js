@@ -108,6 +108,7 @@ export function Gameboard(){
     }
 
     const isCoordsAvailable = (coords) =>{
+        let indexArray = 0
         for(const [key] of Object.entries(_boardGrid)){
             if(key === coords[indexArray]){
                 return (_boardGrid[key]) ? false : true

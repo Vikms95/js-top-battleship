@@ -47,7 +47,7 @@ const renderMatchInfo = () =>{
 }
 
 const renderTurnInfo = (turnData,player1) =>{
-    const matchInfoEl = document.querySelector('.match-info')
+    const matchInfoEl = document.querySelector('.turn-info')
     matchInfoEl.textContent = `${player1.getName()} attack is a ` + 
     (turnData.isPlayerAttackMiss ? 'miss!' : 'hit!')
   

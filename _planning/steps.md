@@ -42,4 +42,4 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
 
 - Absolute positioned elements take hit
 
-- Make letter appear one by one on match-info
+- Make letter appear one by one on turn-info

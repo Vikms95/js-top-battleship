@@ -1,4 +1,4 @@
-import { renderStaticElements } from '../view/renderStaticElements'
+import { renderMatchInfo, renderStaticElements } from '../view/renderStaticElements'
 import { Player } from './player'
 import {executeGame} from '/src/index'
 
@@ -42,7 +42,6 @@ export function Game (){
         enemyGameboard             = switchGameboards()
 
         if(isAnyPlayerDefeated()){
-            console.log('hi')
             finishMatch()
             return null
         }
@@ -69,6 +68,7 @@ export function Game (){
     const finishMatch = () =>{
         // Remove event listeners from board
         // Call renderMatchInfo
+        renderMatchInfo()
         executeGame()
     }
 

@@ -36,8 +36,11 @@ const renderBoardOnReset = () =>{
     boardGridArray2.forEach(square =>{
         square.classList.remove('hit')
         square.classList.remove('miss')
-    })
+    }) 
+}
 
-
-  
+export const renderMatchInfo = () =>{
+    const matchInfoEl = document.querySelector('.match-info')
+    matchInfoEl.style.display = 'block'
+    matchInfoEl.textContent = 'Victor' + ' is the winner!' 
 }
