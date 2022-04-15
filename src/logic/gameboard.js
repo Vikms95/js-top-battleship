@@ -98,9 +98,7 @@ export function Gameboard(){
 
     const isShipHit = (coords) =>{
         for(const [key] of Object.entries(_boardGrid)){
-            if(key === coords && _boardGrid[key]){
-                return true
-            }
+            if(key === coords && _boardGrid[key]) { return true }   
         }
         return false
     }
@@ -110,7 +108,6 @@ export function Gameboard(){
     }
 
     const isCoordsAvailable = (coords) =>{
-        let indexArray = 0
         for(const [key] of Object.entries(_boardGrid)){
             if(key === coords[indexArray]){
                 return (_boardGrid[key]) ? false : true
@@ -126,7 +123,6 @@ export function Gameboard(){
         }   
     }
  
-
     return {
         getBoardGrid,
         getBoardShips,
