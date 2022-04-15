@@ -30,10 +30,6 @@ const isHitElement = (element) =>{
     return element.classList.contains('hit') 
 }
 
-const renderBoardOnReset = () =>{
-  
-}
-
 const renderSquareOnHit = (element) =>{
     element.classList.remove('ship')
     element.classList.add('hit')

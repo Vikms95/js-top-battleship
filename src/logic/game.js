@@ -44,7 +44,7 @@ export function Game (){
         if(isAnyPlayerDefeated()){
             console.log('hi')
             finishMatch()
-            return
+            return null
         }
         return {
             player1,
