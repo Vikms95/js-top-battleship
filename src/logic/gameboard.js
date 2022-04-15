@@ -111,14 +111,14 @@ export function Gameboard(){
     }
 
     const isAllShipsSunk = () =>{
-        return _boardShips.length === 0 ? true : false
+        return (_boardShips.length === 0) ? true : false
     }
 
     const isCoordsAvailable = (coords) =>{
         let indexArray = 0
         for(const [key] of Object.entries(_boardGrid)){
             if(key === coords[indexArray]){
-                return _boardGrid[key] ? false : true
+                return (_boardGrid[key]) ? false : true
             }
         } 
     }
@@ -126,7 +126,7 @@ export function Gameboard(){
     const isAttackValid = (coords) =>{
         for(const [key] of Object.entries(_boardGrid)){
             if(key === coords){
-                return _boardGrid[key] === 'Hit'? false : true
+                return (_boardGrid[key]) === 'Hit'? false : true
             }
         }   
     }

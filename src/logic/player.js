@@ -23,10 +23,6 @@ export function Player(name){
         _attackedSquares.push(coords)
     }
 
-    const createPlayer = (name) =>{
-        _playerName = name
-    }
-
     const createGameBoard = (...coordinates) =>{
         _gameboard = Gameboard()
         _gameboard.populateGameboard(coordinates)
@@ -57,14 +53,13 @@ export function Player(name){
     }
 
     const isPlayerDefeated = () =>{
-        return _gameboard.getBoardShips().length === 0 ? true : false
+        return (_gameboard.getBoardShips().length === 0) ? true : false
     }
 
     return{
         getName,
         getGameboard,
         setAttackedSquares,
-        createPlayer,
         createGameBoard,
         sendRandomAttackCoordsToGame,
         sendAttackCoordsToGame,

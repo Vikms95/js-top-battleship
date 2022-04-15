@@ -1,5 +1,6 @@
 import { renderStaticElements } from '../view/renderStaticElements'
 import { Player } from './player'
+import {executeGame} from '/src/index'
 
 export function Game (){
 
@@ -40,8 +41,11 @@ export function Game (){
         playerInTurn               = switchPlayers()
         enemyGameboard             = switchGameboards()
 
-        if(isAnyPlayerDefeated) console.log('hi')
-        
+        if(isAnyPlayerDefeated()){
+            console.log('hi')
+            finishMatch()
+            return
+        }
         return {
             player1,
             isPlayerAttackMiss,
@@ -51,16 +55,22 @@ export function Game (){
     }
 
     const switchPlayers = () =>{
-        return playerInTurn === player2 ? player1 : player2
+        return (playerInTurn === player2) ? player1 : player2
     }
 
     const switchGameboards = () =>{
-        return playerInTurn === player2 ? gameboard1 : gameboard2
+        return (playerInTurn === player2) ? gameboard1 : gameboard2
     }   
 
     const isAnyPlayerDefeated = () =>{
         return player1.isPlayerDefeated() || player2.isPlayerDefeated()
     } 
+
+    const finishMatch = () =>{
+        // Remove event listeners from board
+        // Call renderMatchInfo
+        executeGame()
+    }
 
     return{gameTurn}
 }

@@ -36,4 +36,10 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
 
 <!-- - Clean code to make it more functional styled -->
 
+- Create unique function to iterate and separate functions to do the action after iterating
+
+- Create function to end match
+
+- Absolute positioned elements take hit
+
 - Make letter appear one by one on match-info
