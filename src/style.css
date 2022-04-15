@@ -42,19 +42,6 @@ body{
   left: 38rem;
 }
 
-.match-info{
-  min-width: 15rem;
-  max-width: 15rem;
-  min-height: 4rem;
-  line-height: 2rem;
-  padding: 30px;
-  display: flex;
-  position: absolute;
-  top:50rem;
-  left:38rem;
-  display: none;
-}
-
 .column{
   border:solid 1px black;
 }
@@ -124,6 +111,7 @@ body{
 }
 
 .gameboard-panel{
+  position: relative;
   height: 50%;
 }
 

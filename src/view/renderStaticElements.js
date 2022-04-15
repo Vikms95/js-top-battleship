@@ -27,6 +27,7 @@ const renderPlayerNames = (player1, player2) =>{
 const renderBoardOnReset = () =>{
     const boardGridArray1 = Array.from(document.querySelectorAll('.player1 > .grid-square'))
     const boardGridArray2 = Array.from(document.querySelectorAll('.player2 > .grid-square'))
+    const matchInfoEl = document.querySelector('.turn-info')
 
     boardGridArray1.forEach(square =>{
         square.classList.remove('ship')
@@ -37,10 +38,6 @@ const renderBoardOnReset = () =>{
         square.classList.remove('hit')
         square.classList.remove('miss')
     }) 
-}
 
-export const renderMatchInfo = () =>{
-    const matchInfoEl = document.querySelector('.match-info')
-    matchInfoEl.style.display = 'block'
-    matchInfoEl.textContent = 'Victor' + ' is the winner!' 
+    matchInfoEl.textContent =  ''
 }

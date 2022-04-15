@@ -39,20 +39,27 @@ const renderSquareOnMiss  = (element) =>{
     element.classList.add('miss')
 }
 
-const renderShipOnSink = () =>{
 
-}
-
-const renderMatchInfo = () =>{
+export const renderMatchResult = (playerData) =>{
+    const winner = playerData.player1.isPlayerDefeated() 
+        ? 'Computer'
+        : playerData.player1.getName()   
+        
+    const matchInfoEl = document.querySelector('.turn-info')
+    matchInfoEl.textContent = `${winner}` + ' is the winner!' 
 }
 
 const renderTurnInfo = (turnData,player1) =>{
     const matchInfoEl = document.querySelector('.turn-info')
     matchInfoEl.textContent = `${player1.getName()} attack is a ` + 
-    (turnData.isPlayerAttackMiss ? 'miss!' : 'hit!')
+  (turnData.isPlayerAttackMiss ? 'miss!' : 'hit!')
   
 }
 
+
 const renderWarningsInfo = () =>{
+}
+
+const renderShipOnSink = () =>{
 
 }
