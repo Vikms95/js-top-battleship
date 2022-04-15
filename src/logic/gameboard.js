@@ -62,15 +62,11 @@ export function Gameboard(){
  
     // Query & Command self x
     const addShipToBoardGridObject = (ship) =>{
-        const coordsArray = ship.getShipCoord()
-
-        for (let i = 0; i < coordsArray.length; i++) {
-            for(const [key] of Object.entries(_boardGrid)){
-                if(key === coordsArray[i]){
-                    _boardGrid[key] = true
-                }
-            }       
-        }
+        ship.getShipCoord().forEach(coord =>{
+            Object.keys(_boardGrid).forEach(key =>{
+                if(key === coord) {_boardGrid[key] = true} 
+            })       
+        })
     }
 
     const addShipToShipsArray = (ship) =>{
@@ -89,7 +85,6 @@ export function Gameboard(){
     }
  
     const findShipByCoords = (coords) =>{
-        // for now we pass an array with already inserted values
         return _boardShips.find(ship =>{
             return ship.getShipCoord().includes(coords)    
         })
