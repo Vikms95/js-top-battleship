@@ -1,12 +1,12 @@
 import { Game } from './logic/game'
-import { addEventListenerDraggable, addEventListenersBoardClick, addEventListenersBoardDragOver} from './logic/handleEventListeners'
+import { addEventListenerDraggable, addEventListenersBoardClick, addEventListenersBoardDrag} from './logic/handleEventListeners'
 
 
 const executeGame = () =>{
     const game = Game()
     addEventListenersBoardClick(game)
     addEventListenerDraggable()
-    addEventListenersBoardDragOver()
+    addEventListenersBoardDrag()
 }
 
 executeGame()

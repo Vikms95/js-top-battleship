@@ -15,7 +15,7 @@ const processTurnData = (game,event) =>{
     renderTurn(turnData,event)
 }
 
-export function addEventListenersBoardDragOver (){
+export function addEventListenersBoardDrag (){
     const gridSquaresPlayer = Array.from(document.querySelectorAll('.player1 > .grid-square'))
     gridSquaresPlayer.forEach(square =>{
         square.addEventListener('dragenter',dragEnter)
@@ -27,7 +27,7 @@ export function addEventListenersBoardDragOver (){
 }
 
 export function addEventListenerDraggable(){
-    const ships = Array.from(document.querySelectorAll('.pool-column.player1'))
+    const ships = Array.from(document.querySelectorAll('.pool-ship.player1'))
     ships.forEach(ship=>
         ship.addEventListener('dragstart',dragStart))
 }

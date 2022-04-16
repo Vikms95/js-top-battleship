@@ -87,7 +87,11 @@ export function drop (event) {
     event.target.classList.remove('drag-over')
 
     const id = event.dataTransfer.getData('text/plain')
-    console.log(id)
-    const draggable = document.getElementById(id)    
+    const draggable = document.getElementById(id)   
+    event.target.appendChild(draggable)
+    // TODO
+    // if element carrier and vertical, add ship class to all 5 elements below the drop point
+    // if element carrier and horizontal, add ship class to all 5 elements below the drop point
+    event.target.classList.add('ship')
 }
 

@@ -53,8 +53,12 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
   - Here I need to get the coordinate/s of the square/s where the draggable is dropped to
   - Store the values on an array, and create a ship with this
   - Remove the hide element from the draggable so the ship sticks there
+// if element carrier and vertical, add ship class to all 5 elements below the drop point
+  // if element carrier and horizontal, add ship class to all 5 elements below the drop point
+  //calculate the length of the draggable inbefore hand and apply square outline when dragover is triggered
 
-- Make ships in the pool be one element only! (Make them span multiple grid areas)
+
+<!-- - Make ships in the pool be one element only! (Make them span multiple grid areas) -->
 
 - Bug when one game ends and any square is clicked afterwards (I need to remove the event listeners while the game is not active)
   :game is passing by as a player is defeated again!
