@@ -200,3 +200,11 @@ body{
 .unclickable{
   pointer-events: none;
 }
+
+.hide{
+  opacity: 0;
+}
+
+.drag-over{
+  border: solid 2px var(--ships-color);
+}

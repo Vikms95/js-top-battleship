@@ -57,13 +57,33 @@ const renderTurnInfo = (turnData,player1) =>{
   
 }
 
-const dragShips = () =>{
-
-}
-
 const renderWarningsInfo = () =>{
 }
 
 const renderShipOnSink = () =>{
 
 }
+
+export function dragStart (event) {
+    event.dataTransfer.setData('text/plain',event.target.id)
+    setTimeout(() =>{
+        event.target.classList.add('hide')
+    },0)
+}
+export function dragEnter (event) {
+    event.preventDefault()
+    event.target.classList.add('drag-over')
+}
+export function dragOver (event) {
+    event.preventDefault()
+    event.target.classList.add('drag-over')
+
+}
+export function dragLeave (event) {
+    event.target.classList.remove('drag-over')
+
+}
+export function drop (event) {
+    event.target.classList.remove('drag-over')
+}
+

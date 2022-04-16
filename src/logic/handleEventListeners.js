@@ -1,13 +1,34 @@
-import { renderTurn } from '../view/renderDynamicElements'
+import { renderTurn,dragEnter,dragStart,dragOver,dragLeave,drop } from '../view/renderDynamicElements'
 
-
-export function addEventListeners (game){
+export function addEventListenersBoardClick (game){
     const gridSquaresComputer = Array.from(document.querySelectorAll('.player2 > .grid-square'))
     gridSquaresComputer.forEach(square =>{
         square.addEventListener('click', event =>{
             processTurnData(game,event)
         })
     })
+}
+
+const processTurnData = (game,event) =>{
+    const turnData = game.gameTurn(event.target.id)
+    if(turnData === null) return      
+    renderTurn(turnData,event)
+}
+
+export function addEventListenersBoardDragOver (){
+    const gridSquaresPlayer = Array.from(document.querySelectorAll('.player1 > .grid-square'))
+    gridSquaresPlayer.forEach(square =>{
+        square.addEventListener('dragenter',dragEnter)
+        square.addEventListener('dragover',dragOver)
+        square.addEventListener('dragleave',dragLeave)
+        square.addEventListener('drop',drop)
+
+    })
+}
+
+export function addEventListenerDraggable(){
+    const item = document.querySelector('.pool-column')
+    item.addEventListener('dragstart',dragStart)
 }
 
 export function removeEventListeners (){
@@ -17,8 +38,5 @@ export function removeEventListeners (){
     })
 }
 
-const processTurnData = (game,event) =>{
-    const turnData = game.gameTurn(event.target.id)
-    if(turnData === null) return      
-    renderTurn(turnData,event)
-}
+
+
