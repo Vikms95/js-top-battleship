@@ -16,6 +16,7 @@ const renderShips = (gameboard) =>{
     }
 }
 
+
 const renderPlayerNames = (player1, player2) =>{
     const player1Name = document.querySelector('.player1-name')
     const player2Name = document.querySelector('.player2-name')

@@ -128,9 +128,21 @@ export function Gameboard(){
         getBoardGrid,
         getBoardShips,
         createShip,
+        getShipLengthByName,
         populateGameboard,
         receiveAttackFromPlayer,
         isAllShipsSunk,
     }
+}
+
+export const getShipLengthByName = (shipName) =>{
+    const _SHIP_NAMES = {
+        'spy': 1,
+        'destroyer': 2,
+        'cruiser': 3,
+        'battleship': 4,
+        'carrier': 5
+    }
+    return _SHIP_NAMES[shipName]
 }
 

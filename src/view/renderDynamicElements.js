@@ -1,3 +1,4 @@
+import { getShipLengthByName } from '../logic/gameboard'
 
 export function renderTurn (turnData,event){
     const { playerData,computerData, attackedElement } = 
@@ -82,15 +83,28 @@ export function dragLeave (event) {
     event.target.classList.remove('drag-over')
 
 }
-export function drop (event) {
+export function drop (event,gameboard) {
     event.target.classList.remove('drag-over')
+    const shipID = event.dataTransfer.getData('text/plain')
+    const squareID = event.target.id 
+    console.log(shipID)
+    let squaresToStyle = getShipLengthByName(shipID)
+    // ONLY ADD STYLE, DO NOT MANAGE BOARDGRID FROM HERE
 
-    const id = event.dataTransfer.getData('text/plain')
-    const draggable = document.getElementById(id)   
-    event.target.appendChild(draggable)
+    let element = document.getElementById(`${squareID}`)
+    console.log(squaresToStyle)
+    while(squaresToStyle > 0){
+        console.log(element)
+        element.classList.add('ship')
+        element = element.nextElementSibling   
+        squaresToStyle-- 
+    }
+    
     // TODO
     // if element carrier and vertical, add ship class to all 5 elements below the drop point
-    // if element carrier and horizontal, add ship class to all 5 elements below the drop point
-    event.target.classList.add('ship')
+    // if element carrier and horizontal, add ship class to all 5 elements to the right of the drop point
 }
 
+const renderShipOnDrop = (coord) =>{
+    
+}

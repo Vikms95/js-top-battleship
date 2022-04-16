@@ -54,7 +54,7 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
   - Store the values on an array, and create a ship with this
   - Remove the hide element from the draggable so the ship sticks there
 // if element carrier and vertical, add ship class to all 5 elements below the drop point
-  // if element carrier and horizontal, add ship class to all 5 elements below the drop point
+  // if element carrier and horizontal, add ship class to all 5 elements to the right of the drop point
   //calculate the length of the draggable inbefore hand and apply square outline when dragover is triggered
 
 
