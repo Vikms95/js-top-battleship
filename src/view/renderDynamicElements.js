@@ -83,28 +83,33 @@ export function dragLeave (event) {
     event.target.classList.remove('drag-over')
 
 }
-export function drop (event,gameboard) {
+export function drop (event) {
     event.target.classList.remove('drag-over')
     const shipID = event.dataTransfer.getData('text/plain')
     const squareID = event.target.id 
-    console.log(shipID)
     let squaresToStyle = getShipLengthByName(shipID)
     // ONLY ADD STYLE, DO NOT MANAGE BOARDGRID FROM HERE
-
-    let element = document.getElementById(`${squareID}`)
-    console.log(squaresToStyle)
-    while(squaresToStyle > 0){
-        console.log(element)
-        element.classList.add('ship')
-        element = element.nextElementSibling   
-        squaresToStyle-- 
-    }
-    
-    // TODO
-    // if element carrier and vertical, add ship class to all 5 elements below the drop point
-    // if element carrier and horizontal, add ship class to all 5 elements to the right of the drop point
+    // (shipDirection === 'vertical' ? renderSquaresVertically() : renderSquaresHorizontally())   
 }
 
 const renderShipOnDrop = (coord) =>{
     
+}
+
+const renderSquaresVertically = (squareID,squaresToStyle) =>{
+    const boardGridArray = Array.from(document.querySelectorAll('.player1 > .grid-square'))
+    let index = boardGridArray.findIndex(el => el.id === squareID)
+    for (let i = 0; i < squaresToStyle; i++) {
+        boardGridArray[index].classList.add('ship')
+        index += 8
+    }
+}
+
+const renderSquaresHorizontally = (squareID,squaresToStyle) =>{
+    let element = document.getElementById(`${squareID}`)
+    while(squaresToStyle > 0){
+        element.classList.add('ship')
+        element = element.nextElementSibling   
+        squaresToStyle-- 
+    }   
 }
