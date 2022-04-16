@@ -1,10 +1,12 @@
 import { renderStaticElements } from '../view/renderStaticElements'
 import { renderMatchResult } from '../view/renderDynamicElements'
+import { removeEventListeners } from './handleEventListeners'
 import { Player } from './player'
 import { executeGame } from '/src/index'
 
 export function Game (){
-
+    const el = document.querySelector('.gameboard-grid.player2')
+    el.classList.remove('unclickable')
     const player1 = Player('Victor')
     player1.createGameBoard(
         ['H8'],
@@ -43,8 +45,11 @@ export function Game (){
         enemyGameboard             = switchGameboards()
 
         if(isAnyPlayerDefeated()){
+            el.classList.add('unclickable')
+            removeEventListeners()
             renderMatchResult({player1,player2})
-            finishMatch()
+            prepareNextMatch()
+            
             return null
         }
         return {
@@ -67,7 +72,7 @@ export function Game (){
         return player1.isPlayerDefeated() || player2.isPlayerDefeated()
     } 
 
-    const finishMatch = () =>{
+    const prepareNextMatch = () =>{
         // Remove event listeners from board
         setTimeout(executeGame,2000)
     }

@@ -1,5 +1,5 @@
 import { Game } from './logic/game'
-import { addEventListeners } from './logic/addEventListeners'
+import { addEventListeners} from './logic/handleEventListeners'
 
 
 const executeGame = () =>{

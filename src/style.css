@@ -175,3 +175,7 @@ body{
 .miss{
   background-color: rgb(32, 31, 31);
 }
+
+.unclickable{
+  pointer-events: none;
+}
