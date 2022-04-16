@@ -10,6 +10,15 @@ export function renderTurn (turnData,event){
     renderTurnInfo(turnData,turnData.player1)
 }
 
+export const renderMatchResult = (playerData) =>{
+    const winner = playerData.player1.isPlayerDefeated() 
+        ? 'Computer'
+        : playerData.player1.getName()   
+
+    const matchInfoEl = document.querySelector('.turn-info')
+    matchInfoEl.textContent = `${winner}` + ' is the winner!' 
+}
+
 const retrieveTurnData = (turnData) =>{
     const playerData      = turnData.isPlayerAttackMiss
     const computerData    = turnData.isComputerAttackMiss
@@ -41,22 +50,12 @@ const renderSquareOnMiss  = (element) =>{
     element.classList.add('miss')
 }
 
-export const renderMatchResult = (playerData) =>{
-    const winner = playerData.player1.isPlayerDefeated() 
-        ? 'Computer'
-        : playerData.player1.getName()   
-
-    const matchInfoEl = document.querySelector('.turn-info')
-    matchInfoEl.textContent = `${winner}` + ' is the winner!' 
-}
-
 const renderTurnInfo = (turnData,player1) =>{
     const matchInfoEl = document.querySelector('.turn-info')
     matchInfoEl.textContent = `${player1.getName()} attack is a ` + 
   (turnData.isPlayerAttackMiss ? 'miss!' : 'hit!')
   
 }
-
 
 const dragShips = () =>{
 

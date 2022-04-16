@@ -43,6 +43,17 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
   :lookup interact.js sourcecode
   :https://www.javascripttutorial.net/web-apis/javascript-drag-and-drop/#:~:text=Introduction%20to%20JavaScript%20Drag%20and%20Drop%20API&text=By%20default%2C%20only%20image%20and,you%20would%20drag%20an%20image.
 
-- Absolute positioned elements take hit
+- GAME SETUP - PLACE SHIPS AND CREATE
+  - Query selector the items to be dragged
+  - Add event listener drag start
+  - Add hide class when dragstart is triggered
+  - Add event listeners to the squares for all 4 properties
+  - Create all 4 functions taking an event, preventing default and adding or removing the drag-over class to the elements
+  - Last function, drop, will remove the drag-over property, get a reference to it with it's ID and append the draggable element to the drop target
+  - Here I need to get the coordinate/s of the square/s where the draggable is dropped to
+  - Store the values on an array, and create a ship with this
+  - Remove the hide element from the draggable so the ship sticks there
 
+
+- Absolute positioned elements take hit
 - Make letter appear one by one on turn-info
