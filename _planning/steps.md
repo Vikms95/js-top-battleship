@@ -54,7 +54,10 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
   - Store the values on an array, and create a ship with this
   - Remove the hide element from the draggable so the ship sticks there
 
+- Make ships in the pool be one element only! (Make them span multiple grid areas)
+
 - Bug when one game ends and any square is clicked afterwards (I need to remove the event listeners while the game is not active)
   :game is passing by as a player is defeated again!
+
 - Absolute positioned elements take hit
 - Make letter appear one by one on turn-info

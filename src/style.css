@@ -84,22 +84,48 @@ body{
   height: 100%;
   background-color: var(--grid-color);
   display: grid;
-  gap: 1rem;
+  gap: .5rem;
   justify-content: center;
-  grid-template-columns: repeat(3,1fr);
-  grid-template-rows: 1.6fr 1fr 1fr;
-  padding: 1rem;
+  grid-template-columns: repeat(3,3.5rem);
+  grid-template-rows: repeat(auto-fill,3.2rem);
+  grid-auto-rows: 3.2rem;
+  padding: .4rem;
   border: solid 1px black;
   box-shadow:0px 5px 10px 0px;
 }
 
-.pool-column{
+/* .pool-column{
   display: grid;
   grid-template-rows:repeat(auto-fill, minmax(3rem, 1fr));
+} */
+
+.pool-column{
+  border-radius: 25px;
 }
 
-.pool-row{
-  gap: .2rem;
+.pool-column.carrier{
+  background-color: #D68614;
+  grid-row: 1/6;
+}
+
+.pool-column.battleship{
+  background-color: #D68614;
+  grid-row: 1/5;
+}
+
+.pool-column.cruiser{
+  background-color: #D68614;
+  grid-row: 1/4;
+}
+
+.pool-column.destroyer{
+  background-color: #D68614;
+  grid-row: 1/2;
+}
+
+.pool-column.spy{
+  background-color: #D68614;
+  grid-row: 1/2;
 }
 
 .gameboard-column{
