@@ -1,4 +1,3 @@
-import interact from 'interactjs'
 
 export function renderTurn (turnData,event){
     const { playerData,computerData, attackedElement } = 

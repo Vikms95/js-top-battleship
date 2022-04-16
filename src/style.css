@@ -96,6 +96,7 @@ body{
 
 .pool-ship{
   border-radius: 25px;
+  transform: translate(0, 0);
 }
 
 .pool-ship#carrier{
