@@ -89,12 +89,14 @@ export function drop (event) {
     const squareID = event.target.id 
     let squaresToStyle = getShipLengthByName(shipID)
     // ONLY ADD STYLE, DO NOT MANAGE BOARDGRID FROM HERE
+    renderSquaresVertically(squareID,squaresToStyle)
+    event.target.classList.remove('hide')
     // (shipDirection === 'vertical' ? renderSquaresVertically() : renderSquaresHorizontally())   
 }
-
 const renderShipOnDrop = (coord) =>{
     
 }
+
 
 const renderSquaresVertically = (squareID,squaresToStyle) =>{
     const boardGridArray = Array.from(document.querySelectorAll('.player1 > .grid-square'))

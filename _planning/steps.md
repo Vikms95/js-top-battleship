@@ -53,10 +53,13 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
   - Here I need to get the coordinate/s of the square/s where the draggable is dropped to
   - Store the values on an array, and create a ship with this
   - Remove the hide element from the draggable so the ship sticks there
-// if element carrier and vertical, add ship class to all 5 elements below the drop point
+<!-- // if element carrier and vertical, add ship class to all 5 elements below the drop point -->
   <!-- // if element carrier and horizontal, add ship class to all 5 elements to the right of the drop point -->
   // if element gets out of it's parent, do not allow!
-  //calculate the length of the draggable inbefore hand and apply square outline when dragover is triggered
+    :renderSquaresHorizontally > if any element after the first has the "row" class, return 
+    :renderSquaresVertically > if error giving undefined, return and reincorportate opacity of ship on the pool
+    :get reference to the element previously dragged and remove its opacity property
+  // make the gameboard with the arrays stored while placing the ships
 
 
 <!-- - Make ships in the pool be one element only! (Make them span multiple grid areas) -->
