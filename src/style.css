@@ -98,27 +98,27 @@ body{
   border-radius: 25px;
 }
 
-.pool-column.carrier{
+.pool-column#carrier{
   background-color: #D68614;
   grid-row: 1/6;
 }
 
-.pool-column.battleship{
+.pool-column#battleship{
   background-color: #D68614;
   grid-row: 1/5;
 }
 
-.pool-column.cruiser{
+.pool-column#cruiser{
   background-color: #D68614;
   grid-row: 1/4;
 }
 
-.pool-column.destroyer{
+.pool-column#destroyer{
   background-color: #D68614;
   grid-row: 7/9;
 }
 
-.pool-column.spy{
+.pool-column#spy{
   background-color: #D68614;
   grid-row: 9/10;
 }

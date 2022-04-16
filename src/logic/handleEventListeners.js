@@ -27,8 +27,9 @@ export function addEventListenersBoardDragOver (){
 }
 
 export function addEventListenerDraggable(){
-    const item = document.querySelector('.pool-column')
-    item.addEventListener('dragstart',dragStart)
+    const ships = Array.from(document.querySelectorAll('.pool-column.player1'))
+    ships.forEach(ship=>
+        ship.addEventListener('dragstart',dragStart))
 }
 
 export function removeEventListeners (){

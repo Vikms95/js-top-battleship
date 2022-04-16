@@ -85,5 +85,9 @@ export function dragLeave (event) {
 }
 export function drop (event) {
     event.target.classList.remove('drag-over')
+
+    const id = event.dataTransfer.getData('text/plain')
+    console.log(id)
+    const draggable = document.getElementById(id)    
 }
 
