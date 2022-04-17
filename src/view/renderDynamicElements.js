@@ -89,7 +89,7 @@ export function drop (event) {
     const squareID = event.target.id 
     let squaresToStyle = getShipLengthByName(shipID)
     // ONLY ADD STYLE, DO NOT MANAGE BOARDGRID FROM HERE
-    renderSquaresVertically(squareID,squaresToStyle)
+    renderSquaresHorizontally(squareID,squaresToStyle)
     event.target.classList.remove('hide')
     // (shipDirection === 'vertical' ? renderSquaresVertically() : renderSquaresHorizontally())   
 }
@@ -100,18 +100,40 @@ const renderShipOnDrop = (coord) =>{
 
 const renderSquaresVertically = (squareID,squaresToStyle) =>{
     const boardGridArray = Array.from(document.querySelectorAll('.player1 > .grid-square'))
-    let index = boardGridArray.findIndex(el => el.id === squareID)
-    for (let i = 0; i < squaresToStyle; i++) {
-        boardGridArray[index].classList.add('ship')
-        index += 8
+    const originalIndex = boardGridArray.findIndex(el => el.id === squareID)
+    let indexToStyle = originalIndex
+    try{
+        for (let i = 0; i < squaresToStyle; i++) {
+            boardGridArray[indexToStyle].classList.add('ship')
+            indexToStyle += 8
+        }
+    }catch(error){
+        indexToStyle -=8
+        while(indexToStyle >= originalIndex){
+            boardGridArray[indexToStyle].classList.remove('ship')
+            indexToStyle -= 8
+        }
+        return
     }
 }
 
 const renderSquaresHorizontally = (squareID,squaresToStyle) =>{
-    let element = document.getElementById(`${squareID}`)
-    while(squaresToStyle > 0){
-        element.classList.add('ship')
-        element = element.nextElementSibling   
+    const originalIndex = document.getElementById(`${squareID}`)
+    const originalSquaresToStyle = squaresToStyle
+    let elementToStyle = originalIndex
+
+    while(squaresToStyle > 0 && !elementToStyle.classList.contains('row')){
+        elementToStyle.classList.add('ship')
+        elementToStyle = elementToStyle.nextElementSibling
         squaresToStyle-- 
+    }
+    if(squaresToStyle > 0){
+        while(squaresToStyle <= originalSquaresToStyle){
+            elementToStyle.classList.remove('ship')
+            elementToStyle = elementToStyle.previousElementSibling
+            squaresToStyle++
+        }
+
     }   
+
 }
