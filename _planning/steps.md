@@ -44,7 +44,7 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
   :https://www.javascripttutorial.net/web-apis/javascript-drag-and-drop/#:~:text=Introduction%20to%20JavaScript%20Drag%20and%20Drop%20API&text=By%20default%2C%20only%20image%20and,you%20would%20drag%20an%20image.
 
 - GAME SETUP - PLACE SHIPS AND CREATE
-  - Query selector the items to be dragged
+  <!-- - Query selector the items to be dragged
   - Add event listener drag start
   - Add hide class when dragstart is triggered
   - Add event listeners to the squares for all 4 properties
@@ -52,15 +52,21 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
   - Last function, drop, will remove the drag-over property, get a reference to it with it's ID and append the draggable element to the drop target
   - Here I need to get the coordinate/s of the square/s where the draggable is dropped to
   - Store the values on an array, and create a ship with this
-  - Remove the hide element from the draggable so the ship sticks there
+  - Remove the hide element from the draggable so the ship sticks there -->
 <!-- // if element carrier and vertical, add ship class to all 5 elements below the drop point -->
   <!-- // if element carrier and horizontal, add ship class to all 5 elements to the right of the drop point -->
   <!-- // if element gets out of it's parent, do not allow! -->
   <!-- :renderSquaresHorizontally > if any element after the first has the "row" class, return  -->
   <!-- :renderSquaresVertically > if error giving undefined, return and reincorportate opacity of ship on the pool -->
   <!-- :get reference to the element previously dragged and remove its opacity property -->
-  // if ship is placed outside of any square, it does not get places nor it reappears on the pool
-  // make the gameboard with the arrays stored while placing the ships
+  <!-- // if ship is placed outside of any square, it does not get places nor it reappears on the pool -->
+  - SETUP FUNCTION -
+  -Before starting game, function to let the player place their name andships
+  -Placing out of bounds or totally not on the board is handled, but need to check about placing the ship on a square which already has a ship class added to it, in that case, return
+  -For each placement of ship, add the values of ID's of each one to an array within an array of arrays
+  -Use that to create the gameboard later on
+
+  make the gameboard with the arrays stored while placing the ships
 
 <!-- - Make ships in the pool be one element only! (Make them span multiple grid areas) -->
 
