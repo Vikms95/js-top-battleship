@@ -113,13 +113,17 @@ body{
   background-color: #D68614;
   grid-row: 1/4;
 }
-
-.pool-ship#destroyer{
+.pool-ship#destroyer,
+.pool-ship#destroyer-1,
+.pool-ship#destroyer-2,
+.pool-ship#destroyer-3{
   background-color: #D68614;
   grid-row: 7/9;
 }
-
-.pool-ship#spy{
+.pool-ship#spy,
+.pool-ship#spy-1,
+.pool-ship#spy-2,
+.pool-ship#spy-3{
   background-color: #D68614;
   grid-row: 9/10;
 }

@@ -137,8 +137,12 @@ export function Gameboard(){
 
 export const getShipLengthByName = (shipName) =>{
     const _SHIP_NAMES = {
-        'spy': 1,
-        'destroyer': 2,
+        'spy-1': 1,
+        'spy-2': 1,
+        'spy-3': 1,
+        'destroyer-1': 2,
+        'destroyer-2': 2,
+        'destroyer-3': 2,
         'cruiser': 3,
         'battleship': 4,
         'carrier': 5
