@@ -61,7 +61,7 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
   <!-- :get reference to the element previously dragged and remove its opacity property -->
   <!-- // if ship is placed outside of any square, it does not get places nor it reappears on the pool -->
   - SETUP FUNCTION -
-  -Before starting game, function to let the player place their name andships
+  -Before starting game, function to let the player place their name and ships
   -Placing out of bounds or totally not on the board is handled, but need to check about placing the ship on a square which already has a ship class added to it, in that case, return
   -For each placement of ship, add the values of ID's of each one to an array within an array of arrays
   -Use that to create the gameboard later on
