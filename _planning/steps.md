@@ -68,6 +68,9 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
   <!-- -For each placement of ship, add the values of ID's of each one to an array within an array of arrays -->
   -Do not start or add click event listeners to the board before having all the ships placed
 
+  <!-- -If ship placed in a row with "row" class, it does not get placed because of the while loop -->
+    <!-- : iterate anyway if the original squaresToStyle is the same as the current -->
+
   -Use that to create the gameboard later on
   make the gameboard with the arrays stored while placing the ships
 

@@ -133,10 +133,10 @@ const renderSquaresHorizontally = (squareID,squaresToStyle,shipID) =>{
     let elementToStyle = originalIndex
     let coords = []
 
-    while(squaresToStyle > 0 && !elementToStyle.classList.contains('row')){
+    while(squaresToStyle > 0 && (!elementToStyle.classList.contains('row') || squaresToStyle === originalSquaresToStyle)){
         elementToStyle.classList.add('ship')
-        coords.push(elementToStyle.id)
         elementToStyle = elementToStyle.nextElementSibling
+        coords.push(elementToStyle.id)
         squaresToStyle-- 
     }
     if(squaresToStyle > 0){
