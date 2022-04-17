@@ -86,28 +86,32 @@ export function drop (event) {
     const squareID = event.target.id 
     let squaresToStyle = getShipLengthByName(shipID)
     // ONLY ADD STYLE, DO NOT MANAGE BOARDGRID FROM HERE
-    renderSquaresVertically(squareID,squaresToStyle,shipID)
+    const shipCoords = renderSquaresHorizontally(squareID,squaresToStyle,shipID)
     event.target.classList.remove('hide')
     // (shipDirection === 'vertical' ? renderSquaresVertically() : renderSquaresHorizontally())   
-}
-const renderShipOnDrop = (coord) =>{
-    
+    saveShipOnDrop()
 }
 
+const saveShipOnDrop = () =>{
+
+}
 
 const renderSquaresVertically = (squareID,squaresToStyle,shipID) =>{
     const boardGridArray = Array.from(document.querySelectorAll('.player1 > .grid-square'))
     const originalIndex = boardGridArray.findIndex(el => el.id === squareID)
     const shipInPool = document.getElementById(shipID)
     let indexToStyle = originalIndex
+    let coords = []
     try{
         for (let i = 0; i < squaresToStyle; i++) {
             boardGridArray[indexToStyle].classList.add('ship')
+            coords.push(boardGridArray[indexToStyle].id)
             indexToStyle += 8
         }
         shipInPool.classList.add('hide')
         shipInPool.removeAttribute('draggable')
     }catch(error){
+        coords.length = 0
         indexToStyle -=8
         while(indexToStyle >= originalIndex){
             boardGridArray[indexToStyle].classList.remove('ship')
@@ -115,20 +119,25 @@ const renderSquaresVertically = (squareID,squaresToStyle,shipID) =>{
         }
         return
     }
+    console.log(coords)
+    return coords
 }
 
 const renderSquaresHorizontally = (squareID,squaresToStyle,shipID) =>{
     const originalIndex = document.getElementById(`${squareID}`)
-    const originalSquaresToStyle = squaresToStyle
     const shipInPool = document.getElementById(shipID)
+    const originalSquaresToStyle = squaresToStyle
     let elementToStyle = originalIndex
+    let coords = []
 
     while(squaresToStyle > 0 && !elementToStyle.classList.contains('row')){
         elementToStyle.classList.add('ship')
+        coords.push(elementToStyle.id)
         elementToStyle = elementToStyle.nextElementSibling
         squaresToStyle-- 
     }
     if(squaresToStyle > 0){
+        coords.length = 0
         while(squaresToStyle <= originalSquaresToStyle){
             elementToStyle.classList.remove('ship')
             elementToStyle = elementToStyle.previousElementSibling
@@ -139,6 +148,8 @@ const renderSquaresHorizontally = (squareID,squaresToStyle,shipID) =>{
     else{
         shipInPool.classList.add('hide')
         shipInPool.removeAttribute('draggable')
+        console.log(coords)
+        return coords
     }   
 
 }

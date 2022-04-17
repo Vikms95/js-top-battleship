@@ -1,6 +1,6 @@
 import { renderStaticElements } from '../view/renderStaticElements'
 import { renderMatchResult } from '../view/renderDynamicElements'
-import { removeEventListeners } from './handleEventListeners'
+import { removeEventListeners, addEventListenerDraggable, addEventListenersBoardDrag } from './handleEventListeners'
 import { Player } from './player'
 import { executeGame } from '/src/index'
 
@@ -77,5 +77,11 @@ export function Game (){
         setTimeout(executeGame,2000)
     }
 
-    return{gameTurn}
+    const prepareShips = () =>{
+        console.log('Place your ships')
+        addEventListenerDraggable()
+        addEventListenersBoardDrag()
+    }
+
+    return{gameTurn,prepareShips}
 }
