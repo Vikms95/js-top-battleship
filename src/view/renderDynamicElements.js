@@ -66,9 +66,6 @@ const renderShipOnSink = () =>{
 
 export function dragStart (event) {
     event.dataTransfer.setData('text/plain',event.target.id)
-    setTimeout(() =>{
-        event.target.classList.add('hide')
-    },0)
 }
 export function dragEnter (event) {
     event.preventDefault()
@@ -89,7 +86,7 @@ export function drop (event) {
     const squareID = event.target.id 
     let squaresToStyle = getShipLengthByName(shipID)
     // ONLY ADD STYLE, DO NOT MANAGE BOARDGRID FROM HERE
-    renderSquaresHorizontally(squareID,squaresToStyle,shipID)
+    renderSquaresVertically(squareID,squaresToStyle,shipID)
     event.target.classList.remove('hide')
     // (shipDirection === 'vertical' ? renderSquaresVertically() : renderSquaresHorizontally())   
 }
@@ -101,20 +98,21 @@ const renderShipOnDrop = (coord) =>{
 const renderSquaresVertically = (squareID,squaresToStyle,shipID) =>{
     const boardGridArray = Array.from(document.querySelectorAll('.player1 > .grid-square'))
     const originalIndex = boardGridArray.findIndex(el => el.id === squareID)
+    const shipInPool = document.getElementById(shipID)
     let indexToStyle = originalIndex
     try{
         for (let i = 0; i < squaresToStyle; i++) {
             boardGridArray[indexToStyle].classList.add('ship')
             indexToStyle += 8
         }
+        shipInPool.classList.add('hide')
+        shipInPool.removeAttribute('draggable')
     }catch(error){
         indexToStyle -=8
         while(indexToStyle >= originalIndex){
             boardGridArray[indexToStyle].classList.remove('ship')
             indexToStyle -= 8
         }
-        const shipInPool = document.getElementById(shipID)
-        console.log(shipInPool.classList)
         return
     }
 }
@@ -122,8 +120,8 @@ const renderSquaresVertically = (squareID,squaresToStyle,shipID) =>{
 const renderSquaresHorizontally = (squareID,squaresToStyle,shipID) =>{
     const originalIndex = document.getElementById(`${squareID}`)
     const originalSquaresToStyle = squaresToStyle
-    let elementToStyle = originalIndex
     const shipInPool = document.getElementById(shipID)
+    let elementToStyle = originalIndex
 
     while(squaresToStyle > 0 && !elementToStyle.classList.contains('row')){
         elementToStyle.classList.add('ship')
@@ -139,6 +137,7 @@ const renderSquaresHorizontally = (squareID,squaresToStyle,shipID) =>{
         shipInPool.classList.remove('hide')
     }
     else{
+        shipInPool.classList.add('hide')
         shipInPool.removeAttribute('draggable')
     }   
 

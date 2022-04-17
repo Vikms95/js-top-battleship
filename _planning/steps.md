@@ -58,9 +58,9 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
   <!-- // if element gets out of it's parent, do not allow! -->
   <!-- :renderSquaresHorizontally > if any element after the first has the "row" class, return  -->
   <!-- :renderSquaresVertically > if error giving undefined, return and reincorportate opacity of ship on the pool -->
-    :get reference to the element previously dragged and remove its opacity property
-  // make the gameboard with the arrays stored while placing the ships
+  <!-- :get reference to the element previously dragged and remove its opacity property -->
   // if ship is placed outside of any square, it does not get places nor it reappears on the pool
+  // make the gameboard with the arrays stored while placing the ships
 
 <!-- - Make ships in the pool be one element only! (Make them span multiple grid areas) -->
 
