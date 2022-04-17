@@ -1,13 +1,10 @@
-import { Game } from './logic/game'
+import { Game,checkForGamePrepared} from './logic/game'
 import {addEventListenersBoardClick} from './logic/handleEventListeners'
 
-
-const executeGame = () =>{
-    const game = Game()
-    game.prepareShips(game)
-    addEventListenersBoardClick(game)
+const prepareGame = (game) =>{
+    game.addEventListenersDragShips(game)
 }
 
-executeGame()
+const game = Game()
+prepareGame(game)
 
-export {executeGame}

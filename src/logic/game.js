@@ -2,12 +2,13 @@ import { renderStaticElements } from '../view/renderStaticElements'
 import { renderMatchResult } from '../view/renderDynamicElements'
 import { removeEventListeners, addEventListenerDraggable, addEventListenersBoardDrag } from './handleEventListeners'
 import { Player } from './player'
-import { executeGame } from '/src/index'
+// import { executeGame } from '/src/index'
 
 export function Game (){
     let coordsArray = []
     const el = document.querySelector('.gameboard-grid.player2')
     el.classList.remove('unclickable')
+
     const player1 = Player('Victor')
     player1.createGameBoard(
         ['H8'],
@@ -73,12 +74,12 @@ export function Game (){
         return player1.isPlayerDefeated() || player2.isPlayerDefeated()
     } 
 
-    const prepareNextMatch = () =>{
-        // Remove event listeners from board
-        setTimeout(executeGame,2000)
-    }
+    // const prepareNextMatch = () =>{
+    //     // Remove event listeners from board
+    //     setTimeout(,2000)
+    // }
 
-    const prepareShips = (game) =>{
+    const addEventListenersDragShips = (game) =>{
         addEventListenerDraggable()
         addEventListenersBoardDrag(game)
     }
@@ -87,6 +88,16 @@ export function Game (){
         coordsArray.push(ship)
         console.log(coordsArray)
     }
+    const getCoordsArray = () =>{
+        return coordsArray
+    }
 
-    return{gameTurn,prepareShips,setCoordsArray}
+    const checkForGamePrepared = (game) =>{
+        if(game.getCoordsArray().length < 9){
+            return 'Not ready'
+        }
+        return 'Ready'
+    }
+
+    return{gameTurn,addEventListenersDragShips,getCoordsArray,setCoordsArray,checkForGamePrepared}
 }

@@ -1,5 +1,6 @@
 import { Game } from '../logic/game'
 import { getShipLengthByName } from '../logic/gameboard'
+import { addEventListenersBoardClick } from '../logic/handleEventListeners'
 
 export function renderTurn (turnData,event){
     const { playerData,computerData, attackedElement } = 
@@ -91,12 +92,11 @@ export function drop (event,game) {
     game.setCoordsArray(shipCoords)
     event.target.classList.remove('hide')
     // (shipDirection === 'vertical' ? renderSquaresVertically() : renderSquaresHorizontally())   
-    saveShipOnDrop()
-    return shipCoords
-}
-
-const saveShipOnDrop = () =>{
-
+    if (game.getCoordsArray().length >= 9){
+        console.log('ready')
+        addEventListenersBoardClick(game)
+    }
+    console.log('not ready')
 }
 
 const renderSquaresVertically = (squareID,squaresToStyle,shipID) =>{

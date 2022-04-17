@@ -62,14 +62,16 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
   <!-- // if ship is placed outside of any square, it does not get places nor it reappears on the pool -->
   - SETUP FUNCTION -
   -Before starting game, function to let the player place their name and ships
-  // HOW TO GET THE ARRAY OUT OF THE DROP EVENT LISTENER
-  You'd have to do it from inside render..() because you cannot otherwise access a local variable from outside a function
+  <!-- // HOW TO GET THE ARRAY OUT OF THE DROP EVENT LISTENER
+  You'd have to do it from inside render..() because you cannot otherwise access a local variable from outside a function -->
 
-  -Placing out of bounds or totally not on the board is handled, but need to check about placing the ship on a square which already has a ship class added to it, in that case, return
-  -For each placement of ship, add the values of ID's of each one to an array within an array of arrays
+  <!-- -For each placement of ship, add the values of ID's of each one to an array within an array of arrays -->
+  -Do not start or add click event listeners to the board before having all the ships placed
+
   -Use that to create the gameboard later on
   make the gameboard with the arrays stored while placing the ships
 
+  -Placing out of bounds or totally not on the board is handled, but need to check about placing the ship on a square which already has a ship class added to it, in that case, return
 <!-- - Make ships in the pool be one element only! (Make them span multiple grid areas) -->
 
 - Bug when one game ends and any square is clicked afterwards (I need to remove the event listeners while the game is not active)
