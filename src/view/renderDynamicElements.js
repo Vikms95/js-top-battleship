@@ -89,7 +89,7 @@ export function drop (event) {
     const squareID = event.target.id 
     let squaresToStyle = getShipLengthByName(shipID)
     // ONLY ADD STYLE, DO NOT MANAGE BOARDGRID FROM HERE
-    renderSquaresHorizontally(squareID,squaresToStyle)
+    renderSquaresHorizontally(squareID,squaresToStyle,shipID)
     event.target.classList.remove('hide')
     // (shipDirection === 'vertical' ? renderSquaresVertically() : renderSquaresHorizontally())   
 }
@@ -98,7 +98,7 @@ const renderShipOnDrop = (coord) =>{
 }
 
 
-const renderSquaresVertically = (squareID,squaresToStyle) =>{
+const renderSquaresVertically = (squareID,squaresToStyle,shipID) =>{
     const boardGridArray = Array.from(document.querySelectorAll('.player1 > .grid-square'))
     const originalIndex = boardGridArray.findIndex(el => el.id === squareID)
     let indexToStyle = originalIndex
@@ -113,11 +113,13 @@ const renderSquaresVertically = (squareID,squaresToStyle) =>{
             boardGridArray[indexToStyle].classList.remove('ship')
             indexToStyle -= 8
         }
+        const shipInPool = document.getElementById(shipID)
+        console.log(shipInPool.classList)
         return
     }
 }
 
-const renderSquaresHorizontally = (squareID,squaresToStyle) =>{
+const renderSquaresHorizontally = (squareID,squaresToStyle,shipID) =>{
     const originalIndex = document.getElementById(`${squareID}`)
     const originalSquaresToStyle = squaresToStyle
     let elementToStyle = originalIndex
@@ -133,7 +135,8 @@ const renderSquaresHorizontally = (squareID,squaresToStyle) =>{
             elementToStyle = elementToStyle.previousElementSibling
             squaresToStyle++
         }
-
+        const shipInPool = document.getElementById(shipID)
+        shipInPool.classList.remove('hide')
     }   
 
 }
