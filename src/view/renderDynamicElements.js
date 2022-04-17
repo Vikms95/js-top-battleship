@@ -123,6 +123,7 @@ const renderSquaresHorizontally = (squareID,squaresToStyle,shipID) =>{
     const originalIndex = document.getElementById(`${squareID}`)
     const originalSquaresToStyle = squaresToStyle
     let elementToStyle = originalIndex
+    const shipInPool = document.getElementById(shipID)
 
     while(squaresToStyle > 0 && !elementToStyle.classList.contains('row')){
         elementToStyle.classList.add('ship')
@@ -135,8 +136,10 @@ const renderSquaresHorizontally = (squareID,squaresToStyle,shipID) =>{
             elementToStyle = elementToStyle.previousElementSibling
             squaresToStyle++
         }
-        const shipInPool = document.getElementById(shipID)
         shipInPool.classList.remove('hide')
+    }
+    else{
+        shipInPool.removeAttribute('draggable')
     }   
 
 }
