@@ -4,7 +4,7 @@ import {addEventListenersBoardClick} from './logic/handleEventListeners'
 
 const executeGame = () =>{
     const game = Game()
-    game.prepareShips()
+    game.prepareShips(game)
     addEventListenersBoardClick(game)
 }
 

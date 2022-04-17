@@ -15,14 +15,15 @@ const processTurnData = (game,event) =>{
     renderTurn(turnData,event)
 }
 
-export function addEventListenersBoardDrag (){
+export function addEventListenersBoardDrag (game){
     const gridSquaresPlayer = Array.from(document.querySelectorAll('.player1 > .grid-square'))
     gridSquaresPlayer.forEach(square =>{
         square.addEventListener('dragenter',dragEnter)
         square.addEventListener('dragover',dragOver)
         square.addEventListener('dragleave',dragLeave)
-        square.addEventListener('drop',drop)
-
+        square.addEventListener('drop',(event) =>{
+            drop(event,game)
+        })
     })
 }
 

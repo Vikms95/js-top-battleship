@@ -5,6 +5,7 @@ import { Player } from './player'
 import { executeGame } from '/src/index'
 
 export function Game (){
+    let coordsArray = []
     const el = document.querySelector('.gameboard-grid.player2')
     el.classList.remove('unclickable')
     const player1 = Player('Victor')
@@ -77,11 +78,15 @@ export function Game (){
         setTimeout(executeGame,2000)
     }
 
-    const prepareShips = () =>{
-        console.log('Place your ships')
+    const prepareShips = (game) =>{
         addEventListenerDraggable()
-        addEventListenersBoardDrag()
+        addEventListenersBoardDrag(game)
     }
 
-    return{gameTurn,prepareShips}
+    const setCoordsArray = (ship) =>{
+        coordsArray.push(ship)
+        console.log(coordsArray)
+    }
+
+    return{gameTurn,prepareShips,setCoordsArray}
 }

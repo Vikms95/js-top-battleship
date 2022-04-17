@@ -1,3 +1,4 @@
+import { Game } from '../logic/game'
 import { getShipLengthByName } from '../logic/gameboard'
 
 export function renderTurn (turnData,event){
@@ -80,16 +81,18 @@ export function dragLeave (event) {
     event.target.classList.remove('drag-over')
 
 }
-export function drop (event) {
+export function drop (event,game) {
     event.target.classList.remove('drag-over')
     const shipID = event.dataTransfer.getData('text/plain')
     const squareID = event.target.id 
     let squaresToStyle = getShipLengthByName(shipID)
     // ONLY ADD STYLE, DO NOT MANAGE BOARDGRID FROM HERE
     const shipCoords = renderSquaresHorizontally(squareID,squaresToStyle,shipID)
+    game.setCoordsArray(shipCoords)
     event.target.classList.remove('hide')
     // (shipDirection === 'vertical' ? renderSquaresVertically() : renderSquaresHorizontally())   
     saveShipOnDrop()
+    return shipCoords
 }
 
 const saveShipOnDrop = () =>{
@@ -148,7 +151,6 @@ const renderSquaresHorizontally = (squareID,squaresToStyle,shipID) =>{
     else{
         shipInPool.classList.add('hide')
         shipInPool.removeAttribute('draggable')
-        console.log(coords)
         return coords
     }   
 
