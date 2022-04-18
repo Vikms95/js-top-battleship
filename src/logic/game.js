@@ -86,8 +86,8 @@ export function Game (){
 
     const setCoordsArray = (ship) =>{
         coordsArray.push(ship)
-        console.log(coordsArray)
     }
+    
     const getCoordsArray = () =>{
         return coordsArray
     }
