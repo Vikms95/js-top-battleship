@@ -1,6 +1,6 @@
-import { Game } from '../logic/game'
-import { getShipLengthByName } from '../logic/gameboard'
-import { addEventListenersBoardClick } from '../logic/handleEventListeners'
+import {checkForGamePrepared} from '../logic/game'
+import { retrieveDataDrop } from './retrieveDataEvents'
+
 
 export function renderTurn (turnData,event){
     const { playerData,computerData, attackedElement } = 
@@ -87,20 +87,15 @@ export function dragLeave (event) {
 }
 
 export function drop (event,game) {
-    event.target.classList.remove('drag-over')
-    const shipID = event.dataTransfer.getData('text/plain')
-    const squareID = event.target.id 
-    let squaresToStyle = getShipLengthByName(shipID)
-    // ONLY ADD STYLE, DO NOT MANAGE BOARDGRID FROM HERE
-    const shipCoords = renderSquaresVertically(squareID,squaresToStyle,shipID)
-    game.setCoordsArray(shipCoords)
-    event.target.classList.remove('hide')
+    const {shipID, squareID ,squaresToStyle} = retrieveDataDrop(event)
+
     // (shipDirection === 'vertical' ? renderSquaresVertically() : renderSquaresHorizontally())   
-    if (game.getCoordsArray().length >= 9){
-        console.log('ready')
-        addEventListenersBoardClick(game)
-    }
-    console.log('not ready')
+    const shipCoords = renderSquaresVertically(squareID,squaresToStyle,shipID)
+  
+    event.target.classList.remove('drag-over')
+    event.target.classList.remove('hide')
+    game.setCoordsArray(shipCoords)
+    game.checkForGamePrepared(game)
 }
 
 const renderSquaresVertically = (squareID,squaresToStyle,shipID) =>{
