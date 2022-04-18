@@ -8,6 +8,17 @@ export const retrieveDataDrop = (event) =>{
     return {shipID,squareID,squaresToStyle}
 }
 
+export const renderShipsAndReturnCoords = (squaresToStyle,boardGridArray) =>{
+
+}
+
+export const restoreShipRenderingOnOverflow = (indexToStyle,originalIndex,boardGridArray) =>{
+    while(indexToStyle >= originalIndex){
+        boardGridArray[indexToStyle].classList.remove('ship')
+        indexToStyle = moveIndexToPreviousRow(indexToStyle)
+    }
+}
+
 export const retrieveDataBoardVertically = (squareID,shipID) =>{
     const boardGridArray = Array.from(document.querySelectorAll('.player1 > .grid-square'))
     const originalIndex  = boardGridArray.findIndex(el => el.id === squareID)
@@ -32,6 +43,10 @@ export const moveIndexToPreviousRow = (indexToStyle) =>{
 
 export const moveIndexToNextColumn = () =>{
 
+}
+
+export const addCoordsToArray = (coords,indexToAdd) =>{
+    return [...coords,indexToAdd]
 }
 
 export const emptyCoordsArray = (coords) =>{

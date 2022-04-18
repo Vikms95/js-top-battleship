@@ -1,9 +1,11 @@
 import { retrieveDataDrop,
     retrieveDataBoardVertically,
+    restoreShipRenderingOnOverflow,
     hasCurrentIndexShipClass,
     moveIndexToNextRow,
     moveIndexToPreviousRow,
-    emptyCoordsArray 
+    emptyCoordsArray, 
+    addCoordsToArray
 } from './handleStylingEventsData'
 
 
@@ -95,7 +97,7 @@ export function drop (event,game) {
     const {shipID, squareID ,squaresToStyle} = retrieveDataDrop(event)
     // Ship direction will change based on some DOM class?
     // (shipDirection === 'vertical' ? renderSquaresVertically() : renderSquaresHorizontally())   
-    const shipCoords = renderSquaresVertically(squareID,squaresToStyle,shipID)
+    const shipCoords = renderShipSquaresVertically(squareID,squaresToStyle,shipID)
   
     event.target.classList.remove('drag-over')
     event.target.classList.remove('hide')
@@ -103,23 +105,23 @@ export function drop (event,game) {
     game.checkForGamePrepared(game)
 }
 
-const renderSquaresVertically = (squareID,squaresToStyle,shipID) =>{
+const renderShipSquaresVertically = (squareID,squaresToStyle,shipID) =>{
     let {boardGridArray, originalIndex, shipInPool, indexToStyle} =
       retrieveDataBoardVertically(squareID,shipID)
     
-    const coords = []
+    let coords = []
 
     try{
         for (let i = 0; i < squaresToStyle; i++) {
-            const currentSquare = boardGridArray[indexToStyle]
+            let currentSquare = boardGridArray[indexToStyle]
             if(hasCurrentIndexShipClass(currentSquare)){
                 removeShipRenderingVertical(currentSquare,originalIndex)
                 coords = emptyCoordsArray(coords)
                 return 
             }
-            currentSquare.classList.add('ship')
-            coords.push(currentSquare.id)
+            coords       = addCoordsToArray(coords,currentSquare.id)
             indexToStyle = moveIndexToNextRow(indexToStyle)
+            currentSquare.classList.add('ship')
         }
         shipInPool.classList.add('hide')
         shipInPool.removeAttribute('draggable')
@@ -129,10 +131,7 @@ const renderSquaresVertically = (squareID,squaresToStyle,shipID) =>{
       
         coords = emptyCoordsArray(coords)
         indexToStyle = moveIndexToPreviousRow(indexToStyle)
-        while(indexToStyle >= originalIndex){
-            boardGridArray[indexToStyle].classList.remove('ship')
-            indexToStyle = moveIndexToPreviousRow(indexToStyle)
-        }
+        restoreShipRenderingOnOverflow(indexToStyle,originalIndex,boardGridArray)
     } 
 }
 
