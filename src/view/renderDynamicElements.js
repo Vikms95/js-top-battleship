@@ -2,8 +2,10 @@ import { retrieveDataDrop,
     retrieveDataBoardVertically,
     restoreRenderingOnVerticalOverflow,
     restoreRenderingOnHorizontalOverflow,
+    restoreRenderingOnHorizontalOverlap,
     checkIfRenderOrRestore,
-    isShipHorizontalOverflowing,
+    isHorizontalOverflowing,
+    isHorizontalOverlapping,
     moveToNextRow,
     moveToPreviousRow,
     emptyCoordsArray, 
@@ -89,40 +91,36 @@ const renderShipHorizontally = (squareID,squaresToStyle,shipID) =>{
         squaresToStyle-- 
     }
 
+    // isPlacementInvalidAndBehindAShip
     if((squaresToStyle > 0 && originalIndex.previousElementSibling.classList.contains('ship'))){
+        coords.length = 0
         elementToStyle = elementToStyle.previousElementSibling
         while(squaresToStyle < originalSquaresToStyle){
             elementToStyle.classList.remove('ship')
             elementToStyle = elementToStyle.previousElementSibling
             squaresToStyle++
         }
-        coords.length = 0
         shipInPool.classList.remove('hide')
         return
     }
 
+    // isPlacedAboveOtherShip
     if(squaresToStyle > 0 && elementToStyle.classList.contains('ship') && squaresToStyle === originalSquaresToStyle){
         coords.length = 0
         shipInPool.classList.remove('hide')
         return
     }
 
-    if(squaresToStyle > 0 && elementToStyle.classList.contains('ship')){
-        coords.length = 0
-        elementToStyle = elementToStyle.previousElementSibling
-        while(squaresToStyle <= originalSquaresToStyle){
-            elementToStyle.classList.remove('ship')
-            elementToStyle = elementToStyle.previousElementSibling
-            squaresToStyle++
-        }
-        shipInPool.classList.remove('hide')
+    // isHorizontalOverlapping
+    if(isHorizontalOverlapping(squaresToStyle,elementToStyle)){
+        coords = emptyCoordsArray(coords)
+        restoreRenderingOnHorizontalOverlap(squaresToStyle,originalSquaresToStyle,elementToStyle,shipInPool)
         return
     }
 
-    if(isShipHorizontalOverflowing(squaresToStyle,elementToStyle)){
+    if(isHorizontalOverflowing(squaresToStyle,elementToStyle)){
         coords = emptyCoordsArray(coords)
-        restoreRenderingOnHorizontalOverflow(
-            squaresToStyle,originalSquaresToStyle,elementToStyle)
+        restoreRenderingOnHorizontalOverflow(squaresToStyle,originalSquaresToStyle,elementToStyle)
         return
     }
 
