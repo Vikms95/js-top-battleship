@@ -1,11 +1,10 @@
 import { retrieveDataDrop,
     retrieveDataBoardVertically,
     restoreShipRenderingOnOverflow,
-    hasCurrentIndexShipClass,
-    moveIndexToNextRow,
-    moveIndexToPreviousRow,
+    checkIfRenderOrRestore,
+    moveToNextRow,
+    moveToPreviousRow,
     emptyCoordsArray, 
-    addCoordsToArray
 } from './handleStylingEventsData'
 
 
@@ -37,67 +36,11 @@ const retrieveTurnData = (turnData) =>{
     return { playerData,computerData, attackedElement }
 }
 
-const findHitElement = (coords) =>{
-    return document.querySelector(`.player1 > #${coords}`)
-}
-
-const renderBoardSquares = (turnData, element) =>{
-    if(isHitElement(element)) return  
-    (turnData) ? renderSquareOnMiss(element) : renderSquareOnHit(element)
-}
-
-const isHitElement = (element) =>{
-    return element.classList.contains('hit') 
-}
-
-const renderSquareOnHit = (element) =>{
-    element.classList.remove('ship')
-    element.classList.add('hit')
-}
-  
-const renderSquareOnMiss  = (element) =>{
-    element.classList.add('miss')
-}
-
-const renderTurnInfo = (turnData,player1) =>{
-    const matchInfoEl = document.querySelector('.turn-info')
-    matchInfoEl.textContent = `${player1.getName()} attack is a ` + 
-  (turnData.isPlayerAttackMiss ? 'miss!' : 'hit!')
-  
-}
-
-const renderWarningsInfo = () =>{
-}
-
-const renderShipOnSink = () =>{
-
-}
-
-export function dragStart (event) {
-    event.dataTransfer.setData('text/plain',event.target.id)
-}
-
-export function dragEnter (event) {
-    event.preventDefault()
-    event.target.classList.add('drag-over')
-}
-
-export function dragOver (event) {
-    event.preventDefault()
-    event.target.classList.add('drag-over')
-
-}
-
-export function dragLeave (event) {
-    event.target.classList.remove('drag-over')
-
-}
-
-export function drop (event,game) {
+export function handleDropEvent (event,game) {
     const {shipID, squareID ,squaresToStyle} = retrieveDataDrop(event)
     // Ship direction will change based on some DOM class?
     // (shipDirection === 'vertical' ? renderSquaresVertically() : renderSquaresHorizontally())   
-    const shipCoords = renderShipSquaresVertically(squareID,squaresToStyle,shipID)
+    const shipCoords = renderShipVertically(squareID,squaresToStyle,shipID)
   
     event.target.classList.remove('drag-over')
     event.target.classList.remove('hide')
@@ -105,37 +48,32 @@ export function drop (event,game) {
     game.checkForGamePrepared(game)
 }
 
-const renderShipSquaresVertically = (squareID,squaresToStyle,shipID) =>{
-    let {boardGridArray, originalIndex, shipInPool, indexToStyle} =
+const renderShipVertically = (squareID,squaresToStyle,shipID) =>{
+    let coords = []
+    let { boardGridArray, originalIndex, shipInPool, indexToStyle } =
       retrieveDataBoardVertically(squareID,shipID)
     
-    let coords = []
-
     try{
         for (let i = 0; i < squaresToStyle; i++) {
             let currentSquare = boardGridArray[indexToStyle]
-            if(hasCurrentIndexShipClass(currentSquare)){
-                removeShipRenderingVertical(currentSquare,originalIndex)
-                coords = emptyCoordsArray(coords)
-                return 
-            }
-            coords       = addCoordsToArray(coords,currentSquare.id)
-            indexToStyle = moveIndexToNextRow(indexToStyle)
-            currentSquare.classList.add('ship')
+            let isSquareInvalid =  checkIfRenderOrRestore(currentSquare,originalIndex,coords,indexToStyle)
+            if(isSquareInvalid) return
+            indexToStyle = moveToNextRow(indexToStyle)
         }
         shipInPool.classList.add('hide')
         shipInPool.removeAttribute('draggable')
         return coords
-
-    }catch(error){ // Will trigger if ship placement overflows from the bottom
-      
+        
+    }catch(error){
+        // Will trigger if ship placement 
+        // overflows from the bottom
         coords = emptyCoordsArray(coords)
-        indexToStyle = moveIndexToPreviousRow(indexToStyle)
+        indexToStyle = moveToPreviousRow(indexToStyle)
         restoreShipRenderingOnOverflow(indexToStyle,originalIndex,boardGridArray)
     } 
 }
 
-const renderSquaresHorizontally = (squareID,squaresToStyle,shipID) =>{
+const renderShipHorizontally = (squareID,squaresToStyle,shipID) =>{
     const originalIndex = document.getElementById(`${squareID}`)
     const shipInPool = document.getElementById(shipID)
     const originalSquaresToStyle = squaresToStyle
@@ -201,11 +139,63 @@ const renderSquaresHorizontally = (squareID,squaresToStyle,shipID) =>{
 
 }
 
-const removeShipRenderingVertical = (currentSquare,originalIndex) =>{
-    indexToStyle -= 8
-    while(indexToStyle >= originalIndex){
-        // go back until the original index and remove class ship from all elements
-        currentSquare.classList.remove('ship')
-        indexToStyle -= 8
-    }
-} 
+export function dragStart (event) {
+    event.dataTransfer.setData('text/plain',event.target.id)
+}
+
+export function dragEnter (event) {
+    event.preventDefault()
+    event.target.classList.add('drag-over')
+}
+
+export function dragOver (event) {
+    event.preventDefault()
+    event.target.classList.add('drag-over')
+}
+
+export function dragLeave (event) {
+    event.target.classList.remove('drag-over')
+}
+
+const findHitElement = (coords) =>{
+    return document.querySelector(`.player1 > #${coords}`)
+}
+
+const renderBoardSquares = (turnData, element) =>{
+    if(isHitElement(element)) return  
+    (turnData) ? renderSquareOnMiss(element) : renderSquareOnHit(element)
+}
+
+const isHitElement = (element) =>{
+    return element.classList.contains('hit') 
+}
+
+const renderSquareOnHit = (element) =>{
+    element.classList.remove('ship')
+    element.classList.add('hit')
+}
+  
+const renderSquareOnMiss  = (element) =>{
+    element.classList.add('miss')
+}
+
+const renderTurnInfo = (turnData,player1) =>{
+    const matchInfoEl = document.querySelector('.turn-info')
+    matchInfoEl.textContent = `${player1.getName()} attack is a ` 
+    + (turnData.isPlayerAttackMiss) ? 'miss!' : 'hit!'
+  
+}
+
+const renderWarningsInfo = () =>{
+}
+
+const renderShipOnSink = () =>{
+
+}
+
+
+
+
+
+
+

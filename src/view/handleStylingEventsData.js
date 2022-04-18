@@ -15,7 +15,28 @@ export const renderShipsAndReturnCoords = (squaresToStyle,boardGridArray) =>{
 export const restoreShipRenderingOnOverflow = (indexToStyle,originalIndex,boardGridArray) =>{
     while(indexToStyle >= originalIndex){
         boardGridArray[indexToStyle].classList.remove('ship')
-        indexToStyle = moveIndexToPreviousRow(indexToStyle)
+        indexToStyle = moveToPreviousRow(indexToStyle)
+    }
+}
+
+export const restoreShipRenderingOnOverlap = (currentSquare,originalIndex,coords) =>{
+    coords = emptyCoordsArray(coords)
+    indexToStyle = moveToPreviousRow(indexToStyle)
+    while(indexToStyle >= originalIndex){
+        currentSquare.classList.remove('ship')
+        indexToStyle = moveToPreviousRow(indexToStyle)
+    }
+} 
+
+export const checkIfRenderOrRestore = (currentSquare,originalIndex,coords) =>{
+    if(hasCurrentIndexShipClass(currentSquare) ){
+        restoreShipRenderingOnOverlap(currentSquare,originalIndex,coords) 
+        return true
+        
+    }else{
+        coords = addCoordsToArray(coords,currentSquare.id)
+        currentSquare.classList.add('ship')
+        return false
     }
 }
 
@@ -32,11 +53,11 @@ export const hasCurrentIndexShipClass = (currentSquare) =>{
     return currentSquare.classList.contains('ship')
 }
 
-export const moveIndexToNextRow = (indexToStyle) =>{
+export const moveToNextRow = (indexToStyle) =>{
     return  indexToStyle += 8
 }
 
-export const moveIndexToPreviousRow = (indexToStyle) =>{
+export const moveToPreviousRow = (indexToStyle) =>{
     return  indexToStyle -= 8
 
 }
