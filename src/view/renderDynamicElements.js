@@ -144,6 +144,19 @@ const renderSquaresHorizontally = (squareID,squaresToStyle,shipID) =>{
         squaresToStyle-- 
     }
 
+    if((squaresToStyle > 0 && originalIndex.previousElementSibling.classList.contains('ship'))){
+        elementToStyle = elementToStyle.previousElementSibling
+        while(squaresToStyle < originalSquaresToStyle){
+            elementToStyle.classList.remove('ship')
+            elementToStyle = elementToStyle.previousElementSibling
+            squaresToStyle++
+        }
+        console.log('hi')
+        coords.length = 0
+        shipInPool.classList.remove('hide')
+        return
+    }
+
     if(squaresToStyle > 0 && elementToStyle.classList.contains('ship') && squaresToStyle === originalSquaresToStyle){
         console.log('hi')
         coords.length = 0
@@ -163,7 +176,6 @@ const renderSquaresHorizontally = (squareID,squaresToStyle,shipID) =>{
         shipInPool.classList.remove('hide')
         return
     }
-
 
     if(squaresToStyle > 0 && elementToStyle.classList.contains('row')){
         coords.length = 0
