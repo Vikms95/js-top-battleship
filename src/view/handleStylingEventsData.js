@@ -17,6 +17,23 @@ export const retrieveDataBoardVertically = (squareID,shipID) =>{
     return {boardGridArray, originalIndex, shipInPool, indexToStyle}
 }
 
-export const isCurrentIndexShipClass = (boardGridArray,indexToStyle) =>{
-    return boardGridArray[indexToStyle].classList.contains('ship')
+export const hasCurrentIndexShipClass = (currentSquare) =>{
+    return currentSquare.classList.contains('ship')
+}
+
+export const moveIndexToNextRow = (indexToStyle) =>{
+    return  indexToStyle += 8
+}
+
+export const moveIndexToPreviousRow = (indexToStyle) =>{
+    return  indexToStyle -= 8
+
+}
+
+export const moveIndexToNextColumn = () =>{
+
+}
+
+export const emptyCoordsArray = (coords) =>{
+    return coords.length = 0
 }

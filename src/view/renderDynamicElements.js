@@ -1,4 +1,10 @@
-import { retrieveDataDrop, retrieveDataBoardVertically, isCurrentIndexShipClass } from './retrieveDataEvents'
+import { retrieveDataDrop,
+    retrieveDataBoardVertically,
+    hasCurrentIndexShipClass,
+    moveIndexToNextRow,
+    moveIndexToPreviousRow,
+    emptyCoordsArray 
+} from './handleStylingEventsData'
 
 
 export function renderTurn (turnData,event){
@@ -101,33 +107,33 @@ const renderSquaresVertically = (squareID,squaresToStyle,shipID) =>{
     let {boardGridArray, originalIndex, shipInPool, indexToStyle} =
       retrieveDataBoardVertically(squareID,shipID)
     
-    let coords = []
+    const coords = []
 
     try{
         for (let i = 0; i < squaresToStyle; i++) {
-            if(isCurrentIndexShipClass(boardGridArray,indexToStyle)){
-                restoreShipPlacementVertical(boardGridArray,indexToStyle,originalIndex)
-                coords.length = 0
+            const currentSquare = boardGridArray[indexToStyle]
+            if(hasCurrentIndexShipClass(currentSquare)){
+                removeShipRenderingVertical(currentSquare,originalIndex)
+                coords = emptyCoordsArray(coords)
                 return 
             }
-
-            boardGridArray[indexToStyle].classList.add('ship')
-            coords.push(boardGridArray[indexToStyle].id)
-            indexToStyle += 8
+            currentSquare.classList.add('ship')
+            coords.push(currentSquare.id)
+            indexToStyle = moveIndexToNextRow(indexToStyle)
         }
         shipInPool.classList.add('hide')
         shipInPool.removeAttribute('draggable')
+        return coords
+
     }catch(error){ // Will trigger if ship placement overflows from the bottom
-        coords.length = 0
-        indexToStyle -=8
+      
+        coords = emptyCoordsArray(coords)
+        indexToStyle = moveIndexToPreviousRow(indexToStyle)
         while(indexToStyle >= originalIndex){
             boardGridArray[indexToStyle].classList.remove('ship')
-            indexToStyle -= 8
+            indexToStyle = moveIndexToPreviousRow(indexToStyle)
         }
-        return
-    }
-    console.log(coords)
-    return coords
+    } 
 }
 
 const renderSquaresHorizontally = (squareID,squaresToStyle,shipID) =>{
@@ -196,11 +202,11 @@ const renderSquaresHorizontally = (squareID,squaresToStyle,shipID) =>{
 
 }
 
-const restoreShipPlacementVertical = (boardGridArray,indexToStyle,originalIndex) =>{
+const removeShipRenderingVertical = (currentSquare,originalIndex) =>{
     indexToStyle -= 8
     while(indexToStyle >= originalIndex){
         // go back until the original index and remove class ship from all elements
-        boardGridArray[indexToStyle].classList.remove('ship')
+        currentSquare.classList.remove('ship')
         indexToStyle -= 8
     }
 } 
