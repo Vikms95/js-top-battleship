@@ -1,5 +1,4 @@
-import {checkForGamePrepared} from '../logic/game'
-import { retrieveDataDrop } from './retrieveDataEvents'
+import { retrieveDataDrop, retrieveDataBoardVertically, isCurrentIndexShipClass } from './retrieveDataEvents'
 
 
 export function renderTurn (turnData,event){
@@ -88,7 +87,7 @@ export function dragLeave (event) {
 
 export function drop (event,game) {
     const {shipID, squareID ,squaresToStyle} = retrieveDataDrop(event)
-
+    // Ship direction will change based on some DOM class?
     // (shipDirection === 'vertical' ? renderSquaresVertically() : renderSquaresHorizontally())   
     const shipCoords = renderSquaresVertically(squareID,squaresToStyle,shipID)
   
@@ -99,22 +98,19 @@ export function drop (event,game) {
 }
 
 const renderSquaresVertically = (squareID,squaresToStyle,shipID) =>{
-    const boardGridArray = Array.from(document.querySelectorAll('.player1 > .grid-square'))
-    const originalIndex = boardGridArray.findIndex(el => el.id === squareID)
-    const shipInPool = document.getElementById(shipID)
-    let indexToStyle = originalIndex
+    let {boardGridArray, originalIndex, shipInPool, indexToStyle} =
+      retrieveDataBoardVertically(squareID,shipID)
+    
     let coords = []
+
     try{
         for (let i = 0; i < squaresToStyle; i++) {
-            if(boardGridArray[indexToStyle].classList.contains('ship')){
-                indexToStyle -= 8
-                while(indexToStyle >= originalIndex){
-                // go back until the original index and remove class ship from all elements
-                    boardGridArray[indexToStyle].classList.remove('ship')
-                    indexToStyle -= 8
-                }
+            if(isCurrentIndexShipClass(boardGridArray,indexToStyle)){
+                restoreShipPlacementVertical(boardGridArray,indexToStyle,originalIndex)
+                coords.length = 0
                 return 
             }
+
             boardGridArray[indexToStyle].classList.add('ship')
             coords.push(boardGridArray[indexToStyle].id)
             indexToStyle += 8
@@ -199,3 +195,12 @@ const renderSquaresHorizontally = (squareID,squaresToStyle,shipID) =>{
     }   
 
 }
+
+const restoreShipPlacementVertical = (boardGridArray,indexToStyle,originalIndex) =>{
+    indexToStyle -= 8
+    while(indexToStyle >= originalIndex){
+        // go back until the original index and remove class ship from all elements
+        boardGridArray[indexToStyle].classList.remove('ship')
+        indexToStyle -= 8
+    }
+} 
