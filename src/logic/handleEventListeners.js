@@ -1,4 +1,4 @@
-import { renderTurn,dragEnter,dragStart,dragOver,dragLeave,drop } from '../view/renderDynamicElements'
+import { renderTurn,dragEnter,dragStart,dragOver,dragLeave,handleDropEvent } from '../view/renderDynamicElements'
 
 export function addEventListenersBoardClick (game){
     const gridSquaresComputer = Array.from(document.querySelectorAll('.player2 > .grid-square'))
@@ -22,7 +22,7 @@ export function addEventListenersBoardDrag (game){
         square.addEventListener('dragover',dragOver)
         square.addEventListener('dragleave',dragLeave)
         square.addEventListener('drop',(event) =>{
-            drop(event,game)
+            handleDropEvent(event,game)
         })
     })
 }

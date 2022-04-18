@@ -1,7 +1,9 @@
 import { retrieveDataDrop,
     retrieveDataBoardVertically,
-    restoreShipRenderingOnOverflow,
+    restoreRenderingOnVerticalOverflow,
+    restoreRenderingOnHorizontalOverflow,
     checkIfRenderOrRestore,
+    isShipHorizontalOverflowing,
     moveToNextRow,
     moveToPreviousRow,
     emptyCoordsArray, 
@@ -40,7 +42,7 @@ export function handleDropEvent (event,game) {
     const {shipID, squareID ,squaresToStyle} = retrieveDataDrop(event)
     // Ship direction will change based on some DOM class?
     // (shipDirection === 'vertical' ? renderSquaresVertically() : renderSquaresHorizontally())   
-    const shipCoords = renderShipVertically(squareID,squaresToStyle,shipID)
+    const shipCoords = renderShipHorizontally(squareID,squaresToStyle,shipID)
   
     event.target.classList.remove('drag-over')
     event.target.classList.remove('hide')
@@ -69,7 +71,7 @@ const renderShipVertically = (squareID,squaresToStyle,shipID) =>{
         // overflows from the bottom
         coords = emptyCoordsArray(coords)
         indexToStyle = moveToPreviousRow(indexToStyle)
-        restoreShipRenderingOnOverflow(indexToStyle,originalIndex,boardGridArray)
+        restoreRenderingOnVerticalOverflow(indexToStyle,originalIndex,boardGridArray)
     } 
 }
 
@@ -94,21 +96,18 @@ const renderShipHorizontally = (squareID,squaresToStyle,shipID) =>{
             elementToStyle = elementToStyle.previousElementSibling
             squaresToStyle++
         }
-        console.log('hi')
         coords.length = 0
         shipInPool.classList.remove('hide')
         return
     }
 
     if(squaresToStyle > 0 && elementToStyle.classList.contains('ship') && squaresToStyle === originalSquaresToStyle){
-        console.log('hi')
         coords.length = 0
         shipInPool.classList.remove('hide')
         return
     }
 
     if(squaresToStyle > 0 && elementToStyle.classList.contains('ship')){
-        console.log('hi')
         coords.length = 0
         elementToStyle = elementToStyle.previousElementSibling
         while(squaresToStyle <= originalSquaresToStyle){
@@ -120,14 +119,10 @@ const renderShipHorizontally = (squareID,squaresToStyle,shipID) =>{
         return
     }
 
-    if(squaresToStyle > 0 && elementToStyle.classList.contains('row')){
-        coords.length = 0
-        while(squaresToStyle <= originalSquaresToStyle){
-            elementToStyle.classList.remove('ship')
-            elementToStyle = elementToStyle.previousElementSibling
-            squaresToStyle++
-        }
-        shipInPool.classList.remove('hide')
+    if(isShipHorizontalOverflowing(squaresToStyle,elementToStyle)){
+        coords = emptyCoordsArray(coords)
+        restoreRenderingOnHorizontalOverflow(
+            squaresToStyle,originalSquaresToStyle,elementToStyle)
         return
     }
 

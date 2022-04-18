@@ -9,17 +9,16 @@ export const retrieveDataDrop = (event) =>{
 }
 
 export const renderShipsAndReturnCoords = (squaresToStyle,boardGridArray) =>{
-
 }
 
-export const restoreShipRenderingOnOverflow = (indexToStyle,originalIndex,boardGridArray) =>{
+export const restoreRenderingOnVerticalOverflow = (indexToStyle,originalIndex,boardGridArray) =>{
     while(indexToStyle >= originalIndex){
         boardGridArray[indexToStyle].classList.remove('ship')
         indexToStyle = moveToPreviousRow(indexToStyle)
     }
 }
 
-export const restoreShipRenderingOnOverlap = (currentSquare,originalIndex,coords) =>{
+export const restoreRenderingOnVerticalOverlap = (currentSquare,originalIndex,coords) =>{
     coords = emptyCoordsArray(coords)
     indexToStyle = moveToPreviousRow(indexToStyle)
     while(indexToStyle >= originalIndex){
@@ -28,9 +27,18 @@ export const restoreShipRenderingOnOverlap = (currentSquare,originalIndex,coords
     }
 } 
 
+export const restoreRenderingOnHorizontalOverflow = (squaresToStyle,originalSquaresToStyle,elementToStyle) =>{
+    while(squaresToStyle <= originalSquaresToStyle){
+        elementToStyle.classList.remove('ship')
+        elementToStyle = elementToStyle.previousElementSibling
+        squaresToStyle++
+    }
+    shipInPool.classList.remove('hide')
+}
+
 export const checkIfRenderOrRestore = (currentSquare,originalIndex,coords) =>{
-    if(hasCurrentIndexShipClass(currentSquare) ){
-        restoreShipRenderingOnOverlap(currentSquare,originalIndex,coords) 
+    if(isShipOverlappingOtherShip(currentSquare) ){
+        restoreRenderingOnVerticalOverlap(currentSquare,originalIndex,coords) 
         return true
         
     }else{
@@ -49,8 +57,12 @@ export const retrieveDataBoardVertically = (squareID,shipID) =>{
     return {boardGridArray, originalIndex, shipInPool, indexToStyle}
 }
 
-export const hasCurrentIndexShipClass = (currentSquare) =>{
+export const isShipOverlappingOtherShip = (currentSquare) =>{
     return currentSquare.classList.contains('ship')
+}
+
+export const isShipHorizontalOverflowing = (squaresToStyle,elementToStyle) =>{
+    return squaresToStyle > 0 && elementToStyle.classList.contains('row')
 }
 
 export const moveToNextRow = (indexToStyle) =>{
