@@ -1,6 +1,6 @@
 import { renderStaticElements } from '../view/renderStaticElements'
 import { renderMatchResult } from '../view/renderDynamicElements'
-import { removeEventListeners, addEventListenerDraggable, addEventListenersBoardDrag } from './handleEventListeners'
+import { removeEventListeners, addEventListenerDraggable, addEventListenersBoardDrag, addEventListenersBoardClick } from './handleEventListeners'
 import { Player } from './player'
 // import { executeGame } from '/src/index'
 
@@ -93,10 +93,9 @@ export function Game (){
     }
 
     const checkForGamePrepared = (game) =>{
-        if(game.getCoordsArray().length < 9){
-            return 'Not ready'
+        if (game.getCoordsArray().length >= 9){
+            addEventListenersBoardClick(game)
         }
-        return 'Ready'
     }
 
     return{gameTurn,addEventListenersDragShips,getCoordsArray,setCoordsArray,checkForGamePrepared}

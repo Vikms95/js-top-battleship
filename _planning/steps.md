@@ -60,8 +60,9 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
   <!-- :renderSquaresVertically > if error giving undefined, return and reincorportate opacity of ship on the pool -->
   <!-- :get reference to the element previously dragged and remove its opacity property -->
   <!-- // if ship is placed outside of any square, it does not get places nor it reappears on the pool -->
-  - SETUP FUNCTION -
+  - SETUP PREPARE GAME FUNCTION -
   -Before starting game, function to let the player place their name and ships
+
   <!-- // HOW TO GET THE ARRAY OUT OF THE DROP EVENT LISTENER
   You'd have to do it from inside render..() because you cannot otherwise access a local variable from outside a function -->
 
@@ -73,10 +74,11 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
   <!-- -If ship placed in a row with "row" class, it does not get placed because of the while loop -->
   <!-- : iterate anyway if the original squaresToStyle is the same as the current -->
 
-- Vertical placement check
+<!-- - Vertical placement check
   :if it is succesful, check if any of the squares has the ship class
   :it is not succesful and the last square had the ship class, do not remove it
-  :
+  : -->
+- Refactor renderSquaresVertically and renderSquaresHorizontally
 
   -Use that to create the gameboard later on
   make the gameboard with the arrays stored while placing the ships
