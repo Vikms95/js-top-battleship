@@ -11,7 +11,7 @@ export function Game (){
 
     const player1 = Player('Victor')
     player1.createGameBoard(
-        ['H8'],
+        ['G3'],
         ['C5','H6'],
         ['B7','D1','H1'],
         ['C6','A5','D8','D2'],
@@ -87,7 +87,7 @@ export function Game (){
     const setCoordsArray = (ship) =>{
         coordsArray.push(ship)
     }
-    
+
     const getCoordsArray = () =>{
         return coordsArray
     }

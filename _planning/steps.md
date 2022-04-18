@@ -66,12 +66,17 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
   You'd have to do it from inside render..() because you cannot otherwise access a local variable from outside a function -->
 
   <!-- -For each placement of ship, add the values of ID's of each one to an array within an array of arrays -->
-  -Do not start or add click event listeners to the board before having all the ships placed
-
-  - Check if it does not have any room and
+  <!-- -Do not start or add click event listeners to the board before having all the ships placed -->
+<!-- 
+  - Check if original square to style previous sibling had the ship class -->
 
   <!-- -If ship placed in a row with "row" class, it does not get placed because of the while loop -->
-    <!-- : iterate anyway if the original squaresToStyle is the same as the current -->
+  <!-- : iterate anyway if the original squaresToStyle is the same as the current -->
+
+- Vertical placement check
+  :if it is succesful, check if any of the squares has the ship class
+  :it is not succesful and the last square had the ship class, do not remove it
+  :
 
   -Use that to create the gameboard later on
   make the gameboard with the arrays stored while placing the ships

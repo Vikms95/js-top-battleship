@@ -92,7 +92,7 @@ export function drop (event,game) {
     const squareID = event.target.id 
     let squaresToStyle = getShipLengthByName(shipID)
     // ONLY ADD STYLE, DO NOT MANAGE BOARDGRID FROM HERE
-    const shipCoords = renderSquaresHorizontally(squareID,squaresToStyle,shipID)
+    const shipCoords = renderSquaresVertically(squareID,squaresToStyle,shipID)
     game.setCoordsArray(shipCoords)
     event.target.classList.remove('hide')
     // (shipDirection === 'vertical' ? renderSquaresVertically() : renderSquaresHorizontally())   
@@ -111,13 +111,22 @@ const renderSquaresVertically = (squareID,squaresToStyle,shipID) =>{
     let coords = []
     try{
         for (let i = 0; i < squaresToStyle; i++) {
+            if(boardGridArray[indexToStyle].classList.contains('ship')){
+                indexToStyle -= 8
+                while(indexToStyle >= originalIndex){
+                // go back until the original index and remove class ship from all elements
+                    boardGridArray[indexToStyle].classList.remove('ship')
+                    indexToStyle -= 8
+                }
+                return 
+            }
             boardGridArray[indexToStyle].classList.add('ship')
             coords.push(boardGridArray[indexToStyle].id)
             indexToStyle += 8
         }
         shipInPool.classList.add('hide')
         shipInPool.removeAttribute('draggable')
-    }catch(error){
+    }catch(error){ // Will trigger if ship placement overflows from the bottom
         coords.length = 0
         indexToStyle -=8
         while(indexToStyle >= originalIndex){
