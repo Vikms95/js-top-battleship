@@ -71,6 +71,7 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
 <!-- 
   - Check if original square to style previous sibling had the ship class -->
 
+<!-- - Make ships in the pool be one element only! (Make them span multiple grid areas) -->
   <!-- -If ship placed in a row with "row" class, it does not get placed because of the while loop -->
   <!-- : iterate anyway if the original squaresToStyle is the same as the current -->
 
@@ -79,16 +80,15 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
   :it is not succesful and the last square had the ship class, do not remove it
   : -->
 - Refactor renderSquaresVertically and renderSquaresHorizontally
+  :Horizontal positioning at the edges of the array
+    : stops because elementToStyle is null
+      :after doing several null checks, now errors out on isHorizOverlap
 
-- Horizontal positioning at the edges of the array
-  : stops because elementToStyle is null
-  : in both cases, the error is the same
 
   -Use that to create the gameboard later on
   make the gameboard with the arrays stored while placing the ships
 
   -Placing out of bounds or totally not on the board is handled, but need to check about placing the ship on a square which already has a ship class added to it, in that case, return
-<!-- - Make ships in the pool be one element only! (Make them span multiple grid areas) -->
 
 - Bug when one game ends and any square is clicked afterwards (I need to remove the event listeners while the game is not active)
   :game is passing by as a player is defeated again!

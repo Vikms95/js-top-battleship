@@ -111,7 +111,8 @@ export const checkIfRenderOrRestore = (currentSquare,originalIndex,coords) =>{
 
 export const isNextSquareValid = (squaresToStyle,elementToStyle,originalSquaresToStyle) =>{
     return (squaresToStyle > 0) 
-        && (!elementToStyle.classList.contains('ship')) 
+        && (!elementToStyle.classList.contains('ship'))
+        &&(!elementToStyle === null) 
         && (!elementToStyle.classList.contains('row') 
         || (squaresToStyle === originalSquaresToStyle))
 }

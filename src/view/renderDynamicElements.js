@@ -89,6 +89,7 @@ const renderShipHorizontally = (squareID,squaresToStyle,shipID) =>{
     while(isNextSquareValid(squaresToStyle,elementToStyle,originalSquaresToStyle)){
         elementToStyle.classList.add('ship')
         elementToStyle = elementToStyle.nextElementSibling
+        if(elementToStyle === null) break
         coords.push(elementToStyle.id)
         squaresToStyle-- 
     }
