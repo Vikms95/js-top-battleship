@@ -85,25 +85,29 @@ const renderShipHorizontally = (squareID,squaresToStyle,shipID) =>{
     let {elementToStyle, originalIndex, shipInPool, originalSquaresToStyle}=
       retrieveDataBoardHorizontally(squareID,shipID,squaresToStyle)
     let coords = []
+    try{
+        while(isNextSquareValid(squaresToStyle,elementToStyle,originalSquaresToStyle)){
+            elementToStyle.classList.add('ship')
+            elementToStyle = elementToStyle.nextElementSibling
+            coords.push(elementToStyle.id)
+            squaresToStyle-- 
+        }
   
-    while(isNextSquareValid(squaresToStyle,elementToStyle,originalSquaresToStyle)){
-        elementToStyle.classList.add('ship')
-        elementToStyle = elementToStyle.nextElementSibling
-        coords.push(elementToStyle.id)
-        squaresToStyle-- 
-    }
-    
-    if(squaresToStyle != 0){
-        restoreShipRender(
-            squaresToStyle,
-            elementToStyle,
-            originalSquaresToStyle,
-            originalIndex)
-        coords = emptyCoordsArray(coords)
-        shipInPool.classList.remove('hide')
-        return
-    }
+
+        if(squaresToStyle != 0){
+            restoreShipRender(
+                squaresToStyle,
+                elementToStyle,
+                originalSquaresToStyle,
+                originalIndex)
+            coords = emptyCoordsArray(coords)
+            shipInPool.classList.remove('hide')
+            return
+        }
       
+    }catch(error){
+        console.log('f')
+    }
     shipInPool.classList.add('hide')
     shipInPool.removeAttribute('draggable')
     return coords

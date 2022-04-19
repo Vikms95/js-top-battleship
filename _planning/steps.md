@@ -80,6 +80,8 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
   : -->
 - Refactor renderSquaresVertically and renderSquaresHorizontally
 
+- Horizontal positioning at the edges of the array
+
   -Use that to create the gameboard later on
   make the gameboard with the arrays stored while placing the ships
 

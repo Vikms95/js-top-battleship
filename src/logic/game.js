@@ -11,11 +11,11 @@ export function Game (){
 
     const player1 = Player('Victor')
     player1.createGameBoard(
-        ['G3'],
-        ['C5','H6'],
-        ['B7','D1','H1'],
-        ['C6','A5','D8','D2'],
-        ['E1','E2','E3','E4','A5']
+        ['A5'],
+        ['C5','C6'],
+        ['B6','B7','B8'],
+        ['F1','F2','F3','F4'],
+        ['E1','E2','E3','E4','E5']
     )
     const player2 = Player('Computer')
     player2.createGameBoard(
