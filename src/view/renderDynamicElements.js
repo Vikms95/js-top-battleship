@@ -1,11 +1,14 @@
 import { retrieveDataDrop,
     retrieveDataBoardVertically,
-    restoreRenderingOnVerticalOverflow,
-    restoreRenderingOnHorizontalOverflow,
-    restoreRenderingOnHorizontalOverlap,
+    restoreRenderVerticalOverflow,
+    restoreRenderHorizontalOverflow,
+    restoreRenderHorizontalOverlap,
+    restoreRenderHorizontalAfterShip,
     checkIfRenderOrRestore,
     isHorizontalOverflowing,
     isHorizontalOverlapping,
+    isPlacedAboveOtherShip,
+    isPlacementInvalidAndBehindAShip,
     moveToNextRow,
     moveToPreviousRow,
     emptyCoordsArray, 
@@ -73,11 +76,12 @@ const renderShipVertically = (squareID,squaresToStyle,shipID) =>{
         // overflows from the bottom
         coords = emptyCoordsArray(coords)
         indexToStyle = moveToPreviousRow(indexToStyle)
-        restoreRenderingOnVerticalOverflow(indexToStyle,originalIndex,boardGridArray)
+        restoreRenderVerticalOverflow(indexToStyle,originalIndex,boardGridArray)
     } 
 }
 
 const renderShipHorizontally = (squareID,squaresToStyle,shipID) =>{
+    // TODO Coords assignment to be removed from each conditional
     const originalIndex = document.getElementById(`${squareID}`)
     const shipInPool = document.getElementById(shipID)
     const originalSquaresToStyle = squaresToStyle
@@ -92,43 +96,28 @@ const renderShipHorizontally = (squareID,squaresToStyle,shipID) =>{
     }
 
     // isPlacementInvalidAndBehindAShip
-    if((squaresToStyle > 0 && originalIndex.previousElementSibling.classList.contains('ship'))){
-        coords.length = 0
-        elementToStyle = elementToStyle.previousElementSibling
-        while(squaresToStyle < originalSquaresToStyle){
-            elementToStyle.classList.remove('ship')
-            elementToStyle = elementToStyle.previousElementSibling
-            squaresToStyle++
-        }
-        shipInPool.classList.remove('hide')
-        return
-    }
-
-    // isPlacedAboveOtherShip
-    if(squaresToStyle > 0 && elementToStyle.classList.contains('ship') && squaresToStyle === originalSquaresToStyle){
-        coords.length = 0
-        shipInPool.classList.remove('hide')
-        return
-    }
-
-    // isHorizontalOverlapping
-    if(isHorizontalOverlapping(squaresToStyle,elementToStyle)){
+    if(isPlacementInvalidAndBehindAShip(squaresToStyle,originalIndex) || isHorizontalOverlapping(squaresToStyle,elementToStyle)){
         coords = emptyCoordsArray(coords)
-        restoreRenderingOnHorizontalOverlap(squaresToStyle,originalSquaresToStyle,elementToStyle,shipInPool)
+        restoreRenderHorizontalOverlap(squaresToStyle,originalSquaresToStyle,elementToStyle)
+        shipInPool.classList.remove('hide')
+        return
+    }
+
+    if(isPlacedAboveOtherShip(squaresToStyle,elementToStyle,originalSquaresToStyle)){
+        coords = emptyCoordsArray(coords)
+        shipInPool.classList.remove('hide')
         return
     }
 
     if(isHorizontalOverflowing(squaresToStyle,elementToStyle)){
         coords = emptyCoordsArray(coords)
-        restoreRenderingOnHorizontalOverflow(squaresToStyle,originalSquaresToStyle,elementToStyle)
+        restoreRenderHorizontalOverflow(squaresToStyle,originalSquaresToStyle,elementToStyle)
         return
     }
 
-    else{
-        shipInPool.classList.add('hide')
-        shipInPool.removeAttribute('draggable')
-        return coords
-    }   
+    shipInPool.classList.add('hide')
+    shipInPool.removeAttribute('draggable')
+    return coords  
 
 }
 
