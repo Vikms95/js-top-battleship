@@ -81,6 +81,8 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
 - Refactor renderSquaresVertically and renderSquaresHorizontally
 
 - Horizontal positioning at the edges of the array
+  : stops because elementToStyle is null
+  : in both cases, the error is the same
 
   -Use that to create the gameboard later on
   make the gameboard with the arrays stored while placing the ships

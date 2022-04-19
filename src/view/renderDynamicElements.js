@@ -1,7 +1,7 @@
 import { retrieveDataDrop,
-    retrieveDataBoardVertically,
-    retrieveDataBoardHorizontally,
-    restoreRenderVerticalOverflow,
+    retrieveDataBoardVert,
+    retrieveDataBoardHoriz,
+    restoreRenderVertOverflow,
     restoreShipRender,
     isNextSquareValid,
     checkIfRenderOrRestore,
@@ -54,7 +54,7 @@ export function handleDropEvent (event,game) {
 const renderShipVertically = (squareID,squaresToStyle,shipID) =>{
     let coords = []
     let { boardGridArray, originalIndex, shipInPool, indexToStyle } =
-      retrieveDataBoardVertically(squareID,shipID)
+      retrieveDataBoardVert(squareID,shipID)
     
     try{
         for (let i = 0; i < squaresToStyle; i++) {
@@ -72,7 +72,7 @@ const renderShipVertically = (squareID,squaresToStyle,shipID) =>{
         // overflows from the bottom
         coords = emptyCoordsArray(coords)
         indexToStyle = moveToPreviousRow(indexToStyle)
-        restoreRenderVerticalOverflow(indexToStyle,originalIndex,boardGridArray)
+        restoreRenderVertOverflow(indexToStyle,originalIndex,boardGridArray)
     } 
 }
 
@@ -83,31 +83,29 @@ const renderSquareVertically = () =>{
 const renderShipHorizontally = (squareID,squaresToStyle,shipID) =>{
     
     let {elementToStyle, originalIndex, shipInPool, originalSquaresToStyle}=
-      retrieveDataBoardHorizontally(squareID,shipID,squaresToStyle)
+      retrieveDataBoardHoriz(squareID,shipID,squaresToStyle)
     let coords = []
-    try{
-        while(isNextSquareValid(squaresToStyle,elementToStyle,originalSquaresToStyle)){
-            elementToStyle.classList.add('ship')
-            elementToStyle = elementToStyle.nextElementSibling
-            coords.push(elementToStyle.id)
-            squaresToStyle-- 
-        }
-  
-
-        if(squaresToStyle != 0){
-            restoreShipRender(
-                squaresToStyle,
-                elementToStyle,
-                originalSquaresToStyle,
-                originalIndex)
-            coords = emptyCoordsArray(coords)
-            shipInPool.classList.remove('hide')
-            return
-        }
-      
-    }catch(error){
-        console.log('f')
+    // Refactor
+    while(isNextSquareValid(squaresToStyle,elementToStyle,originalSquaresToStyle)){
+        elementToStyle.classList.add('ship')
+        elementToStyle = elementToStyle.nextElementSibling
+        coords.push(elementToStyle.id)
+        squaresToStyle-- 
     }
+         
+    // Refactor
+    if(squaresToStyle != 0){
+        restoreShipRender(
+            squaresToStyle,
+            elementToStyle,
+            originalSquaresToStyle,
+            originalIndex)
+        coords = emptyCoordsArray(coords)
+        shipInPool.classList.remove('hide')
+        return
+    }
+        
+    // Refactor along with while loop
     shipInPool.classList.add('hide')
     shipInPool.removeAttribute('draggable')
     return coords

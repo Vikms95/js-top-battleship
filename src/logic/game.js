@@ -11,7 +11,7 @@ export function Game (){
 
     const player1 = Player('Victor')
     player1.createGameBoard(
-        ['A5'],
+        ['A4'],
         ['C5','C6'],
         ['B6','B7','B8'],
         ['F1','F2','F3','F4'],
