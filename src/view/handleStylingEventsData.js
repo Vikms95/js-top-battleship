@@ -8,7 +8,42 @@ export const retrieveDataDrop = (event) =>{
     return {shipID,squareID,squaresToStyle}
 }
 
+export const retrieveDataBoardVertically = (squareID,shipID) =>{
+    const boardGridArray = Array.from(document.querySelectorAll('.player1 > .grid-square'))
+    const originalIndex  = boardGridArray.findIndex(el => el.id === squareID)
+    const shipInPool     = document.getElementById(shipID)
+    let indexToStyle     = originalIndex
+
+    return {boardGridArray, originalIndex, shipInPool, indexToStyle}
+}
+
+export const retrieveDataBoardHorizontally = (squareID,shipID,squaresToStyle) =>{
+    const originalSquaresToStyle = squaresToStyle
+    const originalIndex          = document.getElementById(`${squareID}`)
+    const shipInPool             = document.getElementById(shipID)
+    let elementToStyle           = originalIndex
+
+    return {elementToStyle, originalIndex, shipInPool, originalSquaresToStyle}
+}
+
 export const renderShipsAndReturnCoords = (squaresToStyle,boardGridArray) =>{
+}
+
+export const restoreShipRender = (squaresToStyle,elementToStyle,originalSquaresToStyle,originalIndex) =>{
+    if(isHorizontalOverlapping(squaresToStyle,elementToStyle,originalIndex)){
+        restoreRenderHorizontalOverlap(squaresToStyle,originalSquaresToStyle,elementToStyle)
+        return
+    }
+
+    if(isPlacedAboveOtherShip(squaresToStyle,elementToStyle,originalSquaresToStyle)){
+        shipInPool.classList.remove('hide')
+        return
+    }
+
+    if(isHorizontalOverflowing(squaresToStyle,elementToStyle)){
+        restoreRenderHorizontalOverflow(squaresToStyle,originalSquaresToStyle,elementToStyle)
+        return
+    }
 }
 
 export const restoreRenderVerticalOverflow = (indexToStyle,originalIndex,boardGridArray) =>{
@@ -49,15 +84,6 @@ export const restoreRenderHorizontalOverlap = (squaresToStyle,originalSquaresToS
         squaresToStyle++
     }
 }
-  
-// export const restoreRenderHorizontalAfterShip = (squaresToStyle,originalSquaresToStyle,elementToStyle) =>{
-//     elementToStyle = elementToStyle.previousElementSibling
-//     while(squaresToStyle < originalSquaresToStyle){
-//         elementToStyle.classList.remove('ship')
-//         elementToStyle = elementToStyle.previousElementSibling
-//         squaresToStyle++
-//     } 
-// }
  
 export const checkIfRenderOrRestore = (currentSquare,originalIndex,coords) =>{
     if(isVerticalOverlapping(currentSquare) ){
@@ -65,19 +91,20 @@ export const checkIfRenderOrRestore = (currentSquare,originalIndex,coords) =>{
         return true
         
     }else{
-        coords = addCoordsToArray(coords,currentSquare.id)
+        coords.push(currentSquare.id)
+        console.log(coords)
         currentSquare.classList.add('ship')
         return false
     }
 }
 
-export const retrieveDataBoardVertically = (squareID,shipID) =>{
-    const boardGridArray = Array.from(document.querySelectorAll('.player1 > .grid-square'))
-    const originalIndex  = boardGridArray.findIndex(el => el.id === squareID)
-    const shipInPool     = document.getElementById(shipID)
-    let indexToStyle     = originalIndex
 
-    return {boardGridArray, originalIndex, shipInPool, indexToStyle}
+
+export const isNextSquareValid = (squaresToStyle,elementToStyle,originalSquaresToStyle) =>{
+    return (squaresToStyle > 0) 
+        && (!elementToStyle.classList.contains('ship')) 
+        && (!elementToStyle.classList.contains('row') 
+        || (squaresToStyle === originalSquaresToStyle))
 }
 
 export const isVerticalOverlapping = (currentSquare) =>{
@@ -89,20 +116,16 @@ export const isHorizontalOverflowing = (squaresToStyle,elementToStyle) =>{
         && (elementToStyle.classList.contains('row'))
 }
 
-export const isHorizontalOverlapping = (squaresToStyle,elementToStyle) =>{
+export const isHorizontalOverlapping = (squaresToStyle,elementToStyle,originalIndex) =>{
     return (squaresToStyle > 0) 
-        && (elementToStyle.classList.contains('ship'))
+        && (elementToStyle.classList.contains('ship')
+        || (originalIndex.previousElementSibling.classList.contains('ship')))      
 }
 
 export const isPlacedAboveOtherShip = (squaresToStyle,elementToStyle,originalSquaresToStyle) =>{
     return (squaresToStyle > 0) 
         && (elementToStyle.classList.contains('ship')) 
         && (squaresToStyle === originalSquaresToStyle)
-}
-
-export const isPlacementInvalidAndBehindAShip = (squaresToStyle,originalIndex)=>{
-    return (squaresToStyle > 0) 
-        && (originalIndex.previousElementSibling.classList.contains('ship'))
 }
 
 export const isSquaresHigher = (squaresToStyle,originalSquaresToStyle) =>{
@@ -126,9 +149,9 @@ export const moveToNextColumn = () =>{
 
 }
 
-export const addCoordsToArray = (coords,indexToAdd) =>{
-    return [...coords,indexToAdd]
-}
+// export const addCoordsToArray = (coords,indexToAdd) =>{
+//     return [...coords,indexToAdd]
+// }
 
 export const emptyCoordsArray = (coords) =>{
     return coords.length = 0

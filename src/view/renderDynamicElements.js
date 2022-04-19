@@ -1,14 +1,10 @@
 import { retrieveDataDrop,
     retrieveDataBoardVertically,
+    retrieveDataBoardHorizontally,
     restoreRenderVerticalOverflow,
-    restoreRenderHorizontalOverflow,
-    restoreRenderHorizontalOverlap,
-    restoreRenderHorizontalAfterShip,
+    restoreShipRender,
+    isNextSquareValid,
     checkIfRenderOrRestore,
-    isHorizontalOverflowing,
-    isHorizontalOverlapping,
-    isPlacedAboveOtherShip,
-    isPlacementInvalidAndBehindAShip,
     moveToNextRow,
     moveToPreviousRow,
     emptyCoordsArray, 
@@ -47,7 +43,7 @@ export function handleDropEvent (event,game) {
     const {shipID, squareID ,squaresToStyle} = retrieveDataDrop(event)
     // Ship direction will change based on some DOM class?
     // (shipDirection === 'vertical' ? renderSquaresVertically() : renderSquaresHorizontally())   
-    const shipCoords = renderShipHorizontally(squareID,squaresToStyle,shipID)
+    const shipCoords = renderShipVertically(squareID,squaresToStyle,shipID)
   
     event.target.classList.remove('drag-over')
     event.target.classList.remove('hide')
@@ -58,7 +54,7 @@ export function handleDropEvent (event,game) {
 const renderShipVertically = (squareID,squaresToStyle,shipID) =>{
     let coords = []
     let { boardGridArray, originalIndex, shipInPool, indexToStyle } =
-      retrieveDataBoardVertically(squareID,shipID)
+      retrieveDataBoardHorizontally(squareID,shipID)
     
     try{
         for (let i = 0; i < squaresToStyle; i++) {
@@ -81,43 +77,31 @@ const renderShipVertically = (squareID,squaresToStyle,shipID) =>{
 }
 
 const renderShipHorizontally = (squareID,squaresToStyle,shipID) =>{
-    // TODO Coords assignment to be removed from each conditional
-    const originalIndex = document.getElementById(`${squareID}`)
-    const shipInPool = document.getElementById(shipID)
-    const originalSquaresToStyle = squaresToStyle
-    let elementToStyle = originalIndex
     let coords = []
+    let {elementToStyle, originalIndex, shipInPool, originalSquaresToStyle}=
+    retrieveDataBoardHorizontally(squareID,shipID,squaresToStyle)
 
-    while(squaresToStyle > 0 && !elementToStyle.classList.contains('ship') && (!elementToStyle.classList.contains('row') || squaresToStyle === originalSquaresToStyle)){
+    while(isNextSquareValid(squaresToStyle,elementToStyle,originalSquaresToStyle)){
         elementToStyle.classList.add('ship')
         elementToStyle = elementToStyle.nextElementSibling
         coords.push(elementToStyle.id)
         squaresToStyle-- 
     }
-
-    // isPlacementInvalidAndBehindAShip
-    if(isPlacementInvalidAndBehindAShip(squaresToStyle,originalIndex) || isHorizontalOverlapping(squaresToStyle,elementToStyle)){
-        coords = emptyCoordsArray(coords)
-        restoreRenderHorizontalOverlap(squaresToStyle,originalSquaresToStyle,elementToStyle)
-        shipInPool.classList.remove('hide')
-        return
-    }
-
-    if(isPlacedAboveOtherShip(squaresToStyle,elementToStyle,originalSquaresToStyle)){
+    
+    if(squaresToStyle != 0){
+        restoreShipRender(
+            squaresToStyle,
+            elementToStyle,
+            originalSquaresToStyle,
+            originalIndex)
         coords = emptyCoordsArray(coords)
         shipInPool.classList.remove('hide')
-        return
-    }
-
-    if(isHorizontalOverflowing(squaresToStyle,elementToStyle)){
-        coords = emptyCoordsArray(coords)
-        restoreRenderHorizontalOverflow(squaresToStyle,originalSquaresToStyle,elementToStyle)
         return
     }
 
     shipInPool.classList.add('hide')
     shipInPool.removeAttribute('draggable')
-    return coords  
+    return coords
 
 }
 
