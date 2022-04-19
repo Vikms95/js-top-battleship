@@ -1,5 +1,14 @@
 import { getShipLengthByName } from '../logic/gameboard'
 
+export const retrieveTurnData = (turnData) =>{
+    const playerData      = turnData.isPlayerAttackMiss
+    const computerData    = turnData.isComputerAttackMiss
+    const computerCoords  = turnData.computerCoords
+    const attackedElement = findHitElement(computerCoords)
+
+    return { playerData,computerData, attackedElement }
+}
+
 export const retrieveDataDrop = (event) =>{
     const shipID       = event.dataTransfer.getData('text/plain')
     const squareID     = event.target.id 
@@ -24,9 +33,6 @@ export const retrieveDataBoardHorizontally = (squareID,shipID,squaresToStyle) =>
     let elementToStyle           = originalIndex
 
     return {elementToStyle, originalIndex, shipInPool, originalSquaresToStyle}
-}
-
-export const renderShipsAndReturnCoords = (squaresToStyle,boardGridArray) =>{
 }
 
 export const restoreShipRender = (squaresToStyle,elementToStyle,originalSquaresToStyle,originalIndex) =>{
@@ -71,6 +77,7 @@ export const restoreRenderHorizontalOverflow = (squaresToStyle,originalSquaresTo
 }
 
 export const restoreRenderHorizontalOverlap = (squaresToStyle,originalSquaresToStyle,elementToStyle) =>{
+
     const isAllSquaresNotRestored = 
         elementToStyle.classList.contains('row') 
             ? isSquaresHigher
@@ -84,20 +91,19 @@ export const restoreRenderHorizontalOverlap = (squaresToStyle,originalSquaresToS
         squaresToStyle++
     }
 }
- 
+
+
 export const checkIfRenderOrRestore = (currentSquare,originalIndex,coords) =>{
     if(isVerticalOverlapping(currentSquare) ){
         restoreRenderVerticalOverlap(currentSquare,originalIndex,coords) 
         return true
-        
-    }else{
-        coords.push(currentSquare.id)
-        console.log(coords)
-        currentSquare.classList.add('ship')
-        return false
     }
+    coords.push(currentSquare.id)
+    console.log(coords)
+    currentSquare.classList.add('ship')
+    return false
+  
 }
-
 
 
 export const isNextSquareValid = (squaresToStyle,elementToStyle,originalSquaresToStyle) =>{
@@ -136,6 +142,10 @@ export const isSquaresHigherOrEqual = (squaresToStyle,originalSquaresToStyle) =>
     return squaresToStyle <= originalSquaresToStyle
 }
 
+export const isRenderSuccesful = (squaresToStyle) =>{
+    return squaresToStyle === 0
+}
+
 export const moveToNextRow = (indexToStyle) =>{
     return  indexToStyle += 8
 }
@@ -149,9 +159,6 @@ export const moveToNextColumn = () =>{
 
 }
 
-// export const addCoordsToArray = (coords,indexToAdd) =>{
-//     return [...coords,indexToAdd]
-// }
 
 export const emptyCoordsArray = (coords) =>{
     return coords.length = 0

@@ -43,7 +43,7 @@ export function handleDropEvent (event,game) {
     const {shipID, squareID ,squaresToStyle} = retrieveDataDrop(event)
     // Ship direction will change based on some DOM class?
     // (shipDirection === 'vertical' ? renderSquaresVertically() : renderSquaresHorizontally())   
-    const shipCoords = renderShipVertically(squareID,squaresToStyle,shipID)
+    const shipCoords = renderShipHorizontally(squareID,squaresToStyle,shipID)
   
     event.target.classList.remove('drag-over')
     event.target.classList.remove('hide')
@@ -54,7 +54,7 @@ export function handleDropEvent (event,game) {
 const renderShipVertically = (squareID,squaresToStyle,shipID) =>{
     let coords = []
     let { boardGridArray, originalIndex, shipInPool, indexToStyle } =
-      retrieveDataBoardHorizontally(squareID,shipID)
+      retrieveDataBoardVertically(squareID,shipID)
     
     try{
         for (let i = 0; i < squaresToStyle; i++) {
@@ -76,11 +76,16 @@ const renderShipVertically = (squareID,squaresToStyle,shipID) =>{
     } 
 }
 
-const renderShipHorizontally = (squareID,squaresToStyle,shipID) =>{
-    let coords = []
-    let {elementToStyle, originalIndex, shipInPool, originalSquaresToStyle}=
-    retrieveDataBoardHorizontally(squareID,shipID,squaresToStyle)
+const renderSquareVertically = () =>{
+  
+}
 
+const renderShipHorizontally = (squareID,squaresToStyle,shipID) =>{
+    
+    let {elementToStyle, originalIndex, shipInPool, originalSquaresToStyle}=
+      retrieveDataBoardHorizontally(squareID,shipID,squaresToStyle)
+    let coords = []
+  
     while(isNextSquareValid(squaresToStyle,elementToStyle,originalSquaresToStyle)){
         elementToStyle.classList.add('ship')
         elementToStyle = elementToStyle.nextElementSibling
@@ -98,22 +103,31 @@ const renderShipHorizontally = (squareID,squaresToStyle,shipID) =>{
         shipInPool.classList.remove('hide')
         return
     }
-
+      
     shipInPool.classList.add('hide')
     shipInPool.removeAttribute('draggable')
     return coords
-
+      
 }
-
+    
+const renderSquaresHorizontally = (elementToStyle,squaresToStyle,coords) =>{
+    while(isNextSquareValid(squaresToStyle,elementToStyle,originalSquaresToStyle)){
+        elementToStyle.classList.add('ship')
+        elementToStyle = elementToStyle.nextElementSibling
+        coords.push(elementToStyle.id)
+        squaresToStyle-- 
+    }
+}
+    
 export function dragStart (event) {
     event.dataTransfer.setData('text/plain',event.target.id)
 }
-
+    
 export function dragEnter (event) {
     event.preventDefault()
     event.target.classList.add('drag-over')
 }
-
+    
 export function dragOver (event) {
     event.preventDefault()
     event.target.classList.add('drag-over')
