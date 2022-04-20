@@ -5,18 +5,14 @@ import { Player } from './player'
 // import { executeGame } from '/src/index'
 
 export function Game (){
-    let shipDirection = 'vertical'
+    let shipDirection = 'Vertical'
     let coordsArray = []
     const el = document.querySelector('.gameboard-grid.player2')
     el.classList.remove('unclickable')
 
     const player1 = Player('Victor')
     player1.createGameBoard(
-        ['H4'],
-        ['C5','C6'],
-        ['B6','B7','B8'],
-        ['F1','F2','F3','F4'],
-        ['E1','E2','E3','E4','E5']
+        coordsArray
     )
     const player2 = Player('Computer')
     player2.createGameBoard(
@@ -35,6 +31,7 @@ export function Game (){
     renderStaticElements(gameboard1, player1, player2)
 
     const gameTurn = (coords) =>{
+        console.log(coordsArray)
         const playerCoords = playerInTurn.sendAttackCoordsToGame(coords)
         if(playerCoords === null) return null
   

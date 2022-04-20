@@ -35,7 +35,7 @@ export const retrieveDataBoardHoriz = (squareID,shipID) =>{
 export const isVertPlacementValid = (indexToStyle,squaresToStyle, boardGridArray) =>{
     for (let index = 0; index < squaresToStyle; index++) {
         let element = boardGridArray[indexToStyle]
-        if(element === undefined || element.classList.contains('ship')){
+        if( isOverflowBottom(element) || isOverlap(element)){
             return false
         }
         indexToStyle += 8
@@ -45,13 +45,30 @@ export const isVertPlacementValid = (indexToStyle,squaresToStyle, boardGridArray
 
 export const isHorizPlacementValid = (element,squaresToStyle) =>{
     for (let index = 0; index < squaresToStyle; index++) {
-        if(element === null || element.classList.contains('ship') || (element.classList.contains('row') && index !== 0)){
+        if(isOverflowBottomSide(element) || isOverlap(element) || isOverflowSide(element,index) ){
             return false
         }
         element = element.nextElementSibling
     }
     return true
 } 
+
+export const isOverlap = (element) =>{
+    return element.classList.contains('ship')
+}
+
+export const isOverflowBottom = (element) =>{
+    return element === undefined
+}
+
+export const isOverflowBottomSide = (element) => {
+    return ((element === null) )
+}
+
+export const isOverflowSide = (element,index) => {
+    return (element.classList.contains('row') && index !== 0)
+}
+
 
 export const findHitElement = (coords) =>{
     return document.querySelector(`.player1 > #${coords}`)

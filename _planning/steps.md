@@ -81,11 +81,14 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
 <!-- - Make ships in the pool be one element only! (Make them span multiple grid areas) -->
 <!-- - Refactor renderSquaresVertically and renderSquaresHorizontally -->
 
-- Create a button to tell if place vertical or horizontal
-  :style and properly place button
+<!-- - Create a button to tell if place vertical or horizontal
+  :style and properly place button -->
+
+- Style dragged element?
+https://stackoverflow.com/questions/11169554/how-to-style-dragged-element
 
 - Use positioned ships to create the gameboard later on
-
+  :ship array has undefined indexes?
 
 - Bug when one game ends and any square is clicked afterwards (I need to remove the event listeners while the game is not active)
   :game is passing by as a player is defeated again!

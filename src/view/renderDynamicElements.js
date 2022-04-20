@@ -10,7 +10,7 @@ import {
 } from './handleStylingEventsData'
 
 
-export function renderTurn (turnData,event){
+export const renderTurn = (turnData,event) =>{
     const { playerData,computerData, attackedElement } = 
         retrieveTurnData(turnData)
 
@@ -27,64 +27,6 @@ export const renderMatchResult = (playerData) =>{
 
     const matchInfoEl = document.querySelector('.turn-info')
     matchInfoEl.textContent = `${winner}` + ' is the winner!' 
-}
-
-export function handleDropEvent (event,game) {
-    const {shipID, squareID ,squaresToStyle} = retrieveDataDrop(event)
-    const dragDirection = game.getDirection() === 'vertical' ? renderShipVert : renderShipHoriz
-    const shipCoords = dragDirection(squareID,squaresToStyle,shipID)
-  
-    event.target.classList.remove('drag-over')
-    event.target.classList.remove('hide')
-    game.setCoordsArray(shipCoords)
-    game.checkForGamePrepared(game)
-}
-
-const renderShipVert = (squareID,squaresToStyle,shipID) =>{
-    let { boardGridArray,shipInPool, indexToStyle } =
-        retrieveDataBoardVert(squareID,shipID)
-    if(!isVertPlacementValid(indexToStyle,squaresToStyle, boardGridArray)) return
-    
-    let coords = []
-    renderSquareVert(indexToStyle,squaresToStyle,boardGridArray,coords)
-    hidePoolShip(shipInPool)
-    return coords
-}
-
-const renderSquareVert = (indexToStyle,squaresToStyle,boardGridArray,coords) =>{
-    while(squaresToStyle > 0){
-        let elementToStyle = boardGridArray[indexToStyle]
-        elementToStyle.classList.add('ship')
-        coords.push(elementToStyle.id)
-        indexToStyle += 8
-        squaresToStyle--
-    }  
-
-}
-
-const renderShipHoriz = (squareID,squaresToStyle,shipID) =>{
-    let {elementToStyle, shipInPool} = retrieveDataBoardHoriz(squareID,shipID)
-    if(!isHorizPlacementValid(elementToStyle,squaresToStyle)) return
-    
-    let coords = []
-    renderSquaresHoriz(elementToStyle,squaresToStyle,coords)
-    hidePoolShip(shipInPool)
-
-    return coords     
-}
-    
-const renderSquaresHoriz = (elementToStyle,squaresToStyle,coords) =>{
-    while(squaresToStyle > 0){
-        elementToStyle.classList.add('ship')
-        elementToStyle = elementToStyle.nextElementSibling
-        coords.push(elementToStyle.id)
-        squaresToStyle-- 
-    }
-}
-    
-const hidePoolShip = (shipInPool) =>{
-    shipInPool.classList.add('hide')
-    shipInPool.removeAttribute('draggable')
 }
 
 export function renderDragStart (event) {
@@ -105,6 +47,70 @@ export function renderDragLeave (event) {
     event.target.classList.remove('drag-over')
 }
 
+export const handleDropEvent = (event,game) =>{
+    const {shipID, squareID ,squaresToStyle} = retrieveDataDrop(event)
+    const renderDirection = game.getDirection() === 'Vertical' ? renderShipVert : renderShipHoriz
+
+    const shipCoords = renderDirection(squareID,squaresToStyle,shipID)
+  
+    removeBoardMark(event)
+    game.setCoordsArray(shipCoords)
+    game.checkForGamePrepared(game)
+}
+
+const renderShipVert = (squareID,squaresToStyle,shipID) =>{
+    let { boardGridArray,shipInPool, indexToStyle } =
+        retrieveDataBoardVert(squareID,shipID)
+
+    if(!isVertPlacementValid(indexToStyle,squaresToStyle, boardGridArray)) return
+    
+    let coords = []
+    renderSquareVert(indexToStyle,squaresToStyle,boardGridArray,coords)
+    removePoolShip(shipInPool)
+    return coords
+}
+
+const renderSquareVert = (indexToStyle,squaresToStyle,boardGridArray,coords) =>{
+    while(squaresToStyle > 0){
+        let elementToStyle = boardGridArray[indexToStyle]
+        elementToStyle.classList.add('ship')
+        coords.push(elementToStyle.id)
+        indexToStyle += 8
+        squaresToStyle--
+    }  
+
+}
+
+const renderShipHoriz = (squareID,squaresToStyle,shipID) =>{
+    let {elementToStyle, shipInPool} = retrieveDataBoardHoriz(squareID,shipID)
+
+    if(!isHorizPlacementValid(elementToStyle,squaresToStyle)) return
+    
+    let coords = []
+    renderSquaresHoriz(elementToStyle,squaresToStyle,coords)
+    removePoolShip(shipInPool)
+
+    return coords     
+}
+    
+const renderSquaresHoriz = (elementToStyle,squaresToStyle,coords) =>{
+    while(squaresToStyle > 0){
+        elementToStyle.classList.add('ship')
+        elementToStyle = elementToStyle.nextElementSibling
+        coords.push(elementToStyle.id)
+        squaresToStyle-- 
+    }
+}
+    
+const removePoolShip = (shipInPool) =>{
+    shipInPool.classList.add('hide')
+    shipInPool.removeAttribute('draggable')
+}
+
+const removeBoardMark = (event) =>{
+    event.target.classList.remove('drag-over')
+    event.target.classList.remove('hide')
+}
 
 const renderBoardSquares = (turnData, element) =>{
     if(isHitElement(element)) return  

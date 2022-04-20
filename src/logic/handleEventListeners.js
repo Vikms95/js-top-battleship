@@ -1,4 +1,13 @@
-import { renderTurn,renderDragEnter,renderDragStart,renderDragOver,renderDragLeave,handleDropEvent } from '../view/renderDynamicElements'
+import { 
+    
+    renderTurn,
+    renderDragEnter,
+    renderDragStart,
+    renderDragOver,
+    renderDragLeave,
+    handleDropEvent
+
+} from '../view/renderDynamicElements'
 
 export function addEventListenersBoardClick (game){
     const gridSquaresComputer = Array.from(document.querySelectorAll('.player2 > .grid-square'))
@@ -43,7 +52,7 @@ export function removeEventListeners (){
 export function addEventListenerToggleDirection (game){
     const toggleButton = document.querySelector('.toggle')
     toggleButton.addEventListener('click', ()=>{
-        game.getDirection() === 'vertical' ? game.setDirection('horizontal',toggleButton) : game.setDirection('vertical',toggleButton)
+        game.getDirection() === 'Vertical' ? game.setDirection('Horizontal',toggleButton) : game.setDirection('Vertical',toggleButton)
     })
 }
 
