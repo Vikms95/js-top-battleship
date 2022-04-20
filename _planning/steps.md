@@ -88,8 +88,28 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
 
 
 - Create game out of ships placed
-  :set gameboar and players on turn
-  :populate boardGridArrayObject
+  - Set the event listeners to the ships to be dragged and button to change placement orientation(index.js)
+  - Everytime a ship is dropped, check if the coordinates array is 9(handleStylingEventsData)
+    - If the coordinates is length 9, start a game with:
+    - Creating a Player1 and Player2(computer): 
+      : player creates a Gameboard with coordinates from its placed ships
+        :add ships to gameboard board ships
+        :add ships to gameboard board grid
+      : computer creates a Gameboard with random coordinates
+        :add ships to gameboard board ships
+        :add ships to gameboard board grid
+    - Add event listeners to the enemy board
+
+
+- CHECK WHERE COORDS ARE GETTING LOST
+  they are fine in handleDropEvent
+  they are fine in checkForGamePrepared
+  they are fine in createGameBoard
+  <!-- :populateGameboard is showing length 5? (it should be 9)
+    :at some point the array is put within an array, narrow down where is that happening -->
+  they are fine in populateGameboard
+  createShip
+
 
 - Style dragged element?
 https://stackoverflow.com/questions/11169554/how-to-style-dragged-element

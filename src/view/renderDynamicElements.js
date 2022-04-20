@@ -58,7 +58,6 @@ export const handleDropEvent = (event,game) =>{
     if(!shipCoords) return
 
     game.setCoordsArray(shipCoords)
-    console.log(game.getCoordsArray())
     game.checkForGamePrepared(game,game.getPlayer1(),game.getPlayer2())
 }
 
