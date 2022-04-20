@@ -85,14 +85,19 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
 
 <!-- - Create a button to tell if place vertical or horizontal
   :style and properly place button -->
->>>>>>> 09a263bd93533d9a901d13b06276e48cb40b7251
+
+
+- Create game out of ships placed
+  :set gameboar and players on turn
+  :populate boardGridArrayObject
 
 - Style dragged element?
 https://stackoverflow.com/questions/11169554/how-to-style-dragged-element
 
-
+<!-- 
 - Use positioned ships to create the gameboard later on
   :ship array has undefined indexes?
+    :was showing when placement was unsuccesful -->
 
 - Bug when one game ends and any square is clicked afterwards (I need to remove the event listeners while the game is not active)
   :game is passing by as a player is defeated again!

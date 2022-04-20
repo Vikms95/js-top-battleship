@@ -7,47 +7,29 @@ import { Player } from './player'
 export function Game (){
     let shipDirection = 'Vertical'
     let coordsArray = []
+
     const el = document.querySelector('.gameboard-grid.player2')
     el.classList.remove('unclickable')
 
     const player1 = Player('Victor')
-    player1.createGameBoard(
-<<<<<<< HEAD
-        ['A4'],
-        ['C5','C6'],
-        ['B6','B7','B8'],
-        ['F1','F2','F3','F4'],
-        ['E1','E2','E3','E4','E5']
-=======
-        coordsArray
->>>>>>> 09a263bd93533d9a901d13b06276e48cb40b7251
-    )
     const player2 = Player('Computer')
-    player2.createGameBoard(
-        ['G8'],
-        ['B1','B2'],
-        ['C1','C2','C3'],
-        ['D1','D2','D3','D4'],
-        ['E1','E2','E3','E4','E5']
-    )
+    let playerInTurn = player1
+    let gameboard1 
+    let gameboard2 
+    
 
-    let gameboard1     = player1.getGameboard()
-    let gameboard2     = player2.getGameboard()
-    let playerInTurn   = player1
-    let enemyGameboard = gameboard2
-
-    renderStaticElements(gameboard1, player1, player2)
+    renderStaticElements(player1, player2)
 
     const gameTurn = (coords) =>{
-        console.log(coordsArray)
-        const playerCoords = playerInTurn.sendAttackCoordsToGame(coords)
+        let enemyGameboard = playerInTurn === player1 ? player2.getGameboard() : player1.getGameboard() 
+        const playerCoords = getPlayerInTurn().sendAttackCoordsToGame(coords)
         if(playerCoords === null) return null
   
         const isPlayerAttackMiss   = enemyGameboard.receiveAttackFromPlayer(playerCoords) 
         playerInTurn               = switchPlayers()
         enemyGameboard             = switchGameboards()
         
-        const computerCoords       = playerInTurn.sendRandomAttackCoordsToGame(enemyGameboard)
+        const computerCoords       = getPlayerInTurn().sendRandomAttackCoordsToGame(enemyGameboard)
         const isComputerAttackMiss = enemyGameboard.receiveAttackFromPlayer(computerCoords)
         playerInTurn               = switchPlayers()
         enemyGameboard             = switchGameboards()
@@ -85,11 +67,7 @@ export function Game (){
     //     setTimeout(,2000)
     // }
 
-    const addEventListenersDragShips = (game) =>{
-        addEventListenerDraggable()
-        addEventListenersBoardDrag(game)
-    }
-
+  
     const setCoordsArray = (ship) =>{
         coordsArray.push(ship)
     }
@@ -102,6 +80,22 @@ export function Game (){
         return shipDirection 
     }
 
+    const getPlayer1 = () =>{
+        return player1
+    }
+
+    const getPlayer2 = () =>{
+        return player2
+    }
+
+    const getPlayerInTurn = () =>{
+        return playerInTurn
+    }
+
+    const getGameboard2 = () =>{
+        return gameboard2
+    }
+
     const setDirection = (direction,element) =>{
         shipDirection = direction
         element.textContent = direction
@@ -109,9 +103,22 @@ export function Game (){
 
     const checkForGamePrepared = (game) =>{
         if (game.getCoordsArray().length >= 9){
+            game.getPlayer1().createGameBoard(
+                coordsArray
+            )  
+            game.getPlayer2().createGameBoard(
+                ['G8'],
+                ['B1','B2'],
+                ['C1','C2','C3'],
+                ['D1','D2','D3','D4'],
+                ['E1','E2','E3','E4','E5']
+            )
+            game.gameboard1     = game.getPlayer1().getGameboard()
+            game.gameboard2     = game.getPlayer2().getGameboard()
+            game.playerInTurn   = game.getPlayer1()
             addEventListenersBoardClick(game)
         }
     }
 
-    return{gameTurn,addEventListenersDragShips,getCoordsArray,setCoordsArray,getDirection,setDirection,checkForGamePrepared}
+    return{gameTurn,getCoordsArray,setCoordsArray,getDirection,setDirection,getPlayer1,getPlayer2,getPlayerInTurn,checkForGamePrepared,gameboard1,gameboard2,playerInTurn}
 }

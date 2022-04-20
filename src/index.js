@@ -1,10 +1,9 @@
 import { Game,checkForGamePrepared} from './logic/game'
-import {addEventListenersBoardClick,addEventListenerToggleDirection} from './logic/handleEventListeners'
+import {addEventListenersBoardClick,addEventListenerToggleDirection,addEventListenersDragShips} from './logic/handleEventListeners'
 
 const prepareGame = (game) =>{
-    game.addEventListenersDragShips(game)
+    addEventListenersDragShips(game)
     addEventListenerToggleDirection(game)
-    
 }
 
 const game = Game()

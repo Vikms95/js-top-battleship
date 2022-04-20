@@ -7,7 +7,7 @@ import {
     isHorizPlacementValid,
     isVertPlacementValid,
 
-} from './handleStylingEventsData'
+} from '../logic/handleStylingEventsData'
 
 
 export const renderTurn = (turnData,event) =>{
@@ -49,13 +49,17 @@ export function renderDragLeave (event) {
 
 export const handleDropEvent = (event,game) =>{
     const {shipID, squareID ,squaresToStyle} = retrieveDataDrop(event)
-    const renderDirection = game.getDirection() === 'Vertical' ? renderShipVert : renderShipHoriz
+    const renderDirection = (game.getDirection() === 'Vertical')
+        ? renderShipVert 
+        : renderShipHoriz
 
     const shipCoords = renderDirection(squareID,squaresToStyle,shipID)
-  
     removeBoardMark(event)
+    if(!shipCoords) return
+
     game.setCoordsArray(shipCoords)
-    game.checkForGamePrepared(game)
+    console.log(game.getCoordsArray())
+    game.checkForGamePrepared(game,game.getPlayer1(),game.getPlayer2())
 }
 
 
@@ -70,7 +74,7 @@ const renderShipVert = (squareID,squaresToStyle,shipID) =>{
     removePoolShip(shipInPool)
     return coords
 }
-
+  
 const renderSquaresVert = (indexToStyle,squaresToStyle,boardGridArray,coords) =>{
     while(squaresToStyle > 0){
         let elementToStyle = boardGridArray[indexToStyle]
@@ -80,16 +84,16 @@ const renderSquaresVert = (indexToStyle,squaresToStyle,boardGridArray,coords) =>
         squaresToStyle--
     }  
 }
-
+  
 const renderShipHoriz = (squareID,squaresToStyle,shipID) =>{
     let {elementToStyle, shipInPool} = retrieveDataBoardHoriz(squareID,shipID)
-
+    
     if(!isHorizPlacementValid(elementToStyle,squaresToStyle)) return
     
     let coords = []
     renderSquaresHoriz(elementToStyle,squaresToStyle,coords)
     removePoolShip(shipInPool)
-
+    
     return coords     
 }
     

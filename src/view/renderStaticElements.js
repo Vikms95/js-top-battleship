@@ -1,6 +1,5 @@
-export function renderStaticElements(gameboard, player1, player2){
+export function renderStaticElements(player1, player2){
     renderBoardOnReset()
-    renderShips(gameboard)
     renderPlayerNames(player1, player2)
 }
 

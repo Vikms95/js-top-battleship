@@ -19,10 +19,17 @@ export function addEventListenersBoardClick (game){
 }
 
 const processTurnData = (game,event) =>{
+    console.log(game.playerInTurn)
     const turnData = game.gameTurn(event.target.id)
     if(turnData === null) return      
     renderTurn(turnData,event)
 }
+
+export const addEventListenersDragShips = (game) =>{
+    addEventListenerDraggable()
+    addEventListenersBoardDrag(game)
+}
+
 
 export function addEventListenersBoardDrag (game){
     const gridSquaresPlayer = Array.from(document.querySelectorAll('.player1 > .grid-square'))
@@ -52,7 +59,9 @@ export function removeEventListeners (){
 export function addEventListenerToggleDirection (game){
     const toggleButton = document.querySelector('.toggle')
     toggleButton.addEventListener('click', ()=>{
-        game.getDirection() === 'Vertical' ? game.setDirection('Horizontal',toggleButton) : game.setDirection('Vertical',toggleButton)
+        (game.getDirection() === 'Vertical') 
+            ? game.setDirection('Horizontal',toggleButton) 
+            : game.setDirection('Vertical',toggleButton)
     })
 }
 
