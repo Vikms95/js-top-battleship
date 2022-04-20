@@ -32,35 +32,6 @@ export const retrieveDataBoardHoriz = (squareID,shipID) =>{
     return {elementToStyle, shipInPool}
 }
 
-
-export const restoreRenderVertOverflow = (indexToStyle,originalIndex,boardGridArray) =>{
-    while(indexToStyle >= originalIndex){
-        boardGridArray[indexToStyle].classList.remove('ship')
-        indexToStyle = moveToPreviousRow(indexToStyle)
-    }
-}
-
-export const restoreRenderVertOverlap = (currentSquare,originalIndex,coords) =>{
-    coords = emptyCoordsArray(coords)
-    indexToStyle = moveToPreviousRow(indexToStyle)
-    while(indexToStyle >= originalIndex){
-        currentSquare.classList.remove('ship')
-        indexToStyle = moveToPreviousRow(indexToStyle)
-    }
-} 
-
-export const checkIfRenderOrRestore = (currentSquare,originalIndex,coords) =>{
-    if(isVertOverlap(currentSquare) ){
-        restoreRenderVertOverlap(currentSquare,originalIndex,coords) 
-        return true
-    }
-    coords.push(currentSquare.id)
-    console.log(coords)
-    currentSquare.classList.add('ship')
-    return false
-  
-}
-
 export const isVertPlacementValid = (indexToStyle,squaresToStyle, boardGridArray) =>{
     for (let index = 0; index < squaresToStyle; index++) {
         let element = boardGridArray[indexToStyle]
@@ -82,53 +53,6 @@ export const isHorizPlacementValid = (element,squaresToStyle) =>{
     return true
 } 
 
-export const isNextSquareValid = (squaresToStyle,elementToStyle,originalSquaresToStyle) =>{
-    return (squaresToStyle > 0)
-        && (squaresToStyle >= 1 && elementToStyle.nextElementSibling * squaresToStyle !== null)
-        && (!elementToStyle.classList.contains('ship')) 
-        && (!elementToStyle.classList.contains('row') 
-        || (squaresToStyle === originalSquaresToStyle))
-}
-
-export const isVertOverlap = (currentSquare) =>{
-    return currentSquare.classList.contains('ship')
-}
-
-
-
-
-export const isPlacedAboveOtherShip = (squaresToStyle,elementToStyle,originalSquaresToStyle) =>{
-    return (squaresToStyle > 0) 
-        && (elementToStyle.classList.contains('ship')) 
-        && (squaresToStyle === originalSquaresToStyle)
-}
-
-export const isSquaresHigher = (squaresToStyle,originalSquaresToStyle) =>{
-    return squaresToStyle < originalSquaresToStyle
-}
-
-export const isSquaresHigherOrEqual = (squaresToStyle,originalSquaresToStyle) =>{
-    return squaresToStyle <= originalSquaresToStyle
-}
-
-export const isRenderSuccesful = (squaresToStyle) =>{
-    return squaresToStyle === 0
-}
-
-export const moveToNextRow = (indexToStyle) =>{
-    return  indexToStyle += 8
-}
-
-export const moveToPreviousRow = (indexToStyle) =>{
-    return  indexToStyle -= 8
-
-}
-
-export const moveToNextColumn = () =>{
-
-}
-
-
-export const emptyCoordsArray = (coords) =>{
-    return coords.length = 0
+export const findHitElement = (coords) =>{
+    return document.querySelector(`.player1 > #${coords}`)
 }

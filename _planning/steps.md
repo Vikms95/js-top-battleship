@@ -78,7 +78,9 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
   :if it is succesful, check if any of the squares has the ship class
   :it is not succesful and the last square had the ship class, do not remove it
   : -->
-- Refactor renderSquaresVertically and renderSquaresHorizontally
+<!-- - Refactor renderSquaresVertically and renderSquaresHorizontally -->
+
+- Create a button to tell if place vertical or horizontal
 
   -Use that to create the gameboard later on
   make the gameboard with the arrays stored while placing the ships

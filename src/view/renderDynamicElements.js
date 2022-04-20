@@ -1,4 +1,7 @@
-import { retrieveDataDrop,
+import { 
+
+    retrieveDataDrop,
+    retrieveTurnData,
     retrieveDataBoardVert,
     retrieveDataBoardHoriz,
     isHorizPlacementValid,
@@ -26,20 +29,10 @@ export const renderMatchResult = (playerData) =>{
     matchInfoEl.textContent = `${winner}` + ' is the winner!' 
 }
 
-const retrieveTurnData = (turnData) =>{
-    const playerData      = turnData.isPlayerAttackMiss
-    const computerData    = turnData.isComputerAttackMiss
-    const computerCoords  = turnData.computerCoords
-    const attackedElement = findHitElement(computerCoords)
-
-    return { playerData,computerData, attackedElement }
-}
-
 export function handleDropEvent (event,game) {
     const {shipID, squareID ,squaresToStyle} = retrieveDataDrop(event)
-    // Ship direction will change based on some DOM class?
-    // (shipDirection === 'vertical' ? renderSquaresVertically() : renderSquaresHorizontally())   
-    const shipCoords = renderShipHoriz(squareID,squaresToStyle,shipID)
+    const dragDirection = game.getDirection() === 'vertical' ? renderShipVert : renderShipHoriz
+    const shipCoords = dragDirection(squareID,squaresToStyle,shipID)
   
     event.target.classList.remove('drag-over')
     event.target.classList.remove('hide')
@@ -57,7 +50,6 @@ const renderShipVert = (squareID,squaresToStyle,shipID) =>{
     hidePoolShip(shipInPool)
     return coords
 }
-
 
 const renderSquareVert = (indexToStyle,squaresToStyle,boardGridArray,coords) =>{
     while(squaresToStyle > 0){
@@ -95,27 +87,24 @@ const hidePoolShip = (shipInPool) =>{
     shipInPool.removeAttribute('draggable')
 }
 
-export function dragStart (event) {
+export function renderDragStart (event) {
     event.dataTransfer.setData('text/plain',event.target.id)
 }
     
-export function dragEnter (event) {
+export function renderDragEnter (event) {
     event.preventDefault()
     event.target.classList.add('drag-over')
 }
     
-export function dragOver (event) {
+export function renderDragOver (event) {
     event.preventDefault()
     event.target.classList.add('drag-over')
 }
 
-export function dragLeave (event) {
+export function renderDragLeave (event) {
     event.target.classList.remove('drag-over')
 }
 
-const findHitElement = (coords) =>{
-    return document.querySelector(`.player1 > #${coords}`)
-}
 
 const renderBoardSquares = (turnData, element) =>{
     if(isHitElement(element)) return  

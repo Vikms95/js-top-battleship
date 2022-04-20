@@ -154,6 +154,7 @@ body{
 .grid-square.ship,
 .pool-row.ship{
   background-color:var(--ships-color);
+  border-radius: 15px;
 }
 
 .grid-square{
@@ -212,4 +213,9 @@ body{
 
 .drag-over{
   border: solid 2px var(--ships-color);
+}
+
+.toggle{
+  padding: 20px;
+  background-color: green;
 }

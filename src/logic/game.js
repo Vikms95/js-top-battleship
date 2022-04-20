@@ -5,6 +5,7 @@ import { Player } from './player'
 // import { executeGame } from '/src/index'
 
 export function Game (){
+    let shipDirection = 'vertical'
     let coordsArray = []
     const el = document.querySelector('.gameboard-grid.player2')
     el.classList.remove('unclickable')
@@ -92,11 +93,19 @@ export function Game (){
         return coordsArray
     }
 
+    const getDirection = () =>{
+        return shipDirection 
+    }
+
+    const setDirection = (direction) =>{
+        shipDirection = direction
+    }
+
     const checkForGamePrepared = (game) =>{
         if (game.getCoordsArray().length >= 9){
             addEventListenersBoardClick(game)
         }
     }
 
-    return{gameTurn,addEventListenersDragShips,getCoordsArray,setCoordsArray,checkForGamePrepared}
+    return{gameTurn,addEventListenersDragShips,getCoordsArray,setCoordsArray,getDirection,setDirection,checkForGamePrepared}
 }
