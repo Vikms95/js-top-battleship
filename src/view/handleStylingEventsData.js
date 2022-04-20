@@ -17,7 +17,7 @@ export const retrieveDataDrop = (event) =>{
     return {shipID,squareID,squaresToStyle}
 }
 
-export const retrieveDataBoardVertically = (squareID,shipID) =>{
+export const retrieveDataBoardVert = (squareID,shipID) =>{
     const boardGridArray = Array.from(document.querySelectorAll('.player1 > .grid-square'))
     const originalIndex  = boardGridArray.findIndex(el => el.id === squareID)
     const shipInPool     = document.getElementById(shipID)
@@ -26,7 +26,7 @@ export const retrieveDataBoardVertically = (squareID,shipID) =>{
     return {boardGridArray, originalIndex, shipInPool, indexToStyle}
 }
 
-export const retrieveDataBoardHorizontally = (squareID,shipID,squaresToStyle) =>{
+export const retrieveDataBoardHoriz = (squareID,shipID,squaresToStyle) =>{
     const originalSquaresToStyle = squaresToStyle
     const originalIndex          = document.getElementById(`${squareID}`)
     const shipInPool             = document.getElementById(shipID)
@@ -36,8 +36,8 @@ export const retrieveDataBoardHorizontally = (squareID,shipID,squaresToStyle) =>
 }
 
 export const restoreShipRender = (squaresToStyle,elementToStyle,originalSquaresToStyle,originalIndex) =>{
-    if(isHorizontalOverlapping(squaresToStyle,elementToStyle,originalIndex)){
-        restoreRenderHorizontalOverlap(squaresToStyle,originalSquaresToStyle,elementToStyle)
+    if(isHorizOverlap(squaresToStyle,elementToStyle,originalIndex)){
+        restoreRenderHorizOverlap(squaresToStyle,originalSquaresToStyle,elementToStyle)
         return
     }
 
@@ -46,20 +46,20 @@ export const restoreShipRender = (squaresToStyle,elementToStyle,originalSquaresT
         return
     }
 
-    if(isHorizontalOverflowing(squaresToStyle,elementToStyle)){
-        restoreRenderHorizontalOverflow(squaresToStyle,originalSquaresToStyle,elementToStyle)
+    if(isHorizOverflow(squaresToStyle,elementToStyle)){
+        restoreRenderHorizOverflow(squaresToStyle,originalSquaresToStyle,elementToStyle)
         return
     }
 }
 
-export const restoreRenderVerticalOverflow = (indexToStyle,originalIndex,boardGridArray) =>{
+export const restoreRenderVertOverflow = (indexToStyle,originalIndex,boardGridArray) =>{
     while(indexToStyle >= originalIndex){
         boardGridArray[indexToStyle].classList.remove('ship')
         indexToStyle = moveToPreviousRow(indexToStyle)
     }
 }
 
-export const restoreRenderVerticalOverlap = (currentSquare,originalIndex,coords) =>{
+export const restoreRenderVertOverlap = (currentSquare,originalIndex,coords) =>{
     coords = emptyCoordsArray(coords)
     indexToStyle = moveToPreviousRow(indexToStyle)
     while(indexToStyle >= originalIndex){
@@ -68,7 +68,7 @@ export const restoreRenderVerticalOverlap = (currentSquare,originalIndex,coords)
     }
 } 
 
-export const restoreRenderHorizontalOverflow = (squaresToStyle,originalSquaresToStyle,elementToStyle) =>{
+export const restoreRenderHorizOverflow = (squaresToStyle,originalSquaresToStyle,elementToStyle) =>{
     while(squaresToStyle <= originalSquaresToStyle){
         elementToStyle.classList.remove('ship')
         elementToStyle = elementToStyle.previousElementSibling
@@ -76,7 +76,7 @@ export const restoreRenderHorizontalOverflow = (squaresToStyle,originalSquaresTo
     }
 }
 
-export const restoreRenderHorizontalOverlap = (squaresToStyle,originalSquaresToStyle,elementToStyle) =>{
+export const restoreRenderHorizOverlap = (squaresToStyle,originalSquaresToStyle,elementToStyle) =>{
 
     const isAllSquaresNotRestored = 
         elementToStyle.classList.contains('row') 
@@ -94,8 +94,8 @@ export const restoreRenderHorizontalOverlap = (squaresToStyle,originalSquaresToS
 
 
 export const checkIfRenderOrRestore = (currentSquare,originalIndex,coords) =>{
-    if(isVerticalOverlapping(currentSquare) ){
-        restoreRenderVerticalOverlap(currentSquare,originalIndex,coords) 
+    if(isVertOverlap(currentSquare) ){
+        restoreRenderVertOverlap(currentSquare,originalIndex,coords) 
         return true
     }
     coords.push(currentSquare.id)
@@ -113,16 +113,16 @@ export const isNextSquareValid = (squaresToStyle,elementToStyle,originalSquaresT
         || (squaresToStyle === originalSquaresToStyle))
 }
 
-export const isVerticalOverlapping = (currentSquare) =>{
+export const isVertOverlap = (currentSquare) =>{
     return currentSquare.classList.contains('ship')
 }
 
-export const isHorizontalOverflowing = (squaresToStyle,elementToStyle) =>{
+export const isHorizOverflow = (squaresToStyle,elementToStyle) =>{
     return (squaresToStyle > 0) 
         && (elementToStyle.classList.contains('row'))
 }
 
-export const isHorizontalOverlapping = (squaresToStyle,elementToStyle,originalIndex) =>{
+export const isHorizOverlap = (squaresToStyle,elementToStyle,originalIndex) =>{
     return (squaresToStyle > 0) 
         && (elementToStyle.classList.contains('ship')
         || (originalIndex.previousElementSibling.classList.contains('ship')))      
