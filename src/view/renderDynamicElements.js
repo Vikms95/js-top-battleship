@@ -1,8 +1,7 @@
 import { retrieveDataDrop,
-    retrieveDataBoardVertically,
-    retrieveDataBoardHorizontally,
-    restoreRenderVerticalOverflow,
-    restoreShipRender,
+    retrieveDataBoardVert,
+    retrieveDataBoardHoriz,
+    restoreRenderVertOverflow,
     isNextSquareValid,
     checkIfRenderOrRestore,
     moveToNextRow,
@@ -43,7 +42,7 @@ export function handleDropEvent (event,game) {
     const {shipID, squareID ,squaresToStyle} = retrieveDataDrop(event)
     // Ship direction will change based on some DOM class?
     // (shipDirection === 'vertical' ? renderSquaresVertically() : renderSquaresHorizontally())   
-    const shipCoords = renderShipHorizontally(squareID,squaresToStyle,shipID)
+    const shipCoords = renderShipHoriz(squareID,squaresToStyle,shipID)
   
     event.target.classList.remove('drag-over')
     event.target.classList.remove('hide')
@@ -51,10 +50,10 @@ export function handleDropEvent (event,game) {
     game.checkForGamePrepared(game)
 }
 
-const renderShipVertically = (squareID,squaresToStyle,shipID) =>{
+const renderShipVert = (squareID,squaresToStyle,shipID) =>{
     let coords = []
     let { boardGridArray, originalIndex, shipInPool, indexToStyle } =
-      retrieveDataBoardVertically(squareID,shipID)
+      retrieveDataBoardVert(squareID,shipID)
     
     try{
         for (let i = 0; i < squaresToStyle; i++) {
@@ -72,49 +71,45 @@ const renderShipVertically = (squareID,squaresToStyle,shipID) =>{
         // overflows from the bottom
         coords = emptyCoordsArray(coords)
         indexToStyle = moveToPreviousRow(indexToStyle)
-        restoreRenderVerticalOverflow(indexToStyle,originalIndex,boardGridArray)
+        restoreRenderVertOverflow(indexToStyle,originalIndex,boardGridArray)
     } 
 }
 
-const renderSquareVertically = () =>{
+const renderSquareVert = () =>{
   
 }
 
-const renderShipHorizontally = (squareID,squaresToStyle,shipID) =>{
+const isPlacementValid = (element,squaresToStyle) =>{
+    for (let index = 0; index < squaresToStyle; index++) {
+        if(element === null || element.classList.contains('ship') || (element.classList.contains('row') && index !== 0)){
+            return false
+        }
+        element = element.nextElementSibling
+    }
+    return true
+} 
+
+const renderShipHoriz = (squareID,squaresToStyle,shipID) =>{
     
     let {elementToStyle, originalIndex, shipInPool, originalSquaresToStyle}=
-      retrieveDataBoardHorizontally(squareID,shipID,squaresToStyle)
-    let coords = []
-    try{
-        while(isNextSquareValid(squaresToStyle,elementToStyle,originalSquaresToStyle)){
-            elementToStyle.classList.add('ship')
-            elementToStyle = elementToStyle.nextElementSibling
-            coords.push(elementToStyle.id)
-            squaresToStyle-- 
-        }
-  
+      retrieveDataBoardHoriz(squareID,shipID,squaresToStyle)
 
-        if(squaresToStyle != 0){
-            restoreShipRender(
-                squaresToStyle,
-                elementToStyle,
-                originalSquaresToStyle,
-                originalIndex)
-            coords = emptyCoordsArray(coords)
-            shipInPool.classList.remove('hide')
-            return
-        }
-      
-    }catch(error){
-        console.log('f')
+    if(!isPlacementValid(elementToStyle,squaresToStyle)) return
+    let coords = []
+
+    while(squaresToStyle > 0){
+        elementToStyle.classList.add('ship')
+        elementToStyle = elementToStyle.nextElementSibling
+        coords.push(elementToStyle.id)
+        squaresToStyle-- 
     }
+  
     shipInPool.classList.add('hide')
     shipInPool.removeAttribute('draggable')
-    return coords
-      
+    return coords     
 }
     
-const renderSquaresHorizontally = (elementToStyle,squaresToStyle,coords) =>{
+const renderSquareHoriz = (elementToStyle,squaresToStyle,coords) =>{
     while(isNextSquareValid(squaresToStyle,elementToStyle,originalSquaresToStyle)){
         elementToStyle.classList.add('ship')
         elementToStyle = elementToStyle.nextElementSibling

@@ -80,7 +80,12 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
   : -->
 - Refactor renderSquaresVertically and renderSquaresHorizontally
 
-- Horizontal positioning at the edges of the array
+- Horizontal positioning at the edges of the array creates bug on both end and start
+  : elementToStyle being null is the cause
+    :end > happens within renderShipHoriz while loop when 
+      : add check if squaresToStyle is higher than 0/1? and next element is null, return
+    :start >
+
 
   -Use that to create the gameboard later on
   make the gameboard with the arrays stored while placing the ships
