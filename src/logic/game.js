@@ -104,14 +104,17 @@ export function Game (){
     const checkForGamePrepared = (game) =>{
         if (game.getCoordsArray().length >= 9){
             game.getPlayer1().createGameBoard(
-                coordsArray
+                game.getCoordsArray()
             )  
-            game.getPlayer2().createGameBoard(
+
+            console.log(game.getCoordsArray())
+            game.getPlayer2().createGameBoard([
                 ['G8'],
                 ['B1','B2'],
                 ['C1','C2','C3'],
                 ['D1','D2','D3','D4'],
                 ['E1','E2','E3','E4','E5']
+            ]
             )
             game.gameboard1     = game.getPlayer1().getGameboard()
             game.gameboard2     = game.getPlayer2().getGameboard()

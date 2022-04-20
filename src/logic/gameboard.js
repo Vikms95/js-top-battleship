@@ -25,8 +25,8 @@ export function Gameboard(){
     
     const populateGameboard = (coordinates) =>{
         let index = 0
+        console.log(coordinates.length)
         while( index < coordinates.length ){
-            console.log(...coordinates[index])
             createShip(...coordinates[index])
             index++
         }

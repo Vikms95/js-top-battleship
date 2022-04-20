@@ -23,7 +23,7 @@ export function Player(name){
         _attackedSquares.push(coords)
     }
 
-    const createGameBoard = (...coordinates) =>{
+    const createGameBoard = (coordinates) =>{
         _gameboard = Gameboard()
         _gameboard.populateGameboard(coordinates)
     }
