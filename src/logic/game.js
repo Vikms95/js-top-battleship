@@ -109,16 +109,23 @@ export function Game (){
 
             console.log(game.getCoordsArray())
             game.getPlayer2().createGameBoard([
-                ['G8'],
+                ['A1'],
                 ['B1','B2'],
                 ['C1','C2','C3'],
                 ['D1','D2','D3','D4'],
-                ['E1','E2','E3','E4','E5']
+                ['E1','E2','E3','E4','E5'],
+                ['F1','F2','F3','F4','F5'],
+                ['G1','G2','G3','G4','G5'],
+                ['H1','H2','H3','H4','H5'],
+                ['A8','B8','C8','D8','E8']
             ]
             )
             game.gameboard1     = game.getPlayer1().getGameboard()
+            console.log(game.gameboard1)
             game.gameboard2     = game.getPlayer2().getGameboard()
+            console.log(game.gameboard2)
             game.playerInTurn   = game.getPlayer1()
+            console.log(game.playerInTurn)
             addEventListenersBoardClick(game)
         }
     }

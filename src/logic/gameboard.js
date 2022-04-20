@@ -25,19 +25,21 @@ export function Gameboard(){
     
     const populateGameboard = (coordinates) =>{
         let index = 0
-        console.log(coordinates.length)
         while( index < coordinates.length ){
-            createShip(...coordinates[index])
+            createShip(coordinates[index])
             index++
         }
     }
 
     // Incoming-query (assert result) X
-    const createShip = (...coordinates) =>{
+    const createShip = (coordinates) =>{
         if(isCoordsAvailable(coordinates)){
             const ship  = Ship(...coordinates) 
+            console.log(ship.getShipCoord())
             _boardShips = addShipToShipsArray(ship)
+            console.log(_boardShips)
             addShipToBoardGridObject(ship)
+            console.log(_boardGrid)
             return ship
         }
     }
