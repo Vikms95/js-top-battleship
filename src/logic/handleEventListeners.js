@@ -1,4 +1,13 @@
-import { renderTurn,dragEnter,dragStart,dragOver,dragLeave,handleDropEvent } from '../view/renderDynamicElements'
+import { 
+    
+    renderTurn,
+    renderDragEnter,
+    renderDragStart,
+    renderDragOver,
+    renderDragLeave,
+    handleDropEvent
+
+} from '../view/renderDynamicElements'
 
 export function addEventListenersBoardClick (game){
     const gridSquaresComputer = Array.from(document.querySelectorAll('.player2 > .grid-square'))
@@ -18,9 +27,9 @@ const processTurnData = (game,event) =>{
 export function addEventListenersBoardDrag (game){
     const gridSquaresPlayer = Array.from(document.querySelectorAll('.player1 > .grid-square'))
     gridSquaresPlayer.forEach(square =>{
-        square.addEventListener('dragenter',dragEnter)
-        square.addEventListener('dragover',dragOver)
-        square.addEventListener('dragleave',dragLeave)
+        square.addEventListener('dragenter',renderDragEnter)
+        square.addEventListener('dragover',renderDragOver)
+        square.addEventListener('dragleave',renderDragLeave)
         square.addEventListener('drop',(event) =>{
             handleDropEvent(event,game)
         })
@@ -30,7 +39,7 @@ export function addEventListenersBoardDrag (game){
 export function addEventListenerDraggable(){
     const ships = Array.from(document.querySelectorAll('.pool-ship.player1'))
     ships.forEach(ship=>
-        ship.addEventListener('dragstart',dragStart))
+        ship.addEventListener('dragstart',renderDragStart))
 }
 
 export function removeEventListeners (){
@@ -40,5 +49,11 @@ export function removeEventListeners (){
     })
 }
 
+export function addEventListenerToggleDirection (game){
+    const toggleButton = document.querySelector('.toggle')
+    toggleButton.addEventListener('click', ()=>{
+        game.getDirection() === 'Vertical' ? game.setDirection('Horizontal',toggleButton) : game.setDirection('Vertical',toggleButton)
+    })
+}
 
 

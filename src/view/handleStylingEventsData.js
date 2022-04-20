@@ -97,7 +97,7 @@ export const restoreRenderHorizlOverlap = (squaresToStyle,originalSquaresToStyle
 
 
 export const checkIfRenderOrRestore = (currentSquare,originalIndex,coords) =>{
-    if(isVerticalOverlapping(currentSquare) ){
+    if(isVerticalOverlap(currentSquare) ){
         restoreRenderVertOverlap(currentSquare,originalIndex,coords) 
         return true
     }
@@ -117,7 +117,7 @@ export const isNextSquareValid = (squaresToStyle,elementToStyle,originalSquaresT
         || (squaresToStyle === originalSquaresToStyle))
 }
 
-export const isVerticalOverlapping = (currentSquare) =>{
+export const isVerticalOverlap = (currentSquare) =>{
     return currentSquare.classList.contains('ship')
 }
 

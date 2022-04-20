@@ -5,17 +5,22 @@ import { Player } from './player'
 // import { executeGame } from '/src/index'
 
 export function Game (){
+    let shipDirection = 'Vertical'
     let coordsArray = []
     const el = document.querySelector('.gameboard-grid.player2')
     el.classList.remove('unclickable')
 
     const player1 = Player('Victor')
     player1.createGameBoard(
+<<<<<<< HEAD
         ['A4'],
         ['C5','C6'],
         ['B6','B7','B8'],
         ['F1','F2','F3','F4'],
         ['E1','E2','E3','E4','E5']
+=======
+        coordsArray
+>>>>>>> 09a263bd93533d9a901d13b06276e48cb40b7251
     )
     const player2 = Player('Computer')
     player2.createGameBoard(
@@ -34,6 +39,7 @@ export function Game (){
     renderStaticElements(gameboard1, player1, player2)
 
     const gameTurn = (coords) =>{
+        console.log(coordsArray)
         const playerCoords = playerInTurn.sendAttackCoordsToGame(coords)
         if(playerCoords === null) return null
   
@@ -92,11 +98,20 @@ export function Game (){
         return coordsArray
     }
 
+    const getDirection = () =>{
+        return shipDirection 
+    }
+
+    const setDirection = (direction,element) =>{
+        shipDirection = direction
+        element.textContent = direction
+    }
+
     const checkForGamePrepared = (game) =>{
         if (game.getCoordsArray().length >= 9){
             addEventListenersBoardClick(game)
         }
     }
 
-    return{gameTurn,addEventListenersDragShips,getCoordsArray,setCoordsArray,checkForGamePrepared}
+    return{gameTurn,addEventListenersDragShips,getCoordsArray,setCoordsArray,getDirection,setDirection,checkForGamePrepared}
 }
