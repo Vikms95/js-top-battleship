@@ -216,6 +216,15 @@ body{
 }
 
 .toggle{
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 2em;
+  left: 20rem;
+  padding: 5rem;
+  min-width: 10rem;
+  max-width: 5rem;
+  min-height: 2rem;
+  line-height: 1rem;
   padding: 20px;
-  background-color: green;
 }

@@ -78,15 +78,14 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
   :if it is succesful, check if any of the squares has the ship class
   :it is not succesful and the last square had the ship class, do not remove it
   : -->
+<!-- - Make ships in the pool be one element only! (Make them span multiple grid areas) -->
 <!-- - Refactor renderSquaresVertically and renderSquaresHorizontally -->
 
 - Create a button to tell if place vertical or horizontal
+  :style and properly place button
 
-  -Use that to create the gameboard later on
-  make the gameboard with the arrays stored while placing the ships
+- Use positioned ships to create the gameboard later on
 
-  -Placing out of bounds or totally not on the board is handled, but need to check about placing the ship on a square which already has a ship class added to it, in that case, return
-<!-- - Make ships in the pool be one element only! (Make them span multiple grid areas) -->
 
 - Bug when one game ends and any square is clicked afterwards (I need to remove the event listeners while the game is not active)
   :game is passing by as a player is defeated again!

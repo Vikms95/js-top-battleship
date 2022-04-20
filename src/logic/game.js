@@ -97,8 +97,9 @@ export function Game (){
         return shipDirection 
     }
 
-    const setDirection = (direction) =>{
+    const setDirection = (direction,element) =>{
         shipDirection = direction
+        element.textContent = direction
     }
 
     const checkForGamePrepared = (game) =>{

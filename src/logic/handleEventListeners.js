@@ -43,7 +43,7 @@ export function removeEventListeners (){
 export function addEventListenerToggleDirection (game){
     const toggleButton = document.querySelector('.toggle')
     toggleButton.addEventListener('click', ()=>{
-        game.getDirection() === 'vertical' ? game.setDirection('horizontal') : game.setDirection('vertical')
+        game.getDirection() === 'vertical' ? game.setDirection('horizontal',toggleButton) : game.setDirection('vertical',toggleButton)
     })
 }
 
