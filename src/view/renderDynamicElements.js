@@ -2,7 +2,7 @@ import { retrieveDataDrop,
     retrieveDataBoardVert,
     retrieveDataBoardHoriz,
     restoreRenderVertOverflow,
-    isNextSquareValid,
+    isPlacementValid,
     checkIfRenderOrRestore,
     moveToNextRow,
     moveToPreviousRow,
@@ -79,45 +79,34 @@ const renderSquareVert = () =>{
   
 }
 
-const isPlacementValid = (element,squaresToStyle) =>{
-    for (let index = 0; index < squaresToStyle; index++) {
-        if(element === null || element.classList.contains('ship') || (element.classList.contains('row') && index !== 0)){
-            return false
-        }
-        element = element.nextElementSibling
-    }
-    return true
-} 
+
 
 const renderShipHoriz = (squareID,squaresToStyle,shipID) =>{
     
-    let {elementToStyle, originalIndex, shipInPool, originalSquaresToStyle}=
-      retrieveDataBoardHoriz(squareID,shipID,squaresToStyle)
-
+    let {elementToStyle, shipInPool} = retrieveDataBoardHoriz(squareID,shipID)
     if(!isPlacementValid(elementToStyle,squaresToStyle)) return
+    
     let coords = []
-
+    renderSquaresHoriz(elementToStyle,squaresToStyle,coords)
+    hideShipPool(shipInPool)
+    console.log(coords)
+    return coords     
+}
+    
+const renderSquaresHoriz = (elementToStyle,squaresToStyle,coords) =>{
     while(squaresToStyle > 0){
         elementToStyle.classList.add('ship')
         elementToStyle = elementToStyle.nextElementSibling
         coords.push(elementToStyle.id)
         squaresToStyle-- 
     }
-  
+}
+    
+const hideShipPool = (shipInPool) =>{
     shipInPool.classList.add('hide')
     shipInPool.removeAttribute('draggable')
-    return coords     
 }
-    
-const renderSquareHoriz = (elementToStyle,squaresToStyle,coords) =>{
-    while(isNextSquareValid(squaresToStyle,elementToStyle,originalSquaresToStyle)){
-        elementToStyle.classList.add('ship')
-        elementToStyle = elementToStyle.nextElementSibling
-        coords.push(elementToStyle.id)
-        squaresToStyle-- 
-    }
-}
-    
+
 export function dragStart (event) {
     event.dataTransfer.setData('text/plain',event.target.id)
 }
