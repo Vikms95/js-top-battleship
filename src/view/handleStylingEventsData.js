@@ -19,11 +19,10 @@ export const retrieveDataDrop = (event) =>{
 
 export const retrieveDataBoardVert = (squareID,shipID) =>{
     const boardGridArray = Array.from(document.querySelectorAll('.player1 > .grid-square'))
-    const originalIndex  = boardGridArray.findIndex(el => el.id === squareID)
     const shipInPool     = document.getElementById(shipID)
-    let indexToStyle     = originalIndex
+    let indexToStyle     = boardGridArray.findIndex(el => el.id === squareID)
 
-    return {boardGridArray, originalIndex, shipInPool, indexToStyle}
+    return {boardGridArray,shipInPool, indexToStyle}
 }
 
 export const retrieveDataBoardHoriz = (squareID,shipID) =>{
@@ -50,9 +49,6 @@ export const restoreRenderVertOverlap = (currentSquare,originalIndex,coords) =>{
     }
 } 
 
-
-
-
 export const checkIfRenderOrRestore = (currentSquare,originalIndex,coords) =>{
     if(isVertOverlap(currentSquare) ){
         restoreRenderVertOverlap(currentSquare,originalIndex,coords) 
@@ -65,7 +61,18 @@ export const checkIfRenderOrRestore = (currentSquare,originalIndex,coords) =>{
   
 }
 
-export const isPlacementValid = (element,squaresToStyle) =>{
+export const isVertPlacementValid = (indexToStyle,squaresToStyle, boardGridArray) =>{
+    for (let index = 0; index < squaresToStyle; index++) {
+        let element = boardGridArray[indexToStyle]
+        if(element === undefined || element.classList.contains('ship')){
+            return false
+        }
+        indexToStyle += 8
+    }
+    return true
+}
+
+export const isHorizPlacementValid = (element,squaresToStyle) =>{
     for (let index = 0; index < squaresToStyle; index++) {
         if(element === null || element.classList.contains('ship') || (element.classList.contains('row') && index !== 0)){
             return false

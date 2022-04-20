@@ -1,12 +1,9 @@
 import { retrieveDataDrop,
     retrieveDataBoardVert,
     retrieveDataBoardHoriz,
-    restoreRenderVertOverflow,
-    isPlacementValid,
-    checkIfRenderOrRestore,
-    moveToNextRow,
-    moveToPreviousRow,
-    emptyCoordsArray, 
+    isHorizPlacementValid,
+    isVertPlacementValid,
+
 } from './handleStylingEventsData'
 
 
@@ -51,45 +48,36 @@ export function handleDropEvent (event,game) {
 }
 
 const renderShipVert = (squareID,squaresToStyle,shipID) =>{
-    let coords = []
-    let { boardGridArray, originalIndex, shipInPool, indexToStyle } =
-      retrieveDataBoardVert(squareID,shipID)
+    let { boardGridArray,shipInPool, indexToStyle } =
+        retrieveDataBoardVert(squareID,shipID)
+    if(!isVertPlacementValid(indexToStyle,squaresToStyle, boardGridArray)) return
     
-    try{
-        for (let i = 0; i < squaresToStyle; i++) {
-            let currentSquare = boardGridArray[indexToStyle]
-            let isSquareInvalid =  checkIfRenderOrRestore(currentSquare,originalIndex,coords,indexToStyle)
-            if(isSquareInvalid) return
-            indexToStyle = moveToNextRow(indexToStyle)
-        }
-        shipInPool.classList.add('hide')
-        shipInPool.removeAttribute('draggable')
-        return coords
-        
-    }catch(error){
-        // Will trigger if ship placement 
-        // overflows from the bottom
-        coords = emptyCoordsArray(coords)
-        indexToStyle = moveToPreviousRow(indexToStyle)
-        restoreRenderVertOverflow(indexToStyle,originalIndex,boardGridArray)
-    } 
-}
-
-const renderSquareVert = () =>{
-  
+    let coords = []
+    renderSquareVert(indexToStyle,squaresToStyle,boardGridArray,coords)
+    hidePoolShip(shipInPool)
+    return coords
 }
 
 
+const renderSquareVert = (indexToStyle,squaresToStyle,boardGridArray,coords) =>{
+    while(squaresToStyle > 0){
+        let elementToStyle = boardGridArray[indexToStyle]
+        elementToStyle.classList.add('ship')
+        coords.push(elementToStyle.id)
+        indexToStyle += 8
+        squaresToStyle--
+    }  
+
+}
 
 const renderShipHoriz = (squareID,squaresToStyle,shipID) =>{
-    
     let {elementToStyle, shipInPool} = retrieveDataBoardHoriz(squareID,shipID)
-    if(!isPlacementValid(elementToStyle,squaresToStyle)) return
+    if(!isHorizPlacementValid(elementToStyle,squaresToStyle)) return
     
     let coords = []
     renderSquaresHoriz(elementToStyle,squaresToStyle,coords)
-    hideShipPool(shipInPool)
-    console.log(coords)
+    hidePoolShip(shipInPool)
+
     return coords     
 }
     
@@ -102,7 +90,7 @@ const renderSquaresHoriz = (elementToStyle,squaresToStyle,coords) =>{
     }
 }
     
-const hideShipPool = (shipInPool) =>{
+const hidePoolShip = (shipInPool) =>{
     shipInPool.classList.add('hide')
     shipInPool.removeAttribute('draggable')
 }
