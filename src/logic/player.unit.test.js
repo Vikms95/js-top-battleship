@@ -4,7 +4,7 @@ let mockPlayer
 
 beforeEach(() =>{
     mockPlayer = Player()
-    mockPlayer.createGameBoard(['A1','A2'])
+    mockPlayer.createGameBoard('A1','A2')
 })
 
 test('createGameboard() - creates a gameboard object ', () =>{

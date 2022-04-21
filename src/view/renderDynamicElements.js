@@ -121,7 +121,7 @@ const renderBoardSquares = (turnData, element) =>{
 }
 
 const isHitElement = (element) =>{
-    return element.classList.contains('hit') 
+    return element.classList.contains('hit') || element.classList.contains('miss')
 }
 
 const renderSquareOnHit = (element) =>{
@@ -130,6 +130,8 @@ const renderSquareOnHit = (element) =>{
 }
   
 const renderSquareOnMiss  = (element) =>{
+    element.classList.remove('ship')
+    element.classList.add('hit')
     element.classList.add('miss')
 }
 

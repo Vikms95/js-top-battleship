@@ -42,8 +42,9 @@ export function Gameboard(){
     }
     
     // Incoming-query (assert result)
-    const receiveAttackFromPlayer = (coords)=>{
-        if(isAttackValid(coords) && (!isSquareHit(coords)) && isShipHit(coords)){
+    const receiveAttackFromComputer = (coords)=>{
+        // isWithHitClass(coords)
+        if(isAttackValid(coords) && isShipHit(coords)){
             const ship = findShipByCoords(coords)
             if(ship.isSunkNextHit()){
                 _boardShips = removeShipFromShipsArray(ship)
@@ -51,7 +52,20 @@ export function Gameboard(){
             _boardGrid = removeShipSquare(coords,ship)
             return
         }
-        if(!isAttackValid(coords)) return null
+        _boardGrid = removeSquareFromBoardGridObject(coords)
+        return coords
+    }
+
+    const receiveAttackFromPlayer = (coords)=>{
+        // isWithHitClass(coords)
+        if(isShipHit(coords)){
+            const ship = findShipByCoords(coords)
+            if(ship.isSunkNextHit()){
+                _boardShips = removeShipFromShipsArray(ship)
+            }
+            _boardGrid = removeShipSquare(coords,ship)
+            return
+        }
         _boardGrid = removeSquareFromBoardGridObject(coords)
         return coords
     }
@@ -79,6 +93,7 @@ export function Gameboard(){
     }
 
     const removeShipFromShipsArray = (ship) =>{
+        debugger
         const shipIndex = findShipIndexByName(ship)
         return _boardShips.filter(arrayShip =>{
             return _boardShips.indexOf(arrayShip) !== shipIndex 
@@ -86,15 +101,18 @@ export function Gameboard(){
     }
  
     const findShipByCoords = (coords) =>{
-        console.log('LOOKING FOR '+ coords)
-        console.log(_boardShips.forEach(ship=>console.log(ship.getShipCoord())))
-        return _boardShips.find(ship =>{
-            console.log(ship.getShipCoord())
+        debugger
+        // console.log('LOOKING FOR '+ coords)
+        // console.log(_boardShips.forEach(ship=>console.log(ship.getShipCoord())))
+        let hitShip = _boardShips.find(ship =>{
+            // console.log(ship.getShipCoord())
             if(ship.getShipCoord().includes(coords)){
-                console.log('FOUND')
+                // console.log('FOUND')
+                return ship.getShipCoord().includes(coords)    
             } 
-            return ship.getShipCoord().includes(coords)    
         })
+        if (hitShip) return hitShip
+        if(!hitShip) return null
     }
 
     const findShipIndexByName = (ship) =>{
@@ -105,7 +123,13 @@ export function Gameboard(){
 
     const isShipHit = (coords) =>{
         for(const [key] of Object.entries(_boardGrid)){
-            if(key === coords && _boardGrid[key]) { return true }   
+            if(key === coords){
+                if(_boardGrid[key]){
+                    return true 
+                }else{
+                    return false
+                }   
+            }
         }
         return false
     }
@@ -123,12 +147,12 @@ export function Gameboard(){
         } 
     }
 
-    const isSquareHit= (coords)=>{
+    const isWithHitClass= (coords)=>{
         const array = Array.from(document.querySelectorAll('.player2 > .grid-square'))
-        return array.find(square =>{
-            square.id === coords
+        let coord =  array.find(square =>{
+            square.id === coords && square.classList.contains('hit')
         })
-
+        console.log(coord)
     } 
     
     const isAttackValid = (coords) =>{
@@ -146,6 +170,7 @@ export function Gameboard(){
         getShipLengthByName,
         populateGameboard,
         receiveAttackFromPlayer,
+        receiveAttackFromComputer,
         isAllShipsSunk,
     }
 }

@@ -21,18 +21,33 @@ export function Game (){
     renderStaticElements(player1, player2)
 
     const gameTurn = (coords) =>{ 
-        playerInTurn = switchPlayers()
-        enemyGameboard = playerInTurn === player1 ? player2.getGameboard() : player1.getGameboard() 
-
+        playerInTurn = player1
+        enemyGameboard = player2.getGameboard() 
         // let playerCoords = playerInTurn.sendAttackCoordsToGame(coords)
+
+        const array = (Array.from(document.querySelectorAll('.player2 > .grid-square')))
+        let isvalid = true
+        array.forEach(square =>{
+            if(square.id === coords){
+                console.log(square)
+                if(square.classList.contains('hit') ||square.classList.contains('miss')){
+                    isvalid = false
+                }
+            }
+        })
+
+        if(!isvalid) return null
+        // console.log(playerCoords)
+        // if(playerCoords === null) return null
         let isPlayerAttackMiss   = enemyGameboard.receiveAttackFromPlayer(coords) 
+        console.log(isPlayerAttackMiss)
         if(isPlayerAttackMiss === null) return null
         
-        playerInTurn = switchPlayers()
-        enemyGameboard = playerInTurn === player1 ? player2.getGameboard() : player1.getGameboard() 
+        playerInTurn = player2
+        enemyGameboard = player1.getGameboard()
         
         let computerCoords       = playerInTurn.sendRandomAttackCoordsToGame(enemyGameboard)
-        let isComputerAttackMiss = enemyGameboard.receiveAttackFromPlayer(computerCoords)
+        let isComputerAttackMiss = enemyGameboard.receiveAttackFromComputer(computerCoords)
 
         if(isAnyPlayerDefeated()){
             el.classList.add('unclickable')
@@ -109,13 +124,13 @@ export function Game (){
 
             game.getPlayer2().createGameBoard([
                 ['A1'],
-                ['B1','B2'],
-                ['C1','C2','C3'],
-                ['D1','D2','D3','D4'],
-                ['E1','E2','E3','E4','E5'],
-                ['F1','F2','F3','F4','F5'],
-                ['G1','G2','G3','G4','G5'],
-                ['H1','H2','H3','H4','H5'],
+                ['B1'],
+                ['C1'],
+                ['D1','D2'],
+                ['E1','E2'],
+                ['F1','F2'],
+                ['G1','G2','G3'],
+                ['H1','H2','H3','H4'],
                 ['A8','B8','C8','D8','E8']
             ]
             )

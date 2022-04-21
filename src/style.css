@@ -164,7 +164,7 @@ body{
 
 .grid-square:hover{
   cursor: crosshair;
-  background-color: blue;
+  background-color: red;
 }
 
 .top-coordinates{

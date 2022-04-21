@@ -43,7 +43,7 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
   :lookup interact.js sourcecode
   :https://www.javascripttutorial.net/web-apis/javascript-drag-and-drop/#:~:text=Introduction%20to%20JavaScript%20Drag%20and%20Drop%20API&text=By%20default%2C%20only%20image%20and,you%20would%20drag%20an%20image. -->
 
-- GAME SETUP - PLACE SHIPS AND CREATE
+<!-- - GAME SETUP - PLACE SHIPS AND CREATE -->
   <!-- - Query selector the items to be dragged
   - Add event listener drag start
   - Add hide class when dragstart is triggered
@@ -60,8 +60,8 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
   <!-- :renderSquaresVertically > if error giving undefined, return and reincorportate opacity of ship on the pool -->
   <!-- :get reference to the element previously dragged and remove its opacity property -->
   <!-- // if ship is placed outside of any square, it does not get places nor it reappears on the pool -->
-  - SETUP PREPARE GAME FUNCTION -
-  -Before starting game, function to let the player place their name and ships
+  <!-- - SETUP PREPARE GAME FUNCTION -
+  -Before starting game, function to let the player place their name and ships -->
 
   <!-- // HOW TO GET THE ARRAY OUT OF THE DROP EVENT LISTENER
   You'd have to do it from inside render..() because you cannot otherwise access a local variable from outside a function -->
@@ -86,8 +86,7 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
 <!-- - Create a button to tell if place vertical or horizontal
   :style and properly place button -->
 
-
-- Create game out of ships placed
+<!-- - Create game out of ships placed
   - Set the event listeners to the ships to be dragged and button to change placement orientation(index.js)
   - Everytime a ship is dropped, check if the coordinates array is 9(handleStylingEventsData)
     - If the coordinates is length 9, start a game with:
@@ -98,33 +97,42 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
       : computer creates a Gameboard with random coordinates
         :add ships to gameboard board ships
         :add ships to gameboard board grid
-    - Add event listeners to the enemy board
+    - Add event listeners to the enemy board -->
+
+TODO
+
+- Fix tests
+- Reenable game to be restarted
+- Style dragged elements to show horizontal or vertical based on game.direction?
+https://stackoverflow.com/questions/11169554/how-to-style-dragged-element
+
+- Make letter appear one by one on turn-info
 
 
-- CHECK WHERE COORDS ARE GETTING LOST
-  they are fine in handleDropEvent
+
+
+BUG
+  SOME SHIPS APPEAR TO GET DELETED WITHOUT BEING SUNK, THUS NOT TRIGGERING THE RENDER EFFECT ON CLICK
+- they are fine in handleDropEvent
   they are fine in checkForGamePrepared
   they are fine in createGameBoard
   <!-- :populateGameboard is showing length 5? (it should be 9)
     :at some point the array is put within an array, narrow down where is that happening -->
   they are fine in populateGameboard
   createShip
-gameboard.js:51 Uncaught TypeError: Cannot read properties of undefined (reading 'isSunkNextHit')
+  check findShipCoords with debugger,
+  gameboard.js:51 Uncaught TypeError: Cannot read properties of undefined (reading 'isSunkNextHit')
   :is ship undefined on isSunkNextHit()
     : is registering the square as already attacked? (returning null on  if(playerCoords === null) return null
     :inspect with debugger the array length everytime its clicked
 DISREGARD CHECK ARRAY FOR PLAYER
 USE ISATTACKVALID VALUE (if hit, return null and return from turn)
-- Style dragged element?
-https://stackoverflow.com/questions/11169554/how-to-style-dragged-element
+Squares not getting rendered because computer is repeating coords?
+Ship is not found in the array even though it does not have a hit mark? 
 
-<!-- 
-- Use positioned ships to create the gameboard later on
-  :ship array has undefined indexes?
-    :was showing when placement was unsuccesful -->
-
+BUG
 - Bug when one game ends and any square is clicked afterwards (I need to remove the event listeners while the game is not active)
   :game is passing by as a player is defeated again!
 
+BUG  
 - Absolute positioned elements take hit
-- Make letter appear one by one on turn-info

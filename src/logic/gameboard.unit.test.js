@@ -10,8 +10,8 @@ beforeEach(() =>{
     mockGameboard = Gameboard()
     mockSendHittingCoordDOM =  'A1' 
     mockSendMissingCoordDOM =  'H8' 
-    mockShip = mockGameboard.createShip('A1','A2')
-    mockShip2 = mockGameboard.createShip('A3','A4')      
+    mockShip = mockGameboard.createShip(['A1','A2'])
+    mockShip2 = mockGameboard.createShip(['A3','A4'])      
 })
   
 describe('populateGameboard()', () =>{
@@ -31,7 +31,7 @@ describe('populateGameboard()', () =>{
 })
 
 describe('createShip()', () =>{
-    test('should create a ship object', () =>{
+    test.only('should create a ship object', () =>{
         expect(mockShip).toHaveProperty('getShipName')
         expect(mockShip).toHaveProperty('getShipCoord')
         expect(mockShip).toHaveProperty('isSunkNextHit')
