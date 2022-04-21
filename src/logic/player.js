@@ -36,6 +36,7 @@ export function Player(name){
     }
 
     const sendRandomAttackCoordsToGame = (gameboard) =>{
+        console.log(gameboard)
         const boardGrid = Object.keys(gameboard.getBoardGrid())
         const BOARD_GRID_LENGTH = boardGrid.length
 

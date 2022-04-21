@@ -19,7 +19,6 @@ export function addEventListenersBoardClick (game){
 }
 
 const processTurnData = (game,event) =>{
-    console.log(game.playerInTurn)
     const turnData = game.gameTurn(event.target.id)
     if(turnData === null) return      
     renderTurn(turnData,event)

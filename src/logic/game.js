@@ -27,12 +27,11 @@ export function Game (){
   
         const isPlayerAttackMiss   = enemyGameboard.receiveAttackFromPlayer(playerCoords) 
         playerInTurn               = switchPlayers()
-        enemyGameboard             = switchGameboards()
+        enemyGameboard = playerInTurn === player1 ? player2.getGameboard() : player1.getGameboard() 
         
         const computerCoords       = getPlayerInTurn().sendRandomAttackCoordsToGame(enemyGameboard)
         const isComputerAttackMiss = enemyGameboard.receiveAttackFromPlayer(computerCoords)
         playerInTurn               = switchPlayers()
-        enemyGameboard             = switchGameboards()
 
         if(isAnyPlayerDefeated()){
             el.classList.add('unclickable')

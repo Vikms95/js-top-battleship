@@ -109,7 +109,9 @@ Gameboards should have a receiveAttack function that takes a pair of coordinates
     :at some point the array is put within an array, narrow down where is that happening -->
   they are fine in populateGameboard
   createShip
+gameboard.js:51 Uncaught TypeError: Cannot read properties of undefined (reading 'isSunkNextHit')Cannot read properties of undefined (reading 'getBoardGrid')
 
+  :it passes isPlayerAttackMiss
 
 - Style dragged element?
 https://stackoverflow.com/questions/11169554/how-to-style-dragged-element
