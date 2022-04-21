@@ -13,25 +13,26 @@ export function Game (){
 
     const player1 = Player('Victor')
     const player2 = Player('Computer')
-    let playerInTurn = player1
+    let playerInTurn = player2
     let gameboard1 
     let gameboard2 
-    
+    let enemyGameboard = player1.getGameboard()
 
     renderStaticElements(player1, player2)
 
-    const gameTurn = (coords) =>{
-        let enemyGameboard = playerInTurn === player1 ? player2.getGameboard() : player1.getGameboard() 
-        const playerCoords = getPlayerInTurn().sendAttackCoordsToGame(coords)
-        if(playerCoords === null) return null
-  
-        const isPlayerAttackMiss   = enemyGameboard.receiveAttackFromPlayer(playerCoords) 
-        playerInTurn               = switchPlayers()
+    const gameTurn = (coords) =>{ 
+        playerInTurn = switchPlayers()
+        enemyGameboard = playerInTurn === player1 ? player2.getGameboard() : player1.getGameboard() 
+
+        // let playerCoords = playerInTurn.sendAttackCoordsToGame(coords)
+        let isPlayerAttackMiss   = enemyGameboard.receiveAttackFromPlayer(coords) 
+        if(isPlayerAttackMiss === null) return null
+        
+        playerInTurn = switchPlayers()
         enemyGameboard = playerInTurn === player1 ? player2.getGameboard() : player1.getGameboard() 
         
-        const computerCoords       = getPlayerInTurn().sendRandomAttackCoordsToGame(enemyGameboard)
-        const isComputerAttackMiss = enemyGameboard.receiveAttackFromPlayer(computerCoords)
-        playerInTurn               = switchPlayers()
+        let computerCoords       = playerInTurn.sendRandomAttackCoordsToGame(enemyGameboard)
+        let isComputerAttackMiss = enemyGameboard.receiveAttackFromPlayer(computerCoords)
 
         if(isAnyPlayerDefeated()){
             el.classList.add('unclickable')
@@ -106,7 +107,6 @@ export function Game (){
                 game.getCoordsArray()
             )  
 
-            console.log(game.getCoordsArray())
             game.getPlayer2().createGameBoard([
                 ['A1'],
                 ['B1','B2'],
@@ -120,11 +120,8 @@ export function Game (){
             ]
             )
             game.gameboard1     = game.getPlayer1().getGameboard()
-            console.log(game.gameboard1)
             game.gameboard2     = game.getPlayer2().getGameboard()
-            console.log(game.gameboard2)
             game.playerInTurn   = game.getPlayer1()
-            console.log(game.playerInTurn)
             addEventListenersBoardClick(game)
         }
     }

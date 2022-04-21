@@ -29,6 +29,7 @@ export function Player(name){
     }
     
     const sendAttackCoordsToGame = (coords) =>{
+        // debugger
         if(getAttackedSquares().includes(coords)) return null
         setAttackedSquares(coords)
         return coords
@@ -36,7 +37,6 @@ export function Player(name){
     }
 
     const sendRandomAttackCoordsToGame = (gameboard) =>{
-        console.log(gameboard)
         const boardGrid = Object.keys(gameboard.getBoardGrid())
         const BOARD_GRID_LENGTH = boardGrid.length
 
@@ -60,6 +60,7 @@ export function Player(name){
     return{
         getName,
         getGameboard,
+        getAttackedSquares,
         setAttackedSquares,
         createGameBoard,
         sendRandomAttackCoordsToGame,

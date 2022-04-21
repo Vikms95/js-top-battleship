@@ -35,18 +35,15 @@ export function Gameboard(){
     const createShip = (coordinates) =>{
         if(isCoordsAvailable(coordinates)){
             const ship  = Ship(...coordinates) 
-            console.log(ship.getShipCoord())
             _boardShips = addShipToShipsArray(ship)
-            console.log(_boardShips)
             addShipToBoardGridObject(ship)
-            console.log(_boardGrid)
             return ship
         }
     }
     
     // Incoming-query (assert result)
     const receiveAttackFromPlayer = (coords)=>{
-        if(isAttackValid(coords) && isShipHit(coords)){
+        if(isAttackValid(coords) && (!isSquareHit(coords)) && isShipHit(coords)){
             const ship = findShipByCoords(coords)
             if(ship.isSunkNextHit()){
                 _boardShips = removeShipFromShipsArray(ship)
@@ -54,6 +51,7 @@ export function Gameboard(){
             _boardGrid = removeShipSquare(coords,ship)
             return
         }
+        if(!isAttackValid(coords)) return null
         _boardGrid = removeSquareFromBoardGridObject(coords)
         return coords
     }
@@ -88,7 +86,13 @@ export function Gameboard(){
     }
  
     const findShipByCoords = (coords) =>{
+        console.log('LOOKING FOR '+ coords)
+        console.log(_boardShips.forEach(ship=>console.log(ship.getShipCoord())))
         return _boardShips.find(ship =>{
+            console.log(ship.getShipCoord())
+            if(ship.getShipCoord().includes(coords)){
+                console.log('FOUND')
+            } 
             return ship.getShipCoord().includes(coords)    
         })
     }
@@ -118,6 +122,14 @@ export function Gameboard(){
             }
         } 
     }
+
+    const isSquareHit= (coords)=>{
+        const array = Array.from(document.querySelectorAll('.player2 > .grid-square'))
+        return array.find(square =>{
+            square.id === coords
+        })
+
+    } 
     
     const isAttackValid = (coords) =>{
         for(const [key] of Object.entries(_boardGrid)){
