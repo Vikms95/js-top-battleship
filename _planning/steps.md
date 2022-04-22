@@ -129,6 +129,7 @@ DISREGARD CHECK ARRAY FOR PLAYER
 USE ISATTACKVALID VALUE (if hit, return null and return from turn)
 Squares not getting rendered because computer is repeating coords?
 Ship is not found in the array even though it does not have a hit mark? 
+The way I'm creating the ships with [] might be the problem? AND THE FUNCTIONS THAT CHECK IF A SHIP IS SUNK ARE NOT WORKING WELL?
 
 BUG
 - Bug when one game ends and any square is clicked afterwards (I need to remove the event listeners while the game is not active)

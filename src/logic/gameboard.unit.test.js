@@ -31,7 +31,7 @@ describe('populateGameboard()', () =>{
 })
 
 describe('createShip()', () =>{
-    test.only('should create a ship object', () =>{
+    test('should create a ship object', () =>{
         expect(mockShip).toHaveProperty('getShipName')
         expect(mockShip).toHaveProperty('getShipCoord')
         expect(mockShip).toHaveProperty('isSunkNextHit')
@@ -93,10 +93,10 @@ describe('isAttackValid()',() =>{
 
 describe('isCoordsAvailable()',() =>{
     test('returns true and returns a ship when coordinate is false',()=>{    
-        expect(mockGameboard.createShip('A5','A6')).toHaveProperty('getShipName')   
+        expect(mockGameboard.createShip(['A5','A6'])).toHaveProperty('getShipName')   
     })
     test('returns false and does not create it when coordinate is true',()=>{        
-        expect(mockGameboard.createShip('A1','A2')).toBeUndefined()
+        expect(mockGameboard.createShip(['A1','A2'])).toBeUndefined()
     })
 })
 

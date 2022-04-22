@@ -37,7 +37,7 @@ export function Ship(...coordinates){
 
     // Pure / Outgoing query x
     const isSunkNextHit = () =>{
-        return _shipCoord.length === 1 ? true : false
+        return _shipCoord.length <= 1 ? true : false
     }
     
     return {

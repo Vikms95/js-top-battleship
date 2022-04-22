@@ -19,6 +19,7 @@ test('createGameboard() - creates a gameboard object ', () =>{
 })
 
 test('isPlayerDefeated() - returns false when at least one ship exists in the array', () =>{
+    console.log(mockPlayer.getGameboard().getBoardShips())
     expect(mockPlayer.isPlayerDefeated()).toBe(false)
 })
 test('isPlayerDefeated() - returns true when the array is empty',() =>{
