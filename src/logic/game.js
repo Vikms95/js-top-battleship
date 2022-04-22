@@ -25,28 +25,36 @@ export function Game (){
         enemyGameboard = player2.getGameboard() 
         // let playerCoords = playerInTurn.sendAttackCoordsToGame(coords)
 
-        const array = (Array.from(document.querySelectorAll('.player2 > .grid-square')))
-        let isvalid = true
-        array.forEach(square =>{
+        const arrayPlay = (Array.from(document.querySelectorAll('.player2 > .grid-square')))
+        let isValidPlay = true
+        arrayPlay.forEach(square =>{
             if(square.id === coords){
-                console.log(square)
                 if(square.classList.contains('hit') ||square.classList.contains('miss')){
-                    isvalid = false
+                    isValidPlay = false
                 }
             }
         })
 
-        if(!isvalid) return null
+        if(!isValidPlay) return null
         // console.log(playerCoords)
         // if(playerCoords === null) return null
         let isPlayerAttackMiss   = enemyGameboard.receiveAttackFromPlayer(coords) 
-        console.log(isPlayerAttackMiss)
         if(isPlayerAttackMiss === null) return null
         
         playerInTurn = player2
         enemyGameboard = player1.getGameboard()
         
         let computerCoords       = playerInTurn.sendRandomAttackCoordsToGame(enemyGameboard)
+        const arrayComp = (Array.from(document.querySelectorAll('.player2 > .grid-square')))
+        let isValidComp = true
+        arrayComp.forEach(square =>{
+            if(square.id === computerCoords){
+                if(square.classList.contains('hit') ||square.classList.contains('miss')){
+                    isValidComp = false
+                }
+            }
+        })
+        if(!isValidComp) return null
         let isComputerAttackMiss = enemyGameboard.receiveAttackFromComputer(computerCoords)
 
         if(isAnyPlayerDefeated()){

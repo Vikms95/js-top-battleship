@@ -39,12 +39,11 @@ export function Player(name){
     const sendRandomAttackCoordsToGame = (gameboard) =>{
         const boardGrid = Object.keys(gameboard.getBoardGrid())
         const BOARD_GRID_LENGTH = boardGrid.length
-
         let index = generateRandomNumber(0,BOARD_GRID_LENGTH)
         while(getAttackedSquares().includes(boardGrid[index])){
             index = generateRandomNumber(0,BOARD_GRID_LENGTH)
         }
-        setAttackedSquares(boardGrid[index])
+        // setAttackedSquares(boardGrid[index])
         return boardGrid[index]
 
     }

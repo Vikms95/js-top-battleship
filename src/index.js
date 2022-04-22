@@ -8,5 +8,4 @@ const prepareGame = (game) =>{
 
 const game = Game()
 prepareGame(game)
-game.gameTurn()
 

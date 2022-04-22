@@ -130,6 +130,11 @@ USE ISATTACKVALID VALUE (if hit, return null and return from turn)
 Squares not getting rendered because computer is repeating coords?
 Ship is not found in the array even though it does not have a hit mark? 
 The way I'm creating the ships with [] might be the problem? AND THE FUNCTIONS THAT CHECK IF A SHIP IS SUNK ARE NOT WORKING WELL?
+Found pattern on clicking at A1 after B2, but it works if I click A1 first
+SHIPS ARE GETTING ERASED BY NAME WHEN NAMES ARE GETTING SHARED??
+findShipIndexByCoords not finding the ships if getShipCoord contains the coords
+checkIsShipHit logic
+IF YOU HIT SQUARES DIFFERENT TIMES, IT ENDS UP GETTING STYLED
 
 BUG
 - Bug when one game ends and any square is clicked afterwards (I need to remove the event listeners while the game is not active)
